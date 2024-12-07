@@ -1,5 +1,7 @@
 # MAUDE Database Analysis and Integration
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 This repository contains files and resources related to the analysis and integration of the **MAUDE** (Manufacturer and User Facility Device Experience) database, a U.S. FDA-maintained dataset for medical device adverse event reports.
 
 ## Overview
