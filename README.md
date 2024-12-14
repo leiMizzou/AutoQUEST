@@ -1,4 +1,4 @@
-# MAUDE Database Analysis and Integration
+# AutoQUEST for MAUDE Database
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
