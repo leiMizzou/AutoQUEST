@@ -115,7 +115,62 @@ Sample rows for key tables are provided in the `prompt.txt` file, illustrating t
 #### 5. Reporting Insights
    - Summarize findings into structured reports.
    - Tailor results and visualizations to address the initial research question dynamically.
+Algorithm AutoQUEST_Workflow
+Input: prompt.txt, add.txt, PostgreSQL Database
+Output: Final Analytical Report
+'''
+python
+# --- Phase 1: Research Question Generation ---
+1. Load_Prompt_and_Metadata()
+    Read content from 'prompt.txt' → prompt_content
+    Read content from 'add.txt' → add_content
 
+2. Generate_Research_Question(prompt_content, add_content)
+    Use LLM to generate research question
+    Output: research_question
+
+# --- Phase 2: Execution Plan Outline ---
+3. Generate_Execution_Steps(research_question, prompt_content)
+    Use LLM to create execution steps
+    Output: execution_steps
+
+4. Identify_Involved_Tables(execution_steps)
+    Extract table names using regex or predefined mapping
+    Output: involved_tables
+
+# --- Phase 3: Data Collection ---
+5. For each table in involved_tables:
+       Retrieve_Table_Structure(table)
+           Query database schema for column information → structure
+
+       Fetch_Sample_Data(table)
+           Query database to retrieve sample rows → sample_data
+
+6. Update_Execution_Steps(execution_steps, structure, sample_data)
+    Use LLM to refine execution plan with confirmed table info
+
+7. Generate_SQL_Queries(execution_steps, structure, sample_data)
+    Use LLM to generate SQL queries
+    Output: sql_queries
+
+8. For each SQL query in sql_queries:
+       Execute_SQL_Query(sql_query)
+           Try:
+               Run SQL query → data
+           Catch Error:
+               Auto_Correct_SQL(sql_query, error_message)
+                   Use LLM to correct SQL query
+                   Retry execution (max retries = 10)
+           Aggregate data into data_all
+
+# --- Phase 4: Data Analysis and Report Generation ---
+9. Analyze_Data(research_question, data_all)
+    Use LLM to analyze aggregated results
+    Output: analysis_report
+
+10. Return_Final_Report(analysis_report)
+    Generate and display the final analytical report
+'''
 ### Applications
 This repository is intended for researchers and analysts working with medical device safety data. Common use cases include:
 - Trend analysis of adverse events.
