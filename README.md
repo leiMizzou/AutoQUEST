@@ -119,8 +119,10 @@ Algorithm AutoQUEST_Workflow
 Input: prompt.txt, add.txt, PostgreSQL Database
 Output: Final Analytical Report
 
+
 ```
 python
+
 # --- Phase 1: Research Question Generation ---
 1. Load_Prompt_and_Metadata()
     Read content from 'prompt.txt' → prompt_content
@@ -172,6 +174,7 @@ python
 10. Return_Final_Report(analysis_report)
     Generate and display the final analytical report
 ```
+
 
 ### Applications
 This repository is intended for researchers and analysts working with medical device safety data. Common use cases include:
