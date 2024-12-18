@@ -1,0 +1,35 @@
+Medical Specialty in "foiclass" Table
+Two letters indicate the medical specialty panel responsible for reviewing the product.
+
+Medical Specialty (Advisory Committee)	Regulation No.	Medical Specialty Code
+Anesthesiology	Part 868	AN
+Cardiovascular	Part 870	CV
+Clinical Chemistry	Part 862	CH
+Dental	Part 872	DE
+Ear, Nose, & Throat	Part 874	EN
+Gastroenterology & Urology	Part 876	GU
+General Hospital	Part 880	HO
+Hematology	Part 864	HE
+Immunology	Part 866	IM
+Microbiology	Part 866	MI
+Neurology	Part 882	NE
+Obstetrics/Gynecology	Part 884	OB
+Ophthalmic	Part 886	OP
+Orthopedic	Part 888	OR
+Pathology	Part 864	PA
+Physical Medicine	Part 890	PM
+Radiology	Part 892	RA
+General & Plastic Surgery	Part 878	SU
+Clinical Toxicology	Part 862	TX
+
+Device Name in "foiclass" Table
+The Device Name uses the format of a noun that is usually followed by one or more adjectives, separated by commas. Therefore, the first word in the device name is usually the best search parameter. For example, to find a specific pump, search on the word "pump" to retrieve all products with the word "pump" in their name.
+
+Device Class in "foiclass" Table
+Device Class refers to the level of CDRH regulation of a given device. For each device, the applicable Medical Specialty panel recommends to CDRH the appropriate device class. The three Class designations are:
+
+Class 1 - Devices subject to General Controls,
+Class 2 - Devices subject to General Controls and Special Controls,
+Class 3 - Devices subject to General Controls, Special Controls, and Premarket Clearance
+Further information on how devices are classified.
+
