@@ -1,7 +1,3 @@
-Here’s the updated **README** with the explanation of the **QUEST** acronym integrated:
-
----
-
 # AutoQUEST: A Task-oriented Agent for Informatics Research
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
