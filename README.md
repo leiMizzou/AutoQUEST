@@ -1,198 +1,134 @@
-# AutoQUEST for MAUDE Database
+Here’s the updated **README** with the explanation of the **QUEST** acronym integrated:
+
+---
+
+# AutoQUEST: A Task-oriented Agent for Informatics Research
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-This repository contains files and resources related to the analysis and integration of the **MAUDE** (Manufacturer and User Facility Device Experience) database, a U.S. FDA-maintained dataset for medical device adverse event reports.
+This repository demonstrates **AutoQUEST**, a task-oriented agent designed to streamline informatics research workflows. Using the **MAUDE** (Manufacturer and User Facility Device Experience) database as an example data source, AutoQUEST automates research question generation, data integration, querying, and analysis to uncover actionable insights.
 
 ## Overview
-The MAUDE database includes detailed records of medical device failures, patient problems, and adverse events. This repository provides scripts that automate database integration, querying, and analysis to facilitate the identification of trends and critical issues related to medical device safety.
+The **MAUDE** database, maintained by the U.S. FDA, contains detailed records of medical device failures, patient problems, and adverse events. Despite its potential, its size and complexity make it challenging to extract meaningful insights efficiently. 
+
+AutoQUEST simplifies this process by automating key aspects of data querying and analysis, allowing researchers to explore trends, identify high-risk devices, and generate evidence-based insights.
+
+---
 
 ## Problem Statement
-Medical device safety is a critical aspect of healthcare. Adverse events and device malfunctions can have serious implications for patient health and outcomes. The MAUDE database provides a wealth of information, but its size and complexity pose significant challenges for efficient analysis and actionable insights.
+Medical device safety is critical in healthcare. The vast and complex MAUDE database provides valuable insights into device-related adverse events but poses significant challenges:
+- **Data Volume**: Millions of records spanning decades.  
+- **Complex Schema**: Multiple linked tables and inconsistent formats.  
+- **Manual Overhead**: Significant time and expertise required for analysis.  
 
-## Solution
-This repository addresses these challenges by offering a streamlined approach to:
-- **Data Integration**: Merging and harmonizing multiple years of MAUDE data into cohesive tables.
-- **Automated Querying**: SQL scripts to extract relevant information quickly.
-- **Insights Generation**: Tools to analyze trends, identify high-risk devices, and summarize adverse events.
+---
 
-## Research Objective
-The primary objective of this repository is to streamline the analysis of the MAUDE database by automating key aspects of data processing, querying, and visualization. The repository ensures that research questions and SQL queries are dynamically generated to address specific analytical goals, eliminating manual overhead and enhancing reproducibility.
+## Solution: AutoQUEST
+AutoQUEST addresses these challenges with:
+- **Dynamic Research Question Generation**: Automatically formulates research questions based on user goals and database structure.
+- **SQL Query Automation**: Generates optimized queries for extracting data from complex tables like MAUDE. 
+- **Data Integration and Analysis**: Handles data cleaning, merging, and trend analysis across large datasets.
+- **Reporting and Visualization**: Produces actionable insights with dynamic visualizations and structured reports.
 
-## Automated Workflow
+---
 
-The code in this repository automates the following key workflows:
+## What is AutoQUEST?
+
+**AutoQUEST** is an intelligent agent built for automating research workflows. It operates through a modular **THINK/DO Chain** framework, optimizing both cognitive and operational processes:
+
+1. **THINK Chain**  
+   - Focuses on **reasoning**, **planning**, and **memory** to generate and refine research questions, develop execution plans, and manage contextual knowledge.
+   - Example in MAUDE: AutoQUEST identifies key fields such as device problem codes or event types, ensuring targeted analysis.
+
+2. **DO Chain**  
+   - Executes SQL queries, retrieves data, handles errors, and performs analysis. 
+   - Example in MAUDE: Extracts longitudinal trends in adverse events by querying `Merged_Table_1` and visualizing outcomes.
+
+This separation ensures scalability and adaptability to other datasets while maintaining the MAUDE database as a benchmark for its capabilities.
+
+### The Meaning of "QUEST"
+The term **QUEST** reflects the core functionalities of the AutoQUEST system and can be understood as:  
+- **Query**: Formulating precise research questions and extracting relevant data.  
+- **Understand**: Analyzing the input and context to guide planning.  
+- **Execute**: Running queries and retrieving results.  
+- **Synthesize**: Processing and summarizing the data into actionable insights.  
+- **Transform**: Converting the findings into meaningful outputs such as reports or visualizations.  
+
+These components work together seamlessly to streamline complex informatics research workflows.
+
+---
+
+## Automated Workflow with MAUDE Example
 
 ### 1. **Research Question Formulation**
-   - Users input their research goals or analytical focus (e.g., "Identify high-risk devices," "Analyze trends in adverse events").
-   - The program automatically generates specific research questions based on user input and data schema.
+   - User input: "Analyze adverse event trends by device type."
+   - AutoQUEST generates specific research questions, such as:
+     - "Which devices have the highest frequency of adverse events over the last five years?"
+     - "What trends exist in device failure rates across medical specialties?"
 
 ### 2. **SQL Query Generation**
-   - For each research question, SQL code is dynamically generated to extract relevant data.
-   - Queries account for complex relationships across multiple merged tables (e.g., linking patient data with device event data).
-   - Examples include:
-     - Fetching adverse events by device type.
-     - Analyzing event frequency trends over time.
-     - Identifying correlations between patient demographics and adverse outcomes.
+   - AutoQUEST dynamically generates SQL queries:
+     - Fetching adverse events by `device_problem_code` and `event_type` from `Merged_Table_3`.
+     - Analyzing event frequency over time from `Merged_Table_1`.
 
 ### 3. **Data Processing and Integration**
-   - Raw MAUDE datasets are cleaned, validated, and merged into comprehensive tables.
-   - Data integration scripts handle inconsistencies and missing values across multiple years of reports.
+   - MAUDE datasets from multiple years are cleaned and merged.
+   - Example: `Merged_Table_8` consolidates patient demographics to correlate adverse events with age or gender.
 
 ### 4. **Automated Analysis and Visualization**
-   - Predefined Python scripts execute SQL queries, process results, and generate actionable insights.
-   - Visualizations such as trend graphs, heatmaps, and risk matrices are automatically created to highlight key findings.
+   - AutoQUEST executes the queries and generates visualizations:
+     - Heatmaps of adverse event frequencies by device type.
+     - Trend graphs showing longitudinal changes in event rates.
 
 ### 5. **Reporting and Documentation**
-   - Findings are summarized into structured reports with visual and textual narratives.
-   - Reports emphasize actionable insights and are dynamically tailored to the research objective.
+   - The results are summarized into dynamic reports tailored to the research question, such as:
+     - "Top 5 High-Risk Devices by Event Frequency."
+     - "Correlation Between Adverse Events and Patient Demographics."
+
+---
+
+## THINK/DO Chain in MAUDE Context
+
+### THINK Chain (Cognitive Layer)
+1. **Reasoning**: Generates targeted research questions based on MAUDE schema and user goals.  
+   *Example*: Identifies relevant tables like `Merged_Table_1` and `Merged_Table_3` for event frequency analysis.
+2. **Planning**: Designs the workflow to query and analyze adverse events by device type and timeframe.
+3. **Memory**: Stores and recalls prior query results or reusable SQL snippets for iterative research.
+
+### DO Chain (Operational Layer)
+1. **Execution**: Runs SQL queries on the MAUDE database to fetch relevant data.
+2. **Error Handling**: Automatically corrects invalid queries using feedback from database errors.
+3. **Analysis**: Processes extracted data into insights, such as device safety trends or risk matrices.
+
+---
 
 ## Contents
 
 ### Files
-- **`sql.ipynb`**: Jupyter notebook containing SQL queries and analysis of the MAUDE database. The notebook demonstrates dynamic query generation and analysis workflows.
+- **`sql.ipynb`**: Jupyter notebook demonstrating SQL query generation and analysis with MAUDE data.  
+- **`prompt.txt`**: Describes MAUDE table schemas and fields for reference during query generation.
 
-- **`prompt.txt`**: Text file documenting the structure and description of fields in the MAUDE database and the merged tables. This file is a key reference for understanding the data schema and metadata.
-
-### Key Tables and Fields
-The repository integrates multiple MAUDE data tables, providing a unified view of medical device events:
-
-#### 1. **Merged_Table_1**
-  - **Fields**: Includes `exemptn_no`, `mfr_name`, `report_id`, `event_type`, `brand_name`, `product_code`, and more.
-  - **Purpose**: Combines records from multiple years (e.g., ASR_2007, ASR_2017) to provide a longitudinal view of device-related events.
-
-#### 2. **Merged_Table_3**
-  - **Fields**: Includes `exemption_number`, `manufacturer_name`, `report_id`, `event_type`, `device_problem_codes`, etc.
-  - **Purpose**: Focuses on event reports from 2019, detailing adverse events and device problems.
-
-#### 3. **Merged_Table_7**
-  - **Fields**: Includes `mdr_report_key`, `report_number`, `event_type`, `date_received`, `adverse_event_flag`, etc.
-  - **Purpose**: Provides detailed metadata on reports, including adverse events and product problem flags.
-
-#### 4. **Merged_Table_8**
-  - **Fields**: Includes `mdr_report_key`, `patient_sequence_number`, `patient_age`, `patient_sex`, and more.
-  - **Purpose**: Consolidates patient data and treatment outcomes from various years.
-
-#### 5. **Merged_Table_9**
-  - **Fields**: Includes `mdr_report_key`, `foi_text`, `foi_text_json`.
-  - **Purpose**: Captures free-text descriptions of adverse events, providing narrative context.
-
-### Field Descriptions
-The `prompt.txt` file includes comprehensive descriptions of all fields within the MAUDE database, covering topics such as:
-- **Device Information**: Model numbers, product codes, and device problem codes.
-- **Event Information**: Types of events, dates, and locations.
-- **Reporter Information**: Reporter occupation, health professional status, and country codes.
-- **Patient Information**: Age, sex, weight, ethnicity, and race.
-
-### Example Data
-Sample rows for key tables are provided in the `prompt.txt` file, illustrating the structure and content of merged data.
-
-## Usage
-
-### Prerequisites
-- Install Python and Jupyter Notebook to execute the analysis scripts.
-- A database client capable of handling SQL queries, such as SQLite or PostgreSQL.
-
-### Running the Analysis
-
-#### 1. Data Loading
-   - Open the `sql.ipynb` notebook.
-   - Load raw MAUDE datasets into the database.
-   - Scripts in the notebook will assist in cleaning and transforming the data.
-
-#### 2. Data Integration
-   - Use the provided SQL scripts to merge datasets from multiple years into unified tables (e.g., `Merged_Table_1` through `Merged_Table_9`).
-   - Validate the integrity of merged data using key identifiers such as `report_id` and `mdr_report_key`.
-
-#### 3. Query Execution
-   - Leverage dynamically generated SQL queries tailored to specific research questions.
-   - Extract data subsets based on user-defined objectives.
-
-#### 4. Analysis and Visualization
-   - Utilize Jupyter Notebook to run Python scripts that execute queries and process results.
-   - Automatically generate visualizations (e.g., trend graphs, heatmaps) to identify high-risk devices or recurring problems.
-
-#### 5. Reporting Insights
-   - Summarize findings into structured reports.
-   - Tailor results and visualizations to address the initial research question dynamically.
-Algorithm AutoQUEST_Workflow
-Input: prompt.txt, add.txt, PostgreSQL Database
-Output: Final Analytical Report
-
-
-```
-python
-
-# --- Phase 1: Research Question Generation ---
-1. Load_Prompt_and_Metadata()
-    Read content from 'prompt.txt' → prompt_content
-    Read content from 'add.txt' → add_content
-
-2. Generate_Research_Question(prompt_content, add_content)
-    Use LLM to generate research question
-    Output: research_question
-
-# --- Phase 2: Execution Plan Outline ---
-3. Generate_Execution_Steps(research_question, prompt_content)
-    Use LLM to create execution steps
-    Output: execution_steps
-
-4. Identify_Involved_Tables(execution_steps)
-    Extract table names using regex or predefined mapping
-    Output: involved_tables
-
-# --- Phase 3: Data Collection ---
-5. For each table in involved_tables:
-       Retrieve_Table_Structure(table)
-           Query database schema for column information → structure
-
-       Fetch_Sample_Data(table)
-           Query database to retrieve sample rows → sample_data
-
-6. Update_Execution_Steps(execution_steps, structure, sample_data)
-    Use LLM to refine execution plan with confirmed table info
-
-7. Generate_SQL_Queries(execution_steps, structure, sample_data)
-    Use LLM to generate SQL queries
-    Output: sql_queries
-
-8. For each SQL query in sql_queries:
-       Execute_SQL_Query(sql_query)
-           Try:
-               Run SQL query → data
-           Catch Error:
-               Auto_Correct_SQL(sql_query, error_message)
-                   Use LLM to correct SQL query
-                   Retry execution (max retries = 10)
-           Aggregate data into data_all
-
-# --- Phase 4: Data Analysis and Report Generation ---
-9. Analyze_Data(research_question, data_all)
-    Use LLM to analyze aggregated results
-    Output: analysis_report
-
-10. Return_Final_Report(analysis_report)
-    Generate and display the final analytical report
-```
-
-
-### Applications
-This repository is intended for researchers and analysts working with medical device safety data. Common use cases include:
-- Trend analysis of adverse events.
-- Evaluation of device performance and safety.
-- Identification of high-risk medical devices.
-
-## Contributing
-Contributions are welcome! If you have suggestions for improving the analysis or additional resources to share, please submit a pull request or open an issue.
-
-## License
-This project is licensed under the [MIT License](LICENSE). Feel free to use and modify the contents for your research or applications.
-
-## Acknowledgments
-This repository leverages publicly available data from the FDA's MAUDE database. The analysis scripts and documentation aim to facilitate understanding and usability of this critical dataset.
+### Key Tables and Fields in MAUDE
+- **`Merged_Table_1`**: Longitudinal view of device-related events.  
+- **`Merged_Table_3`**: Focuses on event reports and device problems.  
+- **`Merged_Table_8`**: Consolidates patient data for demographic analysis.  
+- **`Merged_Table_9`**: Captures free-text narratives of adverse events.  
 
 ---
 
-For more details on the MAUDE database, refer to the [FDA MAUDE Database Documentation](https://www.fda.gov/medical-devices/medical-device-reporting-mdr/how-search-maude).
+## Applications
+AutoQUEST, demonstrated with MAUDE, can be applied to other datasets requiring dynamic research workflows. Common use cases include:
+- Trend analysis of medical device adverse events.
+- Identification of high-risk devices and failure patterns.
+- Analysis of correlations between patient demographics and outcomes.
 
+---
 
+## License and Acknowledgments
+This project is licensed under the [MIT License](LICENSE). It leverages publicly available data from the FDA's MAUDE database to demonstrate the capabilities of AutoQUEST.
+
+For more details on the MAUDE database, refer to the [FDA MAUDE Documentation](https://www.fda.gov/medical-devices/medical-device-reporting-mdr/how-search-maude).
+
+---
+
+This version incorporates the **QUEST** acronym meaning into the core explanation of AutoQUEST. Let me know if further refinements are needed!
