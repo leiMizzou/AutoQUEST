@@ -1038,6 +1038,9 @@ The research question is valid and important. However, based on the provided SQL
 2024-12-29 12:37:59,836 [INFO] Performance metrics have been saved to performance_metrics.json.
 2024-12-29 12:37:59,836 [INFO] Final successful SQL queries have been saved to final_queries.sql.
 2024-12-29 12:37:59,837 [INFO] Script execution completed.
+
+**Performance Metrics:**
+
 调用 1:
   Prompt Token Count: 13155
   Candidates Token Count: 2141
