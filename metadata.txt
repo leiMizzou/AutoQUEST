@@ -1,0 +1,783 @@
+Description of Fields in the MAUDE Database
+The following table describes the fields in the MAUDE database in display order. If a submitter did not provide information for a given field, that field will not show in the MDR.
+
+MAUDE Label	Notes
+Model Number	Model number found on the device label or accompanying packaging.
+Device Problem	Submitters are asked to enter codes that most accurately describe medical device failures or problems related to the adverse event. Additional details available on the MDR Adverse Event Codes webpages. Code descriptions can be found on the Coding Resources webpages. Any additional information provided in follow-up reports are added to previously cited device problems. 
+Patient Problem	Submitters are asked to enter codes that most accurately describe patient problems related to the adverse event. Additional details available on the MDR Adverse Event Codes webpages. Code descriptions can be found on the Coding Resources webpages. Any additional information cited in follow-up reports are added to previously provided patient problems.
+Event Date	Date of the actual or best estimate of the first onset of the adverse event.
+Event Type	Type of reportable event, e.g., death, injury, or malfunction.
+Manufacturer Narrative	For manufacturer reports. Manufacturers enter any additional information, evaluation, or clarification of data presented in previous sections, in narrative form. This information is redacted in accordance with 21 CFR 803.9. Any additional information provided in follow-up reports is added to previously provided manufacturer narratives. 
+Event Description	Description of reported event in narrative form. This information is redacted in accordance with 21 CFR 803.9. Any additional information provided in follow-up reports is added to previously provided manufacturer narratives.
+Brand Name	Trade or proprietary name of the suspect medical device as used in product labeling or in the catalogue.
+Type of Device	Generic or common name of the suspect medical device or a generally descriptive name.
+Manufacturer (Section D)	Full name and address of the manufacturer of the suspect medical device.
+Manufacturer (Section G)	Full name and address of the manufacturer site.
+Manufacturer Contact	Full name and address of the manufacturer reporting contact.
+MDR Report Key	Unique key for an MDR, assigned by MAUDE. Follow-up reports do not change this key.
+MDR Text Key	Unique key for the first narrative entered for this report, assigned by MAUDE.
+Report Number	Report numbers for mandatory reporters (manufacturers, importers, and user facilities) generally consist of three components: a registration or identification number for the submitter, the 4-digit calendar year, and a consecutive number for each report filed during the year by the submitter (e.g., 1234567-2016-00001, 1234567-2016-00002). Note that user facility identification numbers are redacted. Voluntary reports are identified with an alphanumeric number that begins with "MW" and adds a sequential number. Follow-up reports do not change an MDR's report number.
+Device Sequence Number	For reports with more than one device, this number differentiates between each device, as each device is displayed separately in the MAUDE search results.
+Product Code	Product Code of the suspected medical device (refer to the Product Classification Database search webpage for more information).
+UDI-Device Identifier	The Device Identifier (DI) portion of the medical device's full Unique Device Identifier (UDI) (see FDA's UDI webpage for more information).
+UDI-Public	Full UDI value with non-releasable Product Identifier (PI) values (such as serial numbers) redacted.
+Combination Product (y/n)	Denotes whether the suspect product is part of a combination product (see FDA's Combination Products webpage for more information).
+Reporter Country Code	Denotes the country of the initial reporter (e.g., the user, caregiver, etc.).
+PMA/PMN Number	Approved PMA or cleared 510(k), or premarket notification (PMN) number for the suspect device.
+Exemption Number	Exemption/Variance Number used to identify MDR reports that are being submitted under the conditions of an exemption or variance granted by FDA under 21 CFR 803.19.
+Number of Events Reported	Number of events that are described in the report.
+Summary Report (Y/N)	Denotes whether the report summarizes multiple reports. Typically applies to reports submitted under an exemption or variance granted by FDA under 21 CFR 803.19, or a report received under FDA's Voluntary Malfunction Summary Report Program.
+Report Source	Denotes whether this report was submitted by a Manufacturer, Distributor (Importer), User Facility, or Voluntary reporter.
+Source Type	The source through which the manufacturer became aware of the reported adverse event.
+Reporter Occupation	Denotes the initial reporter's occupation.
+Remedial Action	Denotes whether a remedial action (e.g., a recall) was initiated.
+Type of Report	Denotes whether the report is an initial report or a follow-up report. Note this field adds follow-up reports, also called supplement reports, as they are received, so readers can discern how many follow-up reports have been submitted. For example, a report with two follow-up reports will be denoted as "Initial, Follow-up, Follow-up."
+Report Date	The date the report is submitted to FDA. If a follow-up report has been submitted, this field will display the date the most recent follow-up report was submitted. Note that if an initial reporter (e.g., an importer or user facility) also sent a report to FDA, this field may include that date in addition to the date the MDR reporter submitted to FDA.
+[X] Device was involved in event	Number of devices included in the report.
+[X] Patient was involved in event	Number of patients included in the report.
+Is this an Adverse Event Report?	Denotes whether the use of a medical device is suspected to have resulted in an adverse outcome in a patient.
+Is this a Product Problem Report?	Denotes device malfunctions.
+Device Operator	Denotes the type of person operating or using the suspect medical device.
+Device Expiration Date	The expiration date found on the device itself or printed on the accompanying packaging.
+Device Model Number	Model number found on the device label or accompanying packaging (same as above).
+Device Catalogue Number	Catalogue number found in the manufacturer's catalogue, device labeling, or accompanying packaging.
+Device Lot Number	Lot number found on the label or packaging material.
+Other Device ID Number	Subfield retired in 2018.
+Was Device Available for Evaluation?	Denotes whether the device was available for evaluation by the manufacturer.
+Date Returned to Manufacturer	If the device was returned to the manufacturer, denotes the date of return.
+Is the Reporter a Health Professional?	Denotes whether the initial reporter is a health professional.
+Was the Report Sent to FDA?	Denotes whether a user facility or importer sent a separate report of the same event to FDA. User facilities are required to send reports of device-related deaths to FDA, and importers are required to send reports of device-associated deaths and serious injuries to FDA.
+Distributor Facility Aware Date	The date that the user facility's medical personnel or the importer became aware that the device has or may have caused or contributed to the reported event.
+Device Age	The age of the device or a best estimate.
+Event Location	The location of actual occurrence of the event.
+Date Report to Manufacturer	Indicates date report was sent to manufacturer from a user facility or importer. User facilities are required to send reports of device-related deaths and serious injuries to manufacturers, and importers are required to send reports of device-associated deaths, serious injuries and malfunctions to manufacturers.
+Initial Date FDA Received	Date that the initial report was received in eMDR by FDA. This date marks when FDA first became aware of the reported event and does not change when a follow-up or supplement report is received.
+Supplement Dates FDA Received	Dates that any supplement or follow-up reports were received in eMDR by FDA. This field lists the dates for each follow-up received in order of receipt.
+Initial Date Manufacturer Received	This field represents the date when a manufacturer received information that a reportable event occurred.
+Supplement Dates Manufacturer Received	For supplement or follow-up reports, manufacturers are asked to provide the date that the follow-up information was received. MAUDE will display the date the manufacturer provided in this field for each supplement or follow-up report received. This field lists the dates for each follow-up received in order of receipt. If a date is not provided by the manufacturer, MAUDE will display “Not provided” in place of a date.
+Was Device Evaluated by Manufacturer?	Denotes whether the manufacturer evaluated the suspect or a related device.
+Date Device Manufactured	The date of the manufacturing of the suspect medical device.
+Is the Device Single Use?	Denotes whether the device was labeled for single use or not.
+Is This a Reprocessed and Reused Single-Use Device?	Denotes whether a single use device was reprocessed or reused on a patient.
+Type of Device Usage	Denotes whether the use of the suspect medical device was the initial use, reuse, or unknown.
+Removal/Correction Number	The correction or removal number following the format directed by 21 CFR Part 806.
+Patient Sequence Number	For reports with more than one patient, this number differentiates between each patient. Patient fields below this one may be repeated multiple times if the report contains multiple patients.
+Treatment	Lists concomitant medical products and therapy dates. This information is redacted in accordance with 21 CFR 803.9.
+Patient Outcome(s)	Patient outcome(s) attributed to the reported event.
+Patient Age	Patient's age at the time of event onset.
+Patient Sex	Patient's sex at birth.
+Patient Weight	Patient's weight or a best estimate.
+Patient Ethnicity	Patient's ethnicity.
+Patient Race	Patient's race.
+
+-------------------------
+
+Medical Specialty in "foiclass" Table
+Two letters indicate the medical specialty panel responsible for reviewing the product.
+
+Medical Specialty (Advisory Committee)	Regulation No.	Medical Specialty Code
+Anesthesiology	Part 868	AN
+Cardiovascular	Part 870	CV
+Clinical Chemistry	Part 862	CH
+Dental	Part 872	DE
+Ear, Nose, & Throat	Part 874	EN
+Gastroenterology & Urology	Part 876	GU
+General Hospital	Part 880	HO
+Hematology	Part 864	HE
+Immunology	Part 866	IM
+Microbiology	Part 866	MI
+Neurology	Part 882	NE
+Obstetrics/Gynecology	Part 884	OB
+Ophthalmic	Part 886	OP
+Orthopedic	Part 888	OR
+Pathology	Part 864	PA
+Physical Medicine	Part 890	PM
+Radiology	Part 892	RA
+General & Plastic Surgery	Part 878	SU
+Clinical Toxicology	Part 862	TX
+
+------------------------------
+
+Device Name in "foiclass" Table
+The Device Name uses the format of a noun that is usually followed by one or more adjectives, separated by commas. Therefore, the first word in the device name is usually the best search parameter. For example, to find a specific pump, search on the word "pump" to retrieve all products with the word "pump" in their name.
+
+-------------------------------
+
+Device Class in "foiclass" Table
+Device Class refers to the level of CDRH regulation of a given device. For each device, the applicable Medical Specialty panel recommends to CDRH the appropriate device class. The three Class designations are:
+
+Class 1 - Devices subject to General Controls,
+Class 2 - Devices subject to General Controls and Special Controls,
+Class 3 - Devices subject to General Controls, Special Controls, and Premarket Clearance
+Further information on how devices are classified.
+
+------------------------------
+
+Each year, the FDA receives over two million medical device reports of suspected device-associated deaths, serious injuries, and malfunctions. These medical device reports have been available in the FDA's public Manufacturer and User Facility Device Experience (MAUDE) Database since 1999 as one source of information to help patients and health care providers make more informed medical decisions.
+
+On this page, the FDA is also providing the medical device reports received from 1984 - 1996 through CDRH's legacy Device Experience Network (DEN) reporting system and reports received under the Alternative Summary Reporting Program from 1999 – April 2019.
+
+Under the Freedom of Information and Privacy Acts (Sec. 552, Title 5, USC) (PL 93-579), the FDA is required to delete, prior to public disclosure, any information that constitutes trade secrets, and confidential, commercial, or financial information; and any personal, medical, and similar information that would constitute a clearly unwarranted invasion of personal privacy. Included in the deletion requirements are all identification of the reporters of the events and the user facility where the event occurred.
+
+On this page:
+MAUDE downloadable files
+Alternative Summary Reports
+ASR Data File Values
+Device Experience Network (DEN) Reports
+MAUDE Data Downloadable Files
+This section provides downloadable zipped data files that consist of:
+
+Voluntary reports since June 1993
+User facility reports since 1991
+Distributor reports since 1993
+Manufacturer reports since August 1996
+This data is provided in zip files, which are updated monthly.
+
+The MDR data is presented in tables and contains all publicly available information from the completed the MEDWATCH Form 3500. The FDA recommends downloading all types of files for the time period of interest.
+
+Tip for Downloading Files
+When downloading the MDR data files to a database such as Microsoft Access, we recommend that you first open, then save the data file in Microsoft WORD. This will add an "end of record" marker to each MDR record that can be recognized by Microsoft ACCESS. For files such as the FOIDEV files, you may need to put in an extra character at the end of the first record prior to importing the file, otherwise the last column of data may be lost.
+Tips for Reviewing the Downloaded Files
+Field Definitions:
+Master Event Data: A distinct master event data record will be present for each source reporting an event. In other words, if a User Facility, Distributor, Manufacturer, and voluntary submitter all report an event, there will be four event records.
+Device Data: Contains information related to the device(s) involved in the event.
+Patient Data: Contains information related to the patient(s) involved in the event.
+Text Data: Contains textual information from MEDWATCH Form Sections B5, H3, and H10.
+Device Problem Data: Contains Device Problem Code data from MEDWATCH Form Sections F10 and H6
+Patient Problem Data: Contains Health Effect – Clinical Code (previously labeled "Patient Code") data from MEDWATCH Form Sections F10 and H6
+All record types are linked by the MDR REPORT KEY, found in each file.
+For distributor reports that also had subsequent manufacturer reports, a special data element, MANUFACTURER LINK FLAG, will be set to 'Y'. In this case, the DISTRIBUTOR information (Section F on the master event data record) will be present; otherwise, these data elements will be blank.
+The following files are available: (File Sizes are approximate)
+
+ 
+
+ 
+
+File Name	Compressed Size in Bytes	Uncompressed Size in Bytes	Total Records	Description
+mdrfoithru2023.zip	598951KB	5800337KB	18118160	Master Record through 2023
+mdrfoi.zip	78032KB	698230KB	2162186	MAUDE Base records received to date for 2024
+mdrfoiadd.zip	8281KB	78290KB	245307	New MAUDE Base records for the current month.
+mdrfoichange.zip	16275KB	141156KB	435700	MAUDE Base data updates: changes to existing Base data.
+foidevthru1997.zip	6001KB	31217KB	136917	Device Data through 1997
+foidev1998.zip	3205KB	17539KB	63440	Device Data for 1998
+foidev1999.zip	2764KB	14798KB	52880	Device Data for 1999
+device2000.zip	1932KB	9998KB	53114	Device Data for 2000
+device2001.zip	2126KB	11075KB	59073	Device Data for 2001
+device2002.zip	2321KB	12967KB	70384	Device Data for 2002
+device2003.zip	2527KB	14242KB	77949	Device Data for 2003
+device2004.zip	2803KB	14944KB	82887	Device Data for 2004
+device2005.zip	3350KB	17711KB	99770	Device Data for 2005
+device2006.zip	3966KB	21308KB	120486	Device Data for 2006
+device2007.zip	4820KB	30277KB	172205	Device Data for 2007
+device2008.zip	5521KB	34034KB	195474	Device Data for 2008
+device2009.zip	6724KB	43739KB	243108	Device Data for 2009
+device2010.zip	8724KB	56054KB	304407	Device Data for 2010
+device2011.zip	11585KB	80802KB	446880	Device Data for 2011
+device2012.zip	13376KB	88104KB	487770	Device Data for 2012
+device2013.zip	17746KB	124537KB	682402	Device Data for 2013
+device2014.zip	20349KB	159694KB	863841	Device Data for 2014
+device2015.zip	23406KB	169708KB	862910	Device Data for 2015
+device2016.zip	26283KB	180365KB	868406	Device Data for 2016
+device2017.zip	31495KB	206501KB	938709	Device Data for 2017
+device2018.zip	37399KB	236717KB	1050403	Device Data for 2018
+device2019.zip	45885KB	307984KB	1333450	Device Data for 2019
+device2020.zip	50739KB	363248KB	1567544	Device Data for 2020
+device2021.zip	60940KB	461286KB	2031120	Device Data for 2021
+device2022.zip	73861KB	659204KB	2949899	Device Data for 2022
+device2023.zip	73369KB	531420KB	2342112	Device Data for 2023
+device.zip	70894KB	491804KB	2163224	Device Data received to date for 2024
+deviceadd.zip	8288KB	56939KB	245225	New MAUDE Device data for the current month.
+devicechange.zip	15232KB	100942KB	435622	Device data updates: changes to existing Device data and additional Device data for existing Base records.
+deviceproblemcodes.zip	13KB	34KB	882	Device Problem Codes
+foidevproblem.zip	53179KB	293534KB	20578598	Device Problem Data
+foitextthru1995.zip	3561KB	16551KB	27401	Narrative data through 1995
+foitext1996.zip	2782KB	9318KB	32059	Narrative Data for 1996
+foitext1997.zip	7557KB	26382KB	91009	Narrative Data for 1997
+foitext1998.zip	5924KB	20773KB	68316	Narrative Data for 1998
+foitext1999.zip	4501KB	15788KB	51119	Narrative Data for 1999
+foitext2000.zip	4760KB	16491KB	52625	Narrative Data for 2000
+foitext2001.zip	5090KB	17763KB	57986	Narrative Data for 2001
+foitext2002.zip	6089KB	22304KB	64859	Narrative Data for 2002
+foitext2003.zip	6221KB	23332KB	66241	Narrative Data for 2003
+foitext2004.zip	6090KB	21742KB	56117	Narrative Data for 2004
+foitext2005.zip	9649KB	34692KB	95044	Narrative Data for 2005
+foitext2006.zip	20092KB	69183KB	177414	Narrative Data for 2006
+foitext2007.zip	25177KB	88484KB	232627	Narrative Data for 2007
+foitext2008.zip	28286KB	101218KB	264972	Narrative Data for 2008
+foitext2009.zip	40869KB	147687KB	388042	Narrative Data for 2009
+foitext2010.zip	62269KB	252984KB	635654	Narrative Data for 2010
+foitext2011.zip	94583KB	425073KB	1040278	Narrative Data for 2011
+foitext2012.zip	108957KB	475208KB	1167621	Narrative Data for 2012
+foitext2013.zip	139507KB	622562KB	1609332	Narrative Data for 2013
+foitext2014.zip	164295KB	788040KB	1948365	Narrative Data for 2014
+foitext2015.zip	184834KB	861735KB	2073784	Narrative Data for 2015
+foitext2016.zip	194760KB	924811KB	2180342	Narrative Data for 2016
+foitext2017.zip	216530KB	1076093KB	2365712	Narrative Data for 2017
+foitext2018.zip	213901KB	1085673KB	2629641	Narrative Data for 2018
+foitext2019.zip	318909KB	1795845KB	3467112	Narrative Data for 2019
+foitext2020.zip	333059KB	2020564KB	4016412	Narrative Data for 2020
+foitext2021.zip	385528KB	2287987KB	4866625	Narrative Data for 2021
+foitext2022.zip	463808KB	3305671KB	6623615	Narrative Data for 2022
+foitext2023.zip	499585KB	3192805KB	5406877	Narrative Data for 2023
+foitext.zip	423247KB	2496230KB	4803780	Narrative Data received to date for 2024
+foitextadd.zip	35295KB	227213KB	479035	New MAUDE Narrative data for the current month.
+foitextchange.zip	63394KB	382728KB	670110	Narrative data updates: changes to existing narrative data and additional narrative data for existing base records.
+patientthru2023.zip	95313KB	687674KB	18104231	Patient Record through 2023
+patient.zip	12345KB	92172KB	2160971	MAUDE Patient records received to date for 2024
+patientadd.zip	1367KB	10331KB	245228	New MAUDE Patient records for the current month.
+patientchange.zip	1537KB	10808KB	264840	MAUDE Patient data updates: changes to existing Base data.
+patientproblemdata.zip	17KB	39KB	1127	MAUDE Patient Problem Codes
+patientproblemcode.zip	134032KB	1130935KB	20457749	MAUDE Patient Data for Patient Problem Codes
+[Accessibility]
+
+Note: This documentation is intended to be used in conjunction with a copy of Medwatch Form 3500A and 3500.
+
+Record/Data Characteristics:
+The data has one record per line, with the data fields in a pipe-delimited, (i.e., "|") format
+All data elements are alpha-numeric
+All text fields contain whatever data was provided/entered. If no information was provided/entered the field will be left empty. If an asterisk ("*") is present, it represents what was entered on the 3500/3500A.
+All "FLAG" data elements have the value of "Y" for Yes, "N" for No, or are blank if no data was available/entered.
+All fields identified as multiply-occurring represent data elements which may have multiple values. Each value will be present in the field, separated by a comma. The word "OTHER" may appear as one of the values if the "Other" box was checked off. If the whole field is blank, no data was reported/entered.
+Section G CONTACT address information may not necessarily be the address where the device is manufactured.
+Special Note for REPORT NUMBER data element:
+The REPORT NUMBER data element represents Manufacturer Report Number, Distributor Report Number, or internally-generated voluntary report number, depending on the source of the record.
+
+This REPORT NUMBER field will be blank when:
+
+User Facility submitted the report
+Distributor report has not been followed by a subsequent Manufacturer report.
+Special Notes for Voluntary Reports and User Facility Malfunction Reports:
+The only data elements which will be present on the Master Event Record will be:
+
+NEW RECORD
+DEVICE EVENT KEY
+REPORT SOURCE CODE
+MDR REPORT KEY
+Section B
+All other data elements will be blank.
+
+MDRFOI file contains following 82 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key
+Empty field (not used)
+Report Number
+Report Source Code
+P = Voluntary report
+U = User Facility report
+D = Distributor report
+M = Manufacturer report
+Manufacturer Link Flag (internal information flag)
+Number Devices in Event (if source code is 'P', field will be null)
+Number Patient in Event (if source code is 'P', field will be null)
+Date Received
+SECTION-B
+
+Adverse Event Flag (B1)
+Product Problem Flag (B1)
+Date Report (B4)
+Date of Event (B3) -- new added, 2006
+Single Use Flag (Reprocessor Flag) (D8) -- new added, 2006
+Reporter Occupation Code (E3) -- new added, 2006
+* INVALID DATA
+
+000 OTHER
+001 PHYSICIAN
+002 NURSE
+003 NON-HEALTHCARE PROFESSIONAL
+0HP HEALTH PROFESSIONAL
+0LP LAY USER/PATIENT
+100 OTHER HEALTH CARE PROFESSIONAL
+101 AUDIOLOGIST
+102 DENTAL HYGIENIST
+103 DIETICIAN
+104 EMERGENCY MEDICAL TECHNICIAN
+105 MEDICAL TECHNOLOGIST
+106 NUCLEAR MEDICINE TECHNOLOGIST
+107 OCCUPATIONAL THERAPIST
+108 PARAMEDIC
+109 PHARMACIST
+110 PHLEBOTOMIST
+111 PHYSICAL THERAPIST
+112 PHYSICIAN ASSISTANT
+113 RADIOLOGIC TECHNOLOGIST
+114 RESPIRATORY THERAPIST
+115 SPEECH THERAPIST
+116 DENTIST
+117 NURSE PRACTITIONER
+300 OTHER CAREGIVERS
+301 DENTAL ASSISTANT
+302 HOME HEALTH AIDE
+303 MEDICAL ASSISTANT
+304 NURSING ASSISTANT
+305 PATIENT
+306 PATIENT FAMILY MEMBER OR FRIEND
+307 PERSONAL CARE ASSISTANT
+400 SERVICE AND TESTING PERSONNEL
+401 BIOMEDICAL ENGINEER
+402 HOSPITAL SERVICE TECHNICIAN
+403 MEDICAL EQUIPMENT COMPANY TECHNICIAN/REPRESENTATIVE
+404 PHYSICIST
+405 SERVICE PERSONNEL
+499 DEVICE UNATTENDED
+500 RISK MANAGER
+501 ADMINISTRATOR/SUPERVISOR
+600 ATTORNEY
+999 UNKNOWN
+NA NOT APPLICABLE
+NI NO INFORMATION
+UNK UNKNOWN
+SECTION-E (if source code is 'P', Section E to H will contain no data)
+
+Health Professional (E2)
+Initial Report to FDA (E4)
+Y = Yes
+N = No
+U = Unknown
+* = No answer provided
+SECTION-F
+
+Date Facility Aware (F6)
+Report Date (F8)
+Report to FDA (F11)
+Date Report to FDA (F11)
+Event Location (F12)
+Date Report to Manufacturer (F13)
+SECTION-G (only for report source 'M', others sources will be null)
+
+Manufacturer Contact Title Name (G1)
+Manufacturer Contact First Name (G1)
+Manufacturer Contact Last Name (G1)
+Manufacturer Contact Street 1 (G1)
+Manufacturer Contact Street 2 (G1)
+Manufacturer Contact City (G1)
+Manufacturer Contact State Code (G1)
+Manufacturer Contact Zip Code (G1)
+Manufacturer Contact Zip Code Ext (G1)
+Manufacturer Contact Country Code
+Manufacturer Contact Postal Code
+Manufacturer Contact Phone No Area Code (G1)
+Manufacturer Contact Phone No Exchange (G2)
+Manufacturer Contact Phone No (G2)
+Manufacturer Contact Phone No Ext (G2)
+Manufacturer Contact Phone No Country Code
+Manufacturer Contact Phone No City Code
+Manufacturer Contact Phone No Local
+Manufacturer G1 Name (G1)
+Manufacturer G1 Street 1 (G1)
+Manufacturer G1 Street 2 (G1)
+Manufacturer G1 City (G1)
+Manufacturer G1 State Code (G1)
+Manufacturer G1 Zip Code (G1)
+Manufacturer G1 Zip Code Ext (G1)
+Manufacturer G1 Country Code
+Manufacturer G1 Postal Code
+Date Manufacturer Received (G4)
+SECTION-H
+
+Device Date Of Manufacture (H4)
+Single Use Flag (H5)
+Remedial Action (H7) -- multiple source type, separate by ','
+RC = Recall
+RP = Repair
+RL = Replace
+RB = Relabeling
+OT = Other
+NO = Notification
+IN = Inspection
+PM = Patient Monitoring
+MA = Modification/Adjustment
+* = Invalid Data
+Previous Use Code (H8)
+Removal/Correction Number (H9)
+Event type (H1) -- only relevant for report sourcetype 'M'
+D = Death
+IN = Injury
+M = Malfunction
+O = Other
+* = No answer provided
+Distributor Name (F3) -- if report source code = 'M' and
+Distributor Address line 1 (F3)
+Distributor Address line 2 (F3)
+Distributor City (F3)
+Distributor State Code (F3)
+Distributor Zip Code (F3)
+Distributor Zip Code Ext (F3)
+Report to Manufacturer (F13)
+Manufacturer Name (F14)
+Manufacturer Address line 1 (F14)
+Manufacturer Address line 2 (F14)
+Manufacturer City (F14)
+Manufacturer State Code (F14)
+Manufacturer Zip Code (F14)
+Manufacturer Zip Code Ext (F14)
+Manufacturer Country Code (F14)
+Manufacturer Postal Code (F14)
+Type of Report (F7) !multiple submission type, separate by ','
+I = Initial submission
+F = Followup
+X = Extra copy received
+O = Other information submitted
+Source Type (G3) -- multiple source type, separate by ','
+00 Other
+01 Foreign
+02 Study
+03 Literature
+04 Consumer
+05 Health Professional
+06 User facility
+07 Company representation
+08 Distributor
+99 Unknown
+* Invalid data
+Date Added
+Date Changed
+Reporter Country Code
+PMA PMN Number
+Exemption Number
+Summary Report
+NOE Summary
+Suppl Dates FDA Received
+Suppl Dates MFR Received
+DEVICE file contains following 48 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key
+Device Event key
+Implant Flag -- D6, new added; 2006
+Date Removed Flag -- D7, new added; 2006; if flag in M or Y, print Date
+U = Unknown
+A = Not available
+I = No information at this time
+M = Month and year provided only, day defaults to 01
+Y = Year provided only, day defaulted to 01, month defaulted to January
+Device Sequence No -- from device report table
+Date Received (from mdr_document table)
+SECTION-D
+
+Brand Name (D1)
+Generic Name (D2)
+Manufacturer Name (D3)
+Manufacturer Address 1 (D3)
+Manufacturer Address 2 (D3)
+Manufacturer City (D3)
+Manufacturer State Code (D3)
+Manufacturer Zip Code (D3)
+Manufacturer Zip Code ext (D3)
+Manufacturer Country Code (D3)
+Manufacturer Postal Code (D3)
+Device Operator (D5)
+Expiration Date of Device (D4)
+Model Number (D4)
+Catalog Number (D4)
+Lot Number (D4)
+Other ID Number (D4)
+Device Availability (D10)
+Y = Yes
+N = No
+R = Device was returned to manufacturer
+* = No answer provided
+Date Returned to Manufacturer (D10)
+Device Report Product Code
+Device Age (F9)
+Device Evaluated by Manufacturer (H3)
+Y = Yes
+N = No
+R = Device not returned to manufacturer
+* = No answer provided
+Combination Product Flag (G4)
+Y = Yes
+N = No
+UDI-DI
+UDI-Public
+BASELINE SECTION (for records prior to 2009)
+
+Baseline brand name
+Baseline generic name
+Baseline model no
+Baseline catalog no
+Baseline other id no
+Baseline device family
+Baseline shelf life contained in label
+Y = Yes
+N = No
+A = Not applicable
+* = No answer provided
+Baseline shelf life in months
+Baseline PMA flag
+Baseline PMA no
+Baseline 510(k) flag
+Baseline 510(k) no
+Baseline preamendment
+Baseline transitional
+Baseline 510(k exempt flag
+Baseline date) first marketed
+Baseline date ceased marketing
+PATIENT file contains following 10 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key (from patient report table)
+Patient Sequence Number (from patient report table)
+Date Received (from mdr_document table)
+Sequence Number||','|| Treatment -- multiple source type, separate by ';'
+Sequence Number||','|| Outcome -- multiple source type, separate by ';'
+L - Life Threatening
+H - Hospitalization
+S - Disability
+C - Congenital Anomaly
+R - Required Intervention
+O - Other
+* - Invalid Data
+U - Unknown
+I - No Information
+A - Not Applicable
+D - Death
+Patient Age
+Patient Sex
+Patient Weight
+Patient Ethnicity
+Patient Race
+TEXT file contains following 6 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key
+MDR Text Key
+Text Type Code (D=B5, E=H3, N=H10 from mdr_text table)
+Patient Sequence Number (from mdr_text table)
+Date Report (from mdr_text table)
+Text (B5, or H3 or H10 from mdr_text table)
+FOIDEVPROBLEM contains 2 fields, delimited by pipe (|), one record per line:
+
+Device Problem Code
+Problem Description
+DEVICEPROBLEMCODES contains 2 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key
+Device Problem Code -- (F10) new added; 2006
+PATIENTPROBLEMDATA contains following 2 fields, delimited by pipe (|), one record per line:
+
+Patient Problem Code
+Problem Description
+PATIENTPROBLEMCODE contains following 2 fields, delimited by pipe (|), one record per line:
+
+MDR Report Key
+Patient Problem Code
+Device Operator Code Key
+* INVALID DATA
+0 OTHER
+1 PHYSICIAN
+2 NURSE
+3 NON-HEALTHCARE PROFESSIONAL
+0HP HEALTH PROFESSIONAL
+0LP LAY USER/PATIENT
+100 OTHER HEALTH CARE PROFESSIONAL
+101 AUDIOLOGIST
+102 DENTAL HYGIENIST
+103 DIETICIAN
+104 EMERGENCY MEDICAL TECHNICIAN
+105 MEDICAL TECHNOLOGIST
+106 NUCLEAR MEDICINE TECHNOLOGIST
+107 OCCUPATIONAL THERAPIST
+108 PARAMEDIC
+109 PHARMACIST
+110 PHLEBOTOMIST
+111 PHYSICAL THERAPIST
+112 PHYSICIAN ASSISTANT
+113 RADIOLOGIC TECHNOLOGIST
+114 RESPIRATORY THERAPIST
+115 SPEECH THERAPIST
+116 DENTIST
+117 NURSE PRACTIONER
+300 OTHER CAREGIVERS
+301 DENTAL ASSISTANT
+302 HOME HEALTH AIDE
+303 MEDICAL ASSISTANT
+304 NURSING ASSISTANT
+305 PATIENT
+306 PATIENT FAMILY MEMBER OR FRIEND
+307 PERSONAL CARE ASSISTANT
+400 SERVICE AND TESTING PERSONNEL
+401 BIOMEDICAL ENGINEER
+402 HOSPITAL SERVICE TECHNICIAN
+403 MEDICAL EQUIPMENT COMPANY TECHNICIAN/REPRESENTATIVE
+404 PHYSICIST
+405 SERVICE PERSONNEL
+499 DEVICE UNATTENDED
+500 RISK MANAGER
+501 ADMINISTRATOR/SUPERVISOR
+600 ATTORNEY
+999 UNKNOWN
+NA NOT APPLICABLE
+NI NO INFORMATION
+UNK UNKNOWN
+Event Location Code Key
+* INVALID DATA
+000 OTHER
+001 HOSPITAL
+002 HOME
+003 NURSING HOME
+004 OUTPATIENT TREATMENT FACILITY
+005 OUTPATIENT DIAGNOSTIC FACILITY
+006 AMBULATORY SURGICAL FACILITY
+500 HOSPITAL
+501 CATHETERIZATION SUITE
+502 CRITICAL CARE UNIT
+503 DIALYSIS UNIT
+504 EMERGENCY ROOM
+505 EXAMINATION ROOM
+506 LABORATORY/PATHOLOGY DEPARTMENT
+507 MATERNITY WARD - NURSERY
+508 OPERATING ROOM
+509 OUTPATIENT CLINIC/SURGERY
+510 PATIENT'S ROOM OR WARD
+511 RADIOLOGY DEPARTMENT
+600 AMBULATORY HEALTH CARE FACILITY
+601 AMBULATORY SURGICAL CENTER
+602 BLOOD BANK
+603 BLOODMOBILE
+604 CATHETERIZATION LAB - FREE STANDING
+605 CHEMOTHERAPY CENTER
+606 CLINIC - WALK IN, OTHER
+607 DIALYSIS CENTER
+608 DRUG CLINIC
+609 IMAGING CENTER - MOBILE
+610 IMAGING CENTER - STATIONARY
+611 LABORATORY
+612 MOBILE HEALTH UNIT
+613 MRI CENTERS
+614 PSYCHIATRIC CENTER - WALK IN, OTHER
+615 TUBERCULOSIS CLINIC
+616 URGENT CARE CENTER
+617 OUTPATIENT DIAGNOSTIC FACILITY
+700 LONG-TERM CARE FACILITY
+701 HOSPICE
+702 NURSING HOME
+703 PSYCHIATRIC FACILITY
+704 REHABILITATION CENTER
+705 RETIREMENT HOME
+810 PATIENT'S HOME
+820 IN TRANSIT TO USER/MEDICAL FACILITY
+830 PUBLIC VENUE
+831 OUTDOORS
+832 PARK
+833 PLAYGROUND
+834 PUBLIC BUILDING
+835 SCHOOL
+836 STREET
+999 UNKNOWN
+NA NOT APPLICABLE
+NI NO INFORMATION
+UNK UNKNOWN
+Alternative Summary Reports
+On February 18, 2022, the FDA posted the available Patient Problem Codes associated with legacy Alternative Summary Report (ASR) files on FDA.gov. The 2022 update followed the addition of Patient Problem Codes to the public Manufacturer and User Facility Device Experience (MAUDE) database in September 2020 to provide additional information on the nature of adverse events and related devices, when available.
+
+The Alternative Summary Reporting (ASR) Program was in effect from 1997 through June 2019. In June 2019, the FDA formally ended the Alternative Summary Reporting (ASR) Program and revoked all such exemptions. All reports received under ASR exemptions from 1999 to April 2019 (when the FDA last received reports under the ASR program) are available in the legacy data files linked below. Reports received under the ASR Program from 1999 – April 2019 are not available in MAUDE and are therefore provided on this page.
+
+For more information, see the 2019 Statement on agency's efforts to increase transparency in medical device reporting.
+
+
+By law, manufacturers may request exemptions, variances or alternatives to reporting requirements under 21 CFR 803.19. Under this provision, the FDA had allowed alternative summary reports (ASRs) for specific well-known and well-characterized events associated with specific devices.
+
+It is important to note that data in ASRs are subject to the same limitations as MDR data in the MAUDE database; they are based on the same threshold for reporting and differ in format. This passive reporting system relies on information provided by users of the devices and other sources, and therefore some information about certain events may be missing, inaccurate, or unverified. Manufacturers are responsible for following up to obtain missing information, but it is not always possible to track down details of an event. Therefore, some fields in both the MAUDE database and ASR reports may be blank. Like all MDR data in the MAUDE database, MDR data in ASR reports cannot be used to determine rates of adverse events due to under-reporting of events, inaccuracies in reports, lack of verification that the device caused the reported event, and lack of information about frequency of device use. In addition, the number of events may fluctuate over time for a variety of reasons that do not reflect a change in the actual rate of the events, such as changes in technology that impact rate of use in clinical practice, changes in a firm's reporting processes, and following a public communication or media reports about a technology. Moreover, the presence of an event or multiple events does not necessarily mean there is a problem with a device. Often additional investigation and data collection are necessary to make that determination.
+
+ASR exemptions excluded events where the device may have caused or contributed to a patient death from being submitted in ASRs, except for sudden death associated with cardiac arrest for certain surgical heart valves when the device had been implanted for at least five years and the event did not necessitate remedial action to prevent an unreasonable risk of substantial harm to the public health.
+
+When an ineligible event was reported through an ASR, the FDA's standard practice was to contact the manufacturer to obtain additional information regarding the event. If the event was labeled in error, the manufacturer was asked to submit a supplemental ASR to correct it. If an event was ineligible for reporting as an ASR, the FDA's standard practice was to require the manufacturer to submit an individual report in MAUDE for the event. In some cases, the FDA revoked ASR exemptions following continued reporting of ineligible events in ASRs.
+
+In some cases, manufacturers also submitted supplemental ASRs providing additional information, such as following an investigation into an event. The supplemental ASRs may include only new information; fields where information did not change from the original ASR may be blank. Both original and supplemental ASRs are posted on our website. Supplemental reports are identified, and caution should be taken so as not to count the same events twice when they appear in both a supplemental and original report.
+
+ASR reports were not made publicly available before 2019 because they were not submitted in a format compatible with the public MAUDE database. The FDA recognized the public interest in this information and modified the conditions of the ASR Program in 2017 to require submission of a companion report on the official mandatory reporting form. The companion report included the total number of events being summarized in the quarterly report through the ASR Program and is available publicly in the MAUDE database. When both an ASR and companion report were submitted, the same events were captured in both systems. Therefore, adding events from ASR and companion reports will result in some double counting.
+
+The following files contain ASR data by reporting year, comprising over six million records in total. Each file is large and contains all ASRs received for that year. As such, these are compressed data files using the zip format. After files are downloaded, they should be unzipped. The unzipped .CSV files can be viewed with a spreadsheet or database software. The ASR data has one record per line, with the data fields in the following comma-delimited format:
+
+Exemption Number,Manufacturer Registration Number,Manufacturer Name,Report ID,Date of Event,Manufacturer Aware Date,Event Type,Device Problem Codes,Report Year,Report Quarter,Initial Report Flag,Device ID,Product Code,Brand Name,Model Number,Catalog Number,Implant Available for Evaluation,Implant Returned to Manufacturer
+
+Following are the compressed MDR data files received from Alternative Summary Reports listed with their compressed and uncompressed file sizes for each year. The data for each year is sorted by product code, exemption number, and quarter.
+
+In February 2022, the FDA added an addendum file containing the Patient Problem Codes for all years of legacy ASR data (1999-2019). The Patient Problem Code records contained in the ASR_PPC file have a one-to-one mapping with the records in the ASR yearly files, based on the Exemption Number, Report ID, Product Code, Report Year, and Report Quarter columns. The ASR_PPC zip file has the same format as the yearly ASR files, with the data fields in the following comma-delimited format: Exemption Number, Report ID, Product Code, Report Year, Report Quarter, Patient Problem Codes. Due to the large size, the addendum file should be opened in database software, such as Microsoft Access, along with the ASR yearly files. This update followed the addition of patient problem codes to the public MAUDE database in September 2020 to provide additional information on the nature of adverse events and related devices, when available.
+
+File name	Compressed Size	Uncompressed Size
+ASR_1999.zip	75KB	1.0MB
+ASR_2000.zip	0.3MB	5.7MB
+ASR_2001.zip	0.5MB	8.5MB
+ASR_2002.zip	0.6MB	10MB
+ASR_2003.zip	0.7MB	11MB
+ASR_2004.zip	0.9MB	13MB
+ASR_2005.zip	0.9MB	14MB
+ASR_2006.zip	3.3MB	52MB
+ASR_2007.zip	3.5MB	54MB
+ASR_2008.zip	3.3MB	51MB
+ASR_2009.zip	3.6MB	55MB
+ASR_2010.zip	3.5MB	53MB
+ASR_2011.zip	3.4MB	52MB
+ASR_2012.zip	3.8MB	57MB
+ASR_2013.zip	3.7MB	55MB
+ASR_2014.zip	3.8MB	56MB
+ASR_2015.zip	3.9MB	56MB
+ASR_2016.zip	4.5MB	68MB
+ASR_2017.zip	3.8MB	55MB
+ASR_2018.zip	1.5MB	23MB
+ASR_2019.zip	83KB	0.9MB
+ASR_PPC.zip	16MB	279MB
+ASR Data File Values
+The below table describes data elements and information contained in the data files. Some fields in some reports may contain blanks or "?" in circumstances where a manufacturer did not have a particular piece of information, the report was supplemental and the information had already been reported, or due to limitations on the text encoding that was accepted when creating the data files. Some reports for silicone-filled breast implants include additional data fields, as required by the FDA as a condition of their summary reporting exemption.
+
+Data Element	Column Heading	Description
+Exemption Number	exemptn_no	The exemption ID number from the ASR approval letter
+Manufacturer Registration Number	mfr_no	CFN or FEI belonging to the reporting firm
+Manufacturer Name	mfr_name	Reporting firm name, analogous to G1 Manufacturer Name on the 3500A form
+Report ID	report_id	Unique identifier for this ASR report. Duplicate values from the same firm in this field indicate initial and supplement reports. Analogous to G9 Manufacturer Report Number on the 3500A form.
+Date of Event*	date_of_event	The date of the adverse event. Analogous to B3 Date of Event on the 3500A form.
+Manufacturer Aware Date	mfr_aware_date	The date the manufacturer became aware of the adverse event. Analogous to G4 Date Received by Manufacturer on the 3500A form
+Event Type	event_type	The type of adverse event, analogous to H1 Type of Reportable Event on the 3500A form. The expected values are:
+M=Malfunction
+M-D=Malfunction where a patient death was reported
+IN=Serious Injury
+IN-D=Serious Injury where a patient death was reported
+D=Death
+Device Problem Codes	dev_prob_cd	A semicolon-delimited list of Device Problem Codes describing the adverse event. Analogous to H6 Device Code on the 3500A form. For the list of expected values and what they mean, see: ASR DPC Terms.csv
+Report Year	report_year	The submission year for this report
+Report Quarter	report_qtr	The submission quarter for this report
+Initial Report Flag	initial_report_flag	A flag indicating whether the report is an initial or supplement, analogous to G7 Initial/Follow-up on the 3500A form. Note that this field was not provided by the submitter, but rather derived by FDA for ease of data analysis. The expected values are:
+I=Initial
+S=Supplement
+Device ID	dev_id	The identifier key for the device in the ASR database, typically a model number or catalog number.
+Product Code	product_code	The product code of the device. Analogous to D2 Procode on the 3500A form.
+Brand Name	brand_name	The brand name of the device. Analogous to D1 Brand Name on the 3500A form.
+Model Number	model_no	The model number of the device. Analogous to D4 Model Number on the 3500A form.
+Catalog Number	catalog_no	The catalog number of the device. Analogous to D4 Catalog Number on the 3500A form.
+Implant Available for Evaluation*	impl_avail_for_eval	Flag indicating whether the device is available for evaluation. Analogous to D10 Device Available for Evaluation Yes/No on the 3500A form. The expected values are:
+1=Yes
+2=No
+7=No Information
+Implant Returned to Manufacturer*	impl_ret_to_mfr	Flag indicating whether the device was returned to the manufacturer. Analogous to the Returned to Manufacturer checkbox under D10 on the 3500A form. The expected values are:
+1=Yes
+2=No
+Patient Problem Codes**	pat_prob_cd	A semicolon-delimited list of Patient Problem Codes describing the adverse event. Analogous to H6 Patient Code on the 3500A form. For the list of expected values and what they mean, see: ASR PPC Terms.csv
+* Field required only for some reports for silicone-filled breast implants as a condition of their summary reporting exemption.
+** The Patient Problem Code data element is only available in the ASR_PPCs zip file.
+
+Device Experience Network (DEN) Reports
+CDRH's Device Experience Network (DEN) was used by the FDA from 1984 – 1996 to store file reports received under both the mandatory Medical Device Reporting Program (MDR) from 1984 - 1996, and the voluntary reports up to June 1993. These files contain over 600,000 reports.
+
+An on-line search is available which allows you to search for information on medical devices which may have malfunctioned or caused a death or serious injury during the years 1984 through 1996.
+
+The following files contain DEN data listed by the year they were received. Each file is large, and complete for that year. As such, these are compressed data files using the zip format. After files are downloaded, they should be unzipped. The unzipped .TXT files can be viewed with a text editor, spreadsheet or database software. The MDR data has one record per line, with the data fields in the following pipe-delimited, (i.e., "|") format:
+
+Access Type and Number|Date Received|Product Description|Manufacturer name code|Manufacturer Name|Street address|City|State
+|Zipcode|Report type|Model number|Catalog number| FDA panel code|FDA Product code|Event description type|Event description|Closeout text
+
+Following are the compressed MDR data files received from CDRH's DEN reports listed with their compressed and uncompressed file sizes. The last file listed, disclaim.zip, contains a disclaimer from the manufacturer for each report.
+
+File name	Compressed Size	Uncompressed Size
+mdr84.zip	24KB	78KB
+mdr85.zip	1.7MB	10MB
+mdr86.zip	2.2MB	13MB
+mdr87.zip	2.0MB	12MB
+mdr88.zip	1.9MB	11MB
+mdr89.zip	2.2MB	14MB
+mdr90.zip	3.2MB	18MB
+mdr91.zip	5.0MB	30MB
+mdr92.zip	7.3MB	49MB
+mdr93.zip	8.5MB	56MB
+mdr94.zip	8.5MB	63MB
+mdr95.zip	8.6MB	47MB
+mdr96.zip	8.5MB	42MB
+mdr97.zip	11.0KB	45KB
+disclaim.zip	163KB	2MB
