@@ -1,0 +1,1319 @@
+Database Tables and Field Descriptions
+
+Below are the descriptions of the merged tables, their respective fields, and the explanations of possible field values. This documentation serves to clarify the structure and content of each table within the database.
+
+Merged_Table_1
+
+Source Tables: ASR_2007, ASR_2017, ASR_2008, ASR_2005, ASR_2011, ASR_2006, ASR_2015, ASR_2013, ASR_2003, ASR_2001, ASR_2012, ASR_2018, ASR_2016, ASR_2009, ASR_2002, ASR_2000, ASR_2010, ASR_2014, ASR_2004, ASR_1999, ASR_PPC, ASR_2019
+
+Fields:
+	•	exemptn_no (TEXT): Exemption Number from the ASR approval letter.
+	•	mfr_no (TEXT): Manufacturer Number, the registration or identification number of the submitting company.
+	•	mfr_name (TEXT): Manufacturer Name, the full name of the reporting company.
+	•	report_id (TEXT): Unique identifier for the ASR report.
+	•	date_of_event (TEXT): Date of the adverse event (analogous to B3 Date of Event on the MEDWATCH Form 3500A). Can be None if not provided.
+	•	mfr_aware_date (TEXT): Date the manufacturer became aware of the adverse event (analogous to G4 Date Received by Manufacturer on the MEDWATCH Form 3500A).
+	•	event_type (TEXT): Type of adverse event. Possible values:
+	•	M = Malfunction
+	•	M-D = Malfunction where a patient death was reported
+	•	IN = Serious Injury
+	•	IN-D = Serious Injury where a patient death was reported
+	•	D = Death
+	•	dev_prob_cd (TEXT): Semicolon-delimited list of Device Problem Codes describing the adverse event.
+	•	report_year (TEXT): Submission year of the report.
+	•	report_qtr (TEXT): Submission quarter of the report.
+	•	initial_report_flag (TEXT): Indicates whether the report is initial or supplemental. Possible values:
+	•	I = Initial
+	•	S = Supplement
+	•	dev_id (TEXT): Identifier key for the device in the ASR database, typically a model number or catalog number.
+	•	product_code (TEXT): Product Code of the device (analogous to D2 Procode on the MEDWATCH Form 3500A).
+	•	brand_name (TEXT): Brand Name of the device (analogous to D1 Brand Name on the MEDWATCH Form 3500A).
+	•	model_no (TEXT): Model Number of the device (analogous to D4 Model Number on the MEDWATCH Form 3500A). Can be None if not provided.
+	•	catalog_no (TEXT): Catalog Number of the device (analogous to D4 Catalog Number on the MEDWATCH Form 3500A). Can be None if not provided.
+	•	impl_avail_for_eval (TEXT): Flag indicating if the device is available for evaluation. Possible values:
+	•	1 = Yes
+	•	2 = No
+	•	7 = No Information
+	•	impl_ret_to_mfr (TEXT): Flag indicating if the device was returned to the manufacturer. Possible values:
+	•	1 = Yes
+	•	2 = No
+
+Sample Records:
+
+{
+  "exemptn_no": "1999011",
+  "mfr_no": "2183157",
+  "mfr_name": "MALLINCKRODT INC. TYCO HEALTHCARE",
+  "report_id": "218315700002",
+  "date_of_event": null,
+  "mfr_aware_date": "03/20/2009",
+  "event_type": "M",
+  "dev_prob_cd": "1012",
+  "report_year": "2009",
+  "report_qtr": "1",
+  "initial_report_flag": "S",
+  "dev_id": "LP10",
+  "product_code": "CBK",
+  "brand_name": "VOLUME VENTILATOR",
+  "model_no": null,
+  "catalog_no": null,
+  "impl_avail_for_eval": null,
+  "impl_ret_to_mfr": null
+},
+{
+  "exemptn_no": "1999011",
+  "mfr_no": "2183157",
+  "mfr_name": "MALLINCKRODT INC. TYCO HEALTHCARE",
+  "report_id": "21831570003",
+  "date_of_event": null,
+  "mfr_aware_date": "3/21/2008",
+  "event_type": "M",
+  "dev_prob_cd": "1012",
+  "report_year": "2008",
+  "report_qtr": "1",
+  "initial_report_flag": "I",
+  "dev_id": "LP10",
+  "product_code": "CBK",
+  "brand_name": "VOLUME VENTILATOR",
+  "model_no": null,
+  "catalog_no": null,
+  "impl_avail_for_eval": null,
+  "impl_ret_to_mfr": null
+},
+{
+  "exemptn_no": "1999011",
+  "mfr_no": "2183157",
+  "mfr_name": "MALLINCKRODT INC. TYCO HEALTHCARE",
+  "report_id": "218315700002",
+  "date_of_event": null,
+  "mfr_aware_date": "02/26/2007",
+  "event_type": "M",
+  "dev_prob_cd": "1015",
+  "report_year": "2007",
+  "report_qtr": "1",
+  "initial_report_flag": "I",
+  "dev_id": "LP10",
+  "product_code": "CBK",
+  "brand_name": "VOLUME VENTILATOR",
+  "model_no": null,
+  "catalog_no": null,
+  "impl_avail_for_eval": null,
+  "impl_ret_to_mfr": null
+}
+
+Merged_Table_10
+
+Source Tables: deviceproblemcodes, patientproblemdata
+
+Fields:
+	•	ï_1 (TEXT): Device Problem Code.
+	•	old_to_be_deactivated (TEXT): Description of the device problem to be deactivated.
+
+Sample Records:
+
+{
+  "ï_1": "1156",
+  "old_to_be_deactivated": "Delamination"
+},
+{
+  "ï_1": "1001",
+  "old_to_be_deactivated": "Failure To Run On AC/DC"
+},
+{
+  "ï_1": "1002",
+  "old_to_be_deactivated": "Abnormal"
+}
+
+Merged_Table_11
+
+Source Table: DISCLAIM
+
+Fields:
+	•	lifeprod_life_products_inc_the_filing_of_this_report_is_not_an_ (TEXT): Manufacturer’s disclaimer statement indicating that filing the report does not constitute an admission regarding the reported event.
+
+Sample Records:
+
+{
+  "lifeprod_life_products_inc_the_filing_of_this_report_is_not_an_": "TRAVLABO        TRAVENOL LAB INC                                  THE FILING OF THIS REPORT IS NOT AN ADMISSION THAT THE DESCRIBED INCIDENT IS A REPORTABLE EVENT. THE INFORMATION IS BEING PROVIDED TO ADVISE THE FDA OF OUR RECEIPT OF A POSSIBLE COMPLAINT AND THE ASSOCIATED CIRCUMSTANCES BUT DOES NOT ADMIT LIABILITY OR THAT THE INFORMATION ACTUALLY FALLS UNDER THE MANDATORY REPORTING REQUIREMENTS."
+},
+{
+  "lifeprod_life_products_inc_the_filing_of_this_report_is_not_an_": "AMES            AMES DIV                                          THIS REPORT IS FILED PURSUANT TO 21 CFR, PART 803, AND DOES NOT CONSTITUTE AN ADMISSION THAT THE DEVICE IN QUESTION MALFUNCTIONED OR CONTRIBUTED TO A DEATH OR SERIOUS INJURY. IN 21 CFR, PART 803.24(F), IT IS STATED THAT ANY RELEASE BY THE FDA OF A REPORT SUBMITTED UNDER THIS SECTION DOES NOT NECESSARILY REFLECT A CONCLUSION BY THE FDA \"THAT THE REPORT OR INFORMATION CONSTITUTES AN ADMISSION THAT THE DEVICE CAUSED OR CONTRIBUTED TO A DEATH OR SERIOUS INJURY OR MALFUNCTIONED.\""
+},
+{
+  "lifeprod_life_products_inc_the_filing_of_this_report_is_not_an_": "MEDRAD          MEDRAD INC                                        THIS REPORT IS BASED ON INFORMATION SUPPLIED TO US WITHOUT OUR INDEPENDENT VERIFICATION AS TO ITS ACCURACY, COMPLETENESS OR CAUSAL RELATIONSHIP TO- THE PRODUCT."
+}
+
+Merged_Table_12
+
+Source Table: foidevproblem
+
+Fields:
+	•	619611 (TEXT): Report Key, associating specific reports.
+	•	1104 (TEXT): Problem Number, describing specific issues.
+
+Sample Records:
+
+{
+  "619611": "2094110",
+  "1104": "2913"
+},
+{
+  "619611": "2296019",
+  "1104": "3190"
+},
+{
+  "619611": "2686192",
+  "1104": "1395"
+}
+
+Merged_Table_13
+
+Source Table: patientproblemcode
+
+Fields:
+	•	mdr_report_key (TEXT): Unique key for an MDR report.
+	•	patient_sequence_no (TEXT): Sequence number to differentiate multiple patients within the same report.
+	•	problem_code (TEXT): Code describing the patient’s problem.
+	•	date_added (TEXT): Timestamp when the problem was added.
+	•	date_changed (TEXT): Timestamp when the problem was last changed.
+
+Sample Records:
+
+{
+  "mdr_report_key": "619611.0",
+  "patient_sequence_no": "0.0",
+  "problem_code": "2199",
+  "date_added": "2016/02/05 13:15:36.000",
+  "date_changed": "2016/02/05 13:15:36.000"
+},
+{
+  "mdr_report_key": "2094110.0",
+  "patient_sequence_no": "1.0",
+  "problem_code": "2104",
+  "date_added": "2017/01/12 15:57:46.000",
+  "date_changed": "2017/01/12 15:57:46.000"
+},
+{
+  "mdr_report_key": "2094110.0",
+  "patient_sequence_no": "1.0",
+  "problem_code": "2348",
+  "date_added": "2017/01/12 15:57:46.000",
+  "date_changed": "2017/01/12 15:57:46.000"
+}
+
+Merged_Table_14
+
+Source Table: table_statistics_selfdefined
+
+Fields:
+	•	table_name (VARCHAR(255)): Name of the table.
+	•	num_fields (INTEGER): Number of fields in the table.
+	•	num_rows (INTEGER): Number of records in the table.
+	•	longest_field_name (VARCHAR(255)): Name of the longest field in the table.
+	•	longest_field_length (INTEGER): Length of the longest field name.
+	•	description (TEXT): Brief description of the table.
+
+Sample Records:
+
+{
+  "table_name": "DEVICEAdd",
+  "num_fields": 31,
+  "num_rows": 196188,
+  "longest_field_name": "brand_name",
+  "longest_field_length": 80,
+  "description": "Table 'DEVICEAdd' contains 31 fields and 196188 rows. The longest field is 'brand_name' with a max length of 80."
+},
+{
+  "table_name": "mdr96",
+  "num_fields": 17,
+  "num_rows": 79787,
+  "longest_field_name": "event_description",
+  "longest_field_length": 31882,
+  "description": "Table 'mdr96' contains 17 fields and 79787 rows. The longest field is 'event_description' with a max length of 31882."
+},
+{
+  "table_name": "patientAdd",
+  "num_fields": 10,
+  "num_rows": 196145,
+  "longest_field_name": "sequence_number_treatment",
+  "longest_field_length": 841,
+  "description": "Table 'patientAdd' contains 10 fields and 196145 rows. The longest field is 'sequence_number_treatment' with a max length of 841."
+}
+
+Merged_Table_4
+
+Source Tables: DEVICE2009, DEVICE2010, DEVICEAdd, foidev1998, DEVICE2003, DEVICE2012, DEVICE2008, DEVICEChange, DEVICE2014, DEVICE2018, DEVICE2002, foidevthru1997, DEVICE2020, DEVICE2007, DEVICE2021, DEVICE2004, DEVICE2022, DEVICE2023, DEVICE2000, DEVICE2019, DEVICE2013, DEVICE2015, DEVICE2006, foidev1999, DEVICE2001, DEVICE2016, DEVICE2011, DEVICE2017, DEVICE2005, DEVICE
+
+Fields:
+	•	mdr_report_key (TEXT): Unique key for an MDR report.
+	•	device_event_key (TEXT): Key linking to a specific device event.
+	•	implant_flag (TEXT): Indicates if the device is implantable.
+	•	date_removed_flag (TEXT): Indicates if and when the device was removed.
+	•	device_sequence_no (TEXT): Sequence number to differentiate multiple devices within the same report.
+	•	date_received (TEXT): Date the device report was received.
+	•	brand_name (TEXT): Brand Name of the device.
+	•	generic_name (TEXT): Generic Name of the device.
+	•	manufacturer_d_name (TEXT): Full name of the device manufacturer.
+	•	manufacturer_d_address_1 (TEXT): First line of the manufacturer’s address.
+	•	manufacturer_d_address_2 (TEXT): Second line of the manufacturer’s address.
+	•	manufacturer_d_city (TEXT): City where the manufacturer is located.
+	•	manufacturer_d_state_code (TEXT): State code of the manufacturer’s location.
+	•	manufacturer_d_zip_code (TEXT): ZIP Code of the manufacturer’s location.
+	•	manufacturer_d_zip_code_ext (TEXT): ZIP Code extension of the manufacturer’s location.
+	•	manufacturer_d_country_code (TEXT): Country code of the manufacturer’s location.
+	•	manufacturer_d_postal_code (TEXT): Full postal code of the manufacturer’s location.
+	•	device_operator (TEXT): Type of person operating or using the device.
+	•	expiration_date_of_device (TEXT): Expiration date of the device.
+	•	model_number (TEXT): Model Number of the device.
+	•	catalog_number (TEXT): Catalog Number of the device.
+	•	lot_number (TEXT): Lot Number of the device.
+	•	other_id_number (TEXT): Other identification numbers for the device.
+	•	device_availability (TEXT): Indicates if the device was available for evaluation. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	date_returned_to_manufacturer (TEXT): Date the device was returned to the manufacturer.
+	•	device_report_product_code (TEXT): Product Code used in reporting the device.
+	•	device_age_text (TEXT): Description of the device’s age.
+	•	device_evaluated_by_manufactur (TEXT): Indicates if the manufacturer evaluated the device. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	R = Device was not returned to manufacturer
+	•	combination_product_flag (TEXT): Indicates if the device is part of a combination product. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	udi_di (TEXT): Device Identifier portion of the Unique Device Identifier (UDI).
+	•	udi_public (TEXT): Public portion of the UDI with non-releasable Product Identifier (PI) values redacted.
+	•	baseline_brand_name (TEXT): Baseline Brand Name of the device.
+	•	baseline_generic_name (TEXT): Baseline Generic Name of the device.
+	•	baseline_model_no (TEXT): Baseline Model Number of the device.
+	•	baseline_catalog_no (TEXT): Baseline Catalog Number of the device.
+	•	baseline_other_id_no (TEXT): Baseline Other Identification Number of the device.
+	•	baseline_device_family (TEXT): Baseline Device Family of the device.
+	•	baseline_shelf_life_contained (TEXT): Indicates if shelf life is contained in the label. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	A = Not applicable
+	•	baseline_shelf_life_in_months (TEXT): Shelf life of the device in months.
+	•	baseline_pma_flag (TEXT): Indicates if the device has Premarket Approval (PMA). Possible values:
+	•	Y = Yes
+	•	N = No
+	•	baseline_pma_no (TEXT): PMA Number of the device.
+	•	baseline_510_k__flag (TEXT): Indicates if the device has 510(k) clearance. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	baseline_510_k__no (TEXT): 510(k) Number of the device.
+	•	baseline_preamendment (TEXT): Indicates if the device is pre-amendment. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	baseline_transitional (TEXT): Indicates if the device is transitional. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	baseline_510_k__exempt_flag (TEXT): Indicates if the device is exempt from 510(k) requirements. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	baseline_date_first_marketed (TEXT): Date the device was first marketed.
+	•	baseline_date_ceased_marketing (TEXT): Date the device ceased marketing.
+
+Sample Records:
+
+{
+  "mdr_report_key": "140580",
+  "device_event_key": "137242",
+  "implant_flag": "N",
+  "date_removed_flag": "A",
+  "device_sequence_no": "1",
+  "date_received": "12/23/1997",
+  "brand_name": "ENDOPATH DILATING TIP TROCAR",
+  "generic_name": "TROCAR",
+  "manufacturer_d_name": "ETHICON ENDO-SURGERY, INC.",
+  "manufacturer_d_address_1": "AVE. DE LAS TORRES 7125",
+  "manufacturer_d_address_2": "COL. SALVARCAR 118",
+  "manufacturer_d_city": "CUIDAD, JUAREZ CHIHUA.",
+  "manufacturer_d_state_code": null,
+  "manufacturer_d_zip_code": null,
+  "manufacturer_d_zip_code_ext": null,
+  "manufacturer_d_country_code": "MX",
+  "manufacturer_d_postal_code": null,
+  "device_operator": "0HP",
+  "expiration_date_of_device": "09/01/2002",
+  "model_number": null,
+  "catalog_number": "355LD",
+  "lot_number": "K4864H",
+  "other_id_number": "BATCH#.K50D7X",
+  "device_availability": "Y",
+  "date_returned_to_manufacturer": null,
+  "device_report_product_code": "GCJ",
+  "device_age_text": null,
+  "device_evaluated_by_manufactur": "Y",
+  "combination_product_flag": "N",
+  "udi_di": null,
+  "udi_public": null,
+  "baseline_brand_name": "ENDOPATH DILATING TIP TROCAR",
+  "baseline_generic_name": "TROCARS",
+  "baseline_model_no": "355LD",
+  "baseline_catalog_no": "355LD",
+  "baseline_other_id_no": "*",
+  "baseline_device_family": "TROCARS",
+  "baseline_shelf_life_contained": "Y",
+  "baseline_shelf_life_in_months": "60",
+  "baseline_pma_flag": "N",
+  "baseline_pma_no": null,
+  "baseline_510_k__flag": "Y",
+  "baseline_510_k__no": "K893715",
+  "baseline_preamendment": "N",
+  "baseline_transitional": "N",
+  "baseline_510_k__exempt_flag": "N",
+  "baseline_date_first_marketed": "02/08/1994",
+  "baseline_date_ceased_marketing": null
+},
+{
+  "mdr_report_key": "368848",
+  "device_event_key": null,
+  "implant_flag": null,
+  "date_removed_flag": null,
+  "device_sequence_no": "1",
+  "date_received": "2002/01/02",
+  "brand_name": "NOVARE ENGAGE INSERTS",
+  "generic_name": "(FOGARTY) VASCULAR CLAMP INSERT",
+  "manufacturer_d_name": "NOVARE SURGICAL SYSTEMS",
+  "manufacturer_d_address_1": "10231 BUBB RD",
+  "manufacturer_d_address_2": null,
+  "manufacturer_d_city": "CUPERTINO",
+  "manufacturer_d_state_code": "CA",
+  "manufacturer_d_zip_code": "95014",
+  "manufacturer_d_zip_code_ext": null,
+  "manufacturer_d_country_code": "US",
+  "manufacturer_d_postal_code": "95014",
+  "device_operator": "0HP",
+  "expiration_date_of_device": null,
+  "model_number": "*",
+  "catalog_number": "N-10103",
+  "lot_number": "*",
+  "other_id_number": "LENGTH 86 MM",
+  "device_availability": "N",
+  "date_returned_to_manufacturer": null,
+  "device_report_product_code": "DXC",
+  "device_age_text": null,
+  "device_evaluated_by_manufactur": null,
+  "combination_product_flag": null,
+  "udi_di": null,
+  "udi_public": null
+},
+{
+  "mdr_report_key": "6860574",
+  "device_event_key": null,
+  "implant_flag": null,
+  "date_removed_flag": null,
+  "device_sequence_no": "1",
+  "date_received": "2018/09/27",
+  "brand_name": "GORE PROPATEN VASCULAR GRAFT",
+  "generic_name": "PROSTHESIS, VASCULAR GRAFT",
+  "manufacturer_d_name": "W.L. GORE & ASSOCIATES",
+  "manufacturer_d_address_1": null,
+  "manufacturer_d_address_2": null,
+  "manufacturer_d_city": "FLAGSTAFF",
+  "manufacturer_d_state_code": "AZ",
+  "manufacturer_d_zip_code": null,
+  "manufacturer_d_zip_code_ext": null,
+  "manufacturer_d_country_code": null,
+  "manufacturer_d_postal_code": null,
+  "device_operator": "0HP",
+  "expiration_date_of_device": "2014/06/29",
+  "model_number": null,
+  "catalog_number": "H470045A",
+  "lot_number": "3281153PP010",
+  "other_id_number": null,
+  "device_availability": "N",
+  "date_returned_to_manufacturer": null,
+  "device_report_product_code": "DSY",
+  "device_age_text": "DA",
+  "device_evaluated_by_manufactur": "R",
+  "combination_product_flag": "N",
+  "udi_di": null,
+  "udi_public": null
+}
+
+Merged_Table_5
+
+Source Table: foiclass
+
+Fields:
+	•	review_panel (TEXT): Two-letter code indicating the medical specialty panel responsible for reviewing the product.
+	•	medicalspecialty (TEXT): Medical specialty associated with the product.
+	•	productcode (TEXT): Product Code of the device.
+	•	devicename (TEXT): Name of the device, typically a noun followed by adjectives separated by commas.
+	•	deviceclass (TEXT): Regulatory class of the device. Possible values:
+	•	1 = Class I
+	•	2 = Class II
+	•	3 = Class III
+	•	unclassified_reason (TEXT): Reason why the device is unclassified, if applicable.
+	•	gmpexemptflag (TEXT): Indicates if the device is exempt from Good Manufacturing Practices (GMP). Possible values:
+	•	Y = Yes
+	•	N = No
+	•	thirdpartyflag (TEXT): Indicates if the device involves a third party. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	reviewcode (TEXT): Specific review code for the device.
+	•	regulationnumber (TEXT): Regulation Number applicable to the device.
+	•	submission_type_id (TEXT): Identifier for the type of submission.
+	•	definition (TEXT): Definition or description of the device.
+	•	physicalstate (TEXT): Physical state of the device.
+	•	technicalmethod (TEXT): Technical method used by the device.
+	•	targetarea (TEXT): Target area or application of the device.
+	•	implant_flag (TEXT): Indicates if the device is implantable. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	life_sustain_support_flag (TEXT): Indicates if the device supports life sustenance. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	summarymalfunctionreporting (TEXT): Indicates eligibility for summary malfunction reporting. Possible values:
+	•	Eligible
+	•	Ineligible
+
+Sample Records:
+
+{
+  "review_panel": "AN",
+  "medicalspecialty": "AN",
+  "productcode": "BRW",
+  "devicename": "Protector, Dental",
+  "deviceclass": "1",
+  "unclassified_reason": null,
+  "gmpexemptflag": "N",
+  "thirdpartyflag": "N",
+  "reviewcode": null,
+  "regulationnumber": "868.5820",
+  "submission_type_id": "4",
+  "definition": null,
+  "physicalstate": null,
+  "technicalmethod": null,
+  "targetarea": null,
+  "implant_flag": "N",
+  "life_sustain_support_flag": "N",
+  "summarymalfunctionreporting": "Eligible"
+},
+{
+  "review_panel": "AN",
+  "medicalspecialty": "AN",
+  "productcode": "BRX",
+  "devicename": "Stool, Anesthesia",
+  "deviceclass": "1",
+  "unclassified_reason": null,
+  "gmpexemptflag": "N",
+  "thirdpartyflag": "N",
+  "reviewcode": null,
+  "regulationnumber": "868.6700",
+  "submission_type_id": "4",
+  "definition": null,
+  "physicalstate": null,
+  "technicalmethod": null,
+  "targetarea": null,
+  "implant_flag": "N",
+  "life_sustain_support_flag": "N",
+  "summarymalfunctionreporting": "Eligible"
+},
+{
+  "review_panel": "AN",
+  "medicalspecialty": "AN",
+  "productcode": "BRY",
+  "devicename": "Cabinet, Table And Tray, Anesthesia",
+  "deviceclass": "1",
+  "unclassified_reason": null,
+  "gmpexemptflag": "N",
+  "thirdpartyflag": "N",
+  "reviewcode": null,
+  "regulationnumber": "868.6100",
+  "submission_type_id": "4",
+  "definition": null,
+  "physicalstate": null,
+  "technicalmethod": null,
+  "targetarea": null,
+  "implant_flag": "N",
+  "life_sustain_support_flag": "N",
+  "summarymalfunctionreporting": "Eligible"
+}
+
+Medical Specialty Codes:
+
+Medical Specialty (Advisory Committee)	Regulation No.	Medical Specialty Code
+Anesthesiology	Part 868	AN
+Cardiovascular	Part 870	CV
+Clinical Chemistry	Part 862	CH
+Dental	Part 872	DE
+Ear, Nose, & Throat	Part 874	EN
+Gastroenterology & Urology	Part 876	GU
+General Hospital	Part 880	HO
+Hematology	Part 864	HE
+Immunology	Part 866	IM
+Microbiology	Part 866	MI
+Neurology	Part 882	NE
+Obstetrics/Gynecology	Part 884	OB
+Ophthalmic	Part 886	OP
+Orthopedic	Part 888	OR
+Pathology	Part 864	PA
+Physical Medicine	Part 890	PM
+Radiology	Part 892	RA
+General & Plastic Surgery	Part 878	SU
+Clinical Toxicology	Part 862	TX
+
+Merged_Table_6
+
+Source Tables: mdr89, mdr96, mdr97, mdr91, mdr90, mdr93, mdr84, mdr92, mdr95, mdr88, mdr94, mdr85, mdr87, mdr86
+
+Fields:
+	•	access_type_and_number (TEXT): Access Type and Number of the device report.
+	•	date_received (TEXT): Date the report was received.
+	•	product_description (TEXT): Description of the product.
+	•	manufacturer_name_code (TEXT): Code representing the manufacturer’s name.
+	•	manufacturer_name (TEXT): Full name of the manufacturer.
+	•	street_address (TEXT): Street address of the manufacturer.
+	•	city (TEXT): City where the manufacturer is located.
+	•	state (TEXT): State where the manufacturer is located.
+	•	zipcode (TEXT): ZIP Code of the manufacturer’s location.
+	•	report_type (TEXT): Type of report (e.g., Malfunction, Serious Injury).
+	•	model_number (TEXT): Model Number of the device.
+	•	catalog_number (TEXT): Catalog Number of the device.
+	•	fda_panel_code (TEXT): FDA Panel Code associated with the device.
+	•	fda_product_code (TEXT): FDA Product Code of the device.
+	•	event_description_type (TEXT): Type of event description (e.g., FINAL).
+	•	event_description (TEXT): Detailed narrative description of the event.
+	•	closeout_text (TEXT): Text indicating the closure of the report.
+
+Sample Records:
+
+{
+  "access_type_and_number": "M885680",
+  "date_received": "01/04/97",
+  "product_description": "REDY 2000",
+  "manufacturer_name_code": "GAMBHEAL",
+  "manufacturer_name": "GAMBRO HEALTHCARE",
+  "street_address": "1185 OAK ST.",
+  "city": "LAKEWOOD",
+  "state": "CO",
+  "zipcode": "80215",
+  "report_type": "MALFUNCTION",
+  "model_number": "REDY 2000",
+  "catalog_number": "604487-006",
+  "fda_panel_code": "GASTROENTEROLOGY-UROLOGY",
+  "fda_product_code": "FKP",
+  "event_description_type": "FINAL",
+  "event_description": "AT THE BEGINNING OF A DIALYSIS TREATMENT, THE FACILITY NOTICED THAT THE \"TOTAL UF (ULTRAFILTRATION) WAS NOT READING. THERE WAS NO PT INJURY OR MEDICAL INTERVENTION. THIS MDR WAS ORIGINALLY REPORTED TO THE MFR ON 5/23/96, HOWEVER, THE MFR DETERMINED ALL RELATED COMPLAINTS TO BE MDR REPORTABLE AFTER THE NEW MDR REGULATIONS TOOK INTO EFFECT. THIS MDR WAS ALSO NOT REPORTED WITHIN THE ALLOTTED TIME PERIOD. DEVICE DISCARDED-UNABLE TO FOLLOW-UP. THE MEDICAL EQUIPMENT SERVICE TECH (MES) REPLACED THE LOAD CELL AND CALIBRATED TO MANUFACTURING SPECS. THERE WERE NO RELATED CPF DEFECTS REPORTED ON THIS MACHINE. THE AFFECTED LOAD CELL ASSEMBLY WAS NOT RETURNED FOR AN INVESTIGATION BECAUSE THE MES DISCARDED IT UPON REPLACEMENT. WITHOUT THE AFFECTED COMPONENT AN EVALUATION AS TO THE FAILURE MODE COULD NOT BE DETERMINED. IF THE LOAD CELL WAS DEFECTIVE A LOAD CELL CIRCUIT ALARM WOULD BE GENERATED. THIS ALARM CONSISTS OF A STEADY AUDIBLE ALARM, THE TOTAL UF DISPLAY FLASHES, THE ULTRAFILTRATION CONTROL IS DISABLED, AND THE MACHINE ENTERS BY-PASS AS STATED IN THE DEVICE. IF THE MACHINE DOES NOT FIND A DEFECT IN THE LOAD CELL CIRCUIT THIS ALARM WILL NOT BE GENERATED. HOWEVER, ANY FLUCUATIONS IN THE LOAD CELL DURING A TREATMENT WILL BE NOTICED IN THE UF RATE. HOWEVER, ANY FLUCUATIONS IN THE LOAD CELL DURING A TREATMENT WILL BE NOTICED IN THE UF RATE. IF THE LOAD CELL STOPPED READING AT A CERTAIN POINT THE UF CIRCUIT WOULD TRY TO COMPENSATE AND THE UF RATE WOULD INCREASE. IF THE UF RATE DOES NOT STOP INCREASING THE MACHINE WOULD GENERATE A HIGH UF RATE ALRM. IN THIS INCIDENT, FOR AN UNKNOWN REASON, THE UF RATE STOPPED INCREASING, THERFORE THE ALARM DID NOT OCCUR. THE UF RATE ALARM ENTAILS A STEADY AUDIBLE ALARM AND THE MACHINE ENTERS THE BY-PASS MODE. AS STATED IN THE DEVICE.",
+  "closeout_text": "*"
+},
+{
+  "access_type_and_number": "M765683",
+  "date_received": "01/03/97",
+  "product_description": "ARTIFICIAL URINARY SPHINCTER",
+  "manufacturer_name_code": "AMERMEDISYST",
+  "manufacturer_name": "AMERICAN MEDICAL SYSTEMS",
+  "street_address": "10700 BREN ROAD WEST",
+  "city": "MINNETONKA",
+  "state": "MN",
+  "zipcode": "55343",
+  "report_type": "SERIOUS INJURY",
+  "model_number": "800",
+  "catalog_number": null,
+  "fda_panel_code": "GASTROENTEROLOGY-UROLOGY",
+  "fda_product_code": "EZY",
+  "event_description_type": "FINAL",
+  "event_description": "THE ENTIRE DEVICE WAS REMOVED FROM THE PT AND REPLACED DUE TO RECURRING INCONTINENCE. OTHER RELEVANT HISTORY, INCLUDES POST PROSTATECTOMY AND POST TUR; TURP; TURS. IMPLANT DATE IS 12/27/95. EXPLANT DATE IS 2/5/96.",
+  "closeout_text": "*"
+},
+{
+  "access_type_and_number": "M100139",
+  "date_received": "01/05/85",
+  "product_description": "MICROVOLUME IV SET",
+  "manufacturer_name_code": "AUTOSYRI",
+  "manufacturer_name": "AUTOSYRINGE",
+  "street_address": "LONDONDERRY TPK",
+  "city": "HOOKSETT",
+  "state": "NH",
+  "zipcode": "03106",
+  "report_type": "SERIOUS INJURY",
+  "model_number": null,
+  "catalog_number": null,
+  "fda_panel_code": "GENERAL HOSPITAL",
+  "fda_product_code": "FPA",
+  "event_description_type": "FINAL",
+  "event_description": "LEAKAGE OF INSULIN AT JUNCTION OF TUBING TO HUB. HUB IS PORTION OF IV SET THAT CONNECTS TO THE SYRINGE. LEAKAGE OF INSULIN CAUSED BLOOD SUGAR TO GO OVER 800. PATIENT TREATED IN A STANDARD MANNER.",
+  "closeout_text": "CAUSE UNKNOWN"
+}
+
+Merged_Table_7
+
+Source Tables: mdrfoiChange, mdrfoiThru2023, mdrfoiAdd, mdrfoi
+
+Fields:
+	•	mdr_report_key (TEXT): Unique key for an MDR report.
+	•	event_key (TEXT): Key linking to a specific event.
+	•	report_number (TEXT): Unique report number assigned to the MDR.
+	•	report_source_code (TEXT): Code indicating the source of the report. Possible values:
+	•	P = Voluntary report
+	•	U = User Facility report
+	•	D = Distributor report
+	•	M = Manufacturer report
+	•	manufacturer_link_flag (TEXT): Indicates if the report is linked to a manufacturer. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	number_devices_in_event (TEXT): Number of devices involved in the event. null if not applicable.
+	•	number_patients_in_event (TEXT): Number of patients involved in the event. null if not applicable.
+	•	date_received (TEXT): Date the report was received.
+	•	adverse_event_flag (TEXT): Indicates if the report pertains to an adverse event. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	product_problem_flag (TEXT): Indicates if the report pertains to a product problem. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	date_report (TEXT): Date the report was submitted.
+	•	date_of_event (TEXT): Date the event occurred.
+	•	reprocessed_and_reused_flag (TEXT): Indicates if the device was reprocessed and reused. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	reporter_occupation_code (TEXT): Code indicating the occupation of the reporter.
+	•	health_professional (TEXT): Indicates if the reporter is a health professional. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	initial_report_to_fda (TEXT): Indicates if the report is an initial submission to FDA. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	date_facility_aware (TEXT): Date the facility became aware of the device issue.
+	•	report_date (TEXT): Date the report was submitted to FDA.
+	•	report_to_fda (TEXT): Indicates if the report was sent to FDA. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	date_report_to_fda (TEXT): Date the report was sent to FDA.
+	•	event_location (TEXT): Code indicating where the event occurred.
+	•	date_report_to_manufacturer (TEXT): Date the report was sent to the manufacturer.
+	•	manufacturer_contact_t_name (TEXT): Title of the manufacturer contact.
+	•	manufacturer_contact_f_name (TEXT): First name of the manufacturer contact.
+	•	manufacturer_contact_l_name (TEXT): Last name of the manufacturer contact.
+	•	manufacturer_contact_street_1 (TEXT): Street address line 1 of the manufacturer contact.
+	•	manufacturer_contact_street_2 (TEXT): Street address line 2 of the manufacturer contact.
+	•	manufacturer_contact_city (TEXT): City of the manufacturer contact.
+	•	manufacturer_contact_state (TEXT): State of the manufacturer contact.
+	•	manufacturer_contact_zip_code (TEXT): ZIP Code of the manufacturer contact.
+	•	manufacturer_contact_zip_ext (TEXT): ZIP Code extension of the manufacturer contact.
+	•	manufacturer_contact_country (TEXT): Country code of the manufacturer contact.
+	•	manufacturer_contact_postal (TEXT): Full postal code of the manufacturer contact.
+	•	manufacturer_contact_area_code (TEXT): Area code of the manufacturer contact’s phone number.
+	•	manufacturer_contact_exchange (TEXT): Exchange code of the manufacturer contact’s phone number.
+	•	manufacturer_contact_phone_no (TEXT): Phone number of the manufacturer contact.
+	•	manufacturer_contact_extension (TEXT): Extension of the manufacturer contact’s phone number.
+	•	manufacturer_contact_pcountry (TEXT): Phone country code of the manufacturer contact.
+	•	manufacturer_contact_pcity (TEXT): Phone city code of the manufacturer contact.
+	•	manufacturer_contact_plocal (TEXT): Local phone number of the manufacturer contact.
+	•	manufacturer_g1_name (TEXT): G1 Name of the manufacturer.
+	•	manufacturer_g1_street_1 (TEXT): G1 Street Address line 1 of the manufacturer.
+	•	manufacturer_g1_street_2 (TEXT): G1 Street Address line 2 of the manufacturer.
+	•	manufacturer_g1_city (TEXT): G1 City of the manufacturer.
+	•	manufacturer_g1_state_code (TEXT): G1 State Code of the manufacturer.
+	•	manufacturer_g1_zip_code (TEXT): G1 ZIP Code of the manufacturer.
+	•	manufacturer_g1_zip_code_ext (TEXT): G1 ZIP Code extension of the manufacturer.
+	•	manufacturer_g1_country_code (TEXT): G1 Country Code of the manufacturer.
+	•	manufacturer_g1_postal_code (TEXT): G1 Postal Code of the manufacturer.
+	•	date_manufacturer_received (TEXT): Date the manufacturer received the report.
+	•	device_date_of_manufacture (TEXT): Date the device was manufactured.
+	•	single_use_flag (TEXT): Indicates if the device is single-use. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	remedial_action (TEXT): Indicates if a remedial action was taken. Possible values:
+	•	RC = Recall
+	•	RP = Repair
+	•	RL = Replace
+	•	RB = Relabeling
+	•	OT = Other
+	•	NO = Notification
+	•	IN = Inspection
+	•	PM = Patient Monitoring
+	•	MA = Modification/Adjustment
+	•	* = Invalid Data
+	•	previous_use_code (TEXT): Code indicating previous use of the device.
+	•	removal_correction_number (TEXT): Removal or Correction Number following 21 CFR Part 806 format.
+	•	event_type (TEXT): Type of event. Possible values:
+	•	D = Death
+	•	IN = Injury
+	•	M = Malfunction
+	•	O = Other
+	•	* = No answer provided
+	•	distributor_name (TEXT): Name of the distributor.
+	•	distributor_address_1 (TEXT): Street address line 1 of the distributor.
+	•	distributor_address_2 (TEXT): Street address line 2 of the distributor.
+	•	distributor_city (TEXT): City of the distributor.
+	•	distributor_state_code (TEXT): State code of the distributor.
+	•	distributor_zip_code (TEXT): ZIP Code of the distributor.
+	•	distributor_zip_code_ext (TEXT): ZIP Code extension of the distributor.
+	•	report_to_manufacturer (TEXT): Indicates if the report was sent to the manufacturer.
+	•	manufacturer_name (TEXT): Name of the manufacturer.
+	•	manufacturer_address_1 (TEXT): Street address line 1 of the manufacturer.
+	•	manufacturer_address_2 (TEXT): Street address line 2 of the manufacturer.
+	•	manufacturer_city (TEXT): City of the manufacturer.
+	•	manufacturer_state_code (TEXT): State code of the manufacturer.
+	•	manufacturer_zip_code (TEXT): ZIP Code of the manufacturer.
+	•	manufacturer_zip_code_ext (TEXT): ZIP Code extension of the manufacturer.
+	•	manufacturer_country_code (TEXT): Country code of the manufacturer.
+	•	manufacturer_postal_code (TEXT): Postal Code of the manufacturer.
+	•	type_of_report (TEXT): Indicates if the report is initial or follow-up. Possible values:
+	•	I = Initial submission
+	•	F = Follow-up
+	•	X = Extra copy received
+	•	O = Other information submitted
+	•	source_type (TEXT): Source through which the manufacturer became aware of the event. Possible values:
+	•	00 = Other
+	•	01 = Foreign
+	•	02 = Study
+	•	03 = Literature
+	•	04 = Consumer
+	•	05 = Health Professional
+	•	06 = User facility
+	•	07 = Company representation
+	•	08 = Distributor
+	•	99 = Unknown
+	•	* = Invalid data
+	•	date_added (TEXT): Date the record was added.
+	•	date_changed (TEXT): Date the record was last changed.
+	•	reporter_country_code (TEXT): Country code of the reporter.
+	•	pma_pmn_num (TEXT): PMA or PMN Number of the device.
+	•	exemption_number (TEXT): Exemption or Variance Number for MDR reports submitted under FDA exemptions.
+	•	summary_report (TEXT): Indicates if the report is a summary. Possible values:
+	•	Y = Yes
+	•	N = No
+	•	noe_summarized (TEXT): Number of events summarized in the report.
+
+Sample Records:
+
+{
+  "mdr_report_key": "917340",
+  "event_key": null,
+  "report_number": "1043534-2007-00146",
+  "report_source_code": "M",
+  "manufacturer_link_flag": "Y",
+  "number_devices_in_event": null,
+  "number_patients_in_event": null,
+  "date_received": "09/20/2007",
+  "adverse_event_flag": "Y",
+  "product_problem_flag": "Y",
+  "date_report": "05/29/2018",
+  "date_of_event": "06/13/2007",
+  "reprocessed_and_reused_flag": "N",
+  "reporter_occupation_code": "000",
+  "health_professional": "Y",
+  "initial_report_to_fda": "N",
+  "date_facility_aware": "2007/06/13 04:00:00.000",
+  "report_date": null,
+  "report_to_fda": "N",
+  "date_report_to_fda": null,
+  "event_location": "001",
+  "date_report_to_manufacturer": null,
+  "manufacturer_contact_t_name": null,
+  "manufacturer_contact_f_name": "SUSAN",
+  "manufacturer_contact_l_name": "ANDERSON",
+  "manufacturer_contact_street_1": "5677 AIRLINE ROAD",
+  "manufacturer_contact_street_2": null,
+  "manufacturer_contact_city": "ARLINGTON",
+  "manufacturer_contact_state": "TN",
+  "manufacturer_contact_zip_code": "38002",
+  "manufacturer_contact_zip_ext": null,
+  "manufacturer_contact_country": "US",
+  "manufacturer_contact_postal": "38002",
+  "manufacturer_contact_area_code": "901",
+  "manufacturer_contact_exchange": "901",
+  "manufacturer_contact_phone_no": "9018",
+  "manufacturer_contact_extension": null,
+  "manufacturer_contact_pcountry": null,
+  "manufacturer_contact_pcity": "90186741",
+  "manufacturer_contact_plocal": "9018674140",
+  "manufacturer_g1_name": "WRIGHT MEDICAL TECHNOLOGY, INC.",
+  "manufacturer_g1_street_1": "5677 AIRLINE ROAD",
+  "manufacturer_g1_street_2": null,
+  "manufacturer_g1_city": "ARLINGTON",
+  "manufacturer_g1_state_code": "TN",
+  "manufacturer_g1_zip_code": "38002",
+  "manufacturer_g1_zip_code_ext": null,
+  "manufacturer_g1_country_code": "US",
+  "manufacturer_g1_postal_code": "38002",
+  "date_manufacturer_received": "01/28/2008",
+  "device_date_of_manufacture": "04/01/2006",
+  "single_use_flag": "Y",
+  "remedial_action": null,
+  "previous_use_code": "I",
+  "removal_correction_number": null,
+  "event_type": "IN",
+  "distributor_name": null,
+  "distributor_address_1": null,
+  "distributor_address_2": null,
+  "distributor_city": null,
+  "distributor_state_code": null,
+  "distributor_zip_code": null,
+  "distributor_zip_code_ext": null,
+  "report_to_manufacturer": null,
+  "manufacturer_name": null,
+  "manufacturer_address_1": null,
+  "manufacturer_address_2": null,
+  "manufacturer_city": null,
+  "manufacturer_state_code": null,
+  "manufacturer_zip_code": null,
+  "manufacturer_zip_code_ext": null,
+  "manufacturer_country_code": null,
+  "manufacturer_postal_code": null,
+  "type_of_report": "I,F",
+  "source_type": "05,07",
+  "date_added": "09/26/2007",
+  "date_changed": "03/15/2024",
+  "reporter_country_code": "US",
+  "pma_pmn_num": "K042530",
+  "exemption_number": null,
+  "summary_report": "N",
+  "noe_summarized": "1"
+},
+{
+  "mdr_report_key": "18423065",
+  "event_key": null,
+  "report_number": "9610595-2024-00001",
+  "report_source_code": "M",
+  "manufacturer_link_flag": "Y",
+  "number_devices_in_event": null,
+  "number_patients_in_event": null,
+  "date_received": "01/01/2024",
+  "adverse_event_flag": "N",
+  "product_problem_flag": "Y",
+  "date_report": "02/02/2024",
+  "date_of_event": null,
+  "reprocessed_and_reused_flag": "N",
+  "reporter_occupation_code": "100",
+  "health_professional": "Y",
+  "initial_report_to_fda": "N",
+  "date_facility_aware": null,
+  "report_date": null,
+  "report_to_fda": "N",
+  "date_report_to_fda": null,
+  "event_location": null,
+  "date_report_to_manufacturer": null,
+  "manufacturer_contact_t_name": "MR.",
+  "manufacturer_contact_f_name": "TODD",
+  "manufacturer_contact_l_name": "BRILL",
+  "manufacturer_contact_street_1": "800 WEST PARK DRIVE",
+  "manufacturer_contact_street_2": null,
+  "manufacturer_contact_city": "WESTBOROUGH",
+  "manufacturer_contact_state": "MA",
+  "manufacturer_contact_zip_code": "01581",
+  "manufacturer_contact_zip_ext": null,
+  "manufacturer_contact_country": "US",
+  "manufacturer_contact_postal": "01581",
+  "manufacturer_contact_area_code": "508",
+  "manufacturer_contact_exchange": "508",
+  "manufacturer_contact_phone_no": "5082",
+  "manufacturer_contact_extension": null,
+  "manufacturer_contact_pcountry": null,
+  "manufacturer_contact_pcity": "50820776",
+  "manufacturer_contact_plocal": "5082077661",
+  "manufacturer_g1_name": "AIZU OLYMPUS CO., LTD.",
+  "manufacturer_g1_street_1": "3-1-1 NIIDERAKITA",
+  "manufacturer_g1_street_2": null,
+  "manufacturer_g1_city": "AIZUWAKAMATSU-SHI, FUKUSHIMA",
+  "manufacturer_g1_state_code": null,
+  "manufacturer_g1_zip_code": null,
+  "manufacturer_g1_zip_code_ext": null,
+  "manufacturer_g1_country_code": "US",
+  "manufacturer_g1_postal_code": null,
+  "date_manufacturer_received": "01/31/2024",
+  "device_date_of_manufacture": "02/17/2009",
+  "single_use_flag": "N",
+  "remedial_action": null,
+  "previous_use_code": "R",
+  "removal_correction_number": null,
+  "event_type": "M",
+  "distributor_name": null,
+  "distributor_address_1": null,
+  "distributor_address_2": null,
+  "distributor_city": null,
+  "distributor_state_code": null,
+  "distributor_zip_code": null,
+  "distributor_zip_code_ext": null,
+  "report_to_manufacturer": null,
+  "manufacturer_name": null,
+  "manufacturer_address_1": null,
+  "manufacturer_address_2": null,
+  "manufacturer_city": null,
+  "manufacturer_state_code": null,
+  "manufacturer_zip_code": null,
+  "manufacturer_zip_code_ext": null,
+  "manufacturer_country_code": null,
+  "manufacturer_postal_code": null,
+  "type_of_report": "I,F",
+  "source_type": "05,06",
+  "date_added": "01/01/2024",
+  "date_changed": "02/14/2024",
+  "reporter_country_code": "US",
+  "pma_pmn_num": "K100584",
+  "exemption_number": null,
+  "summary_report": "N",
+  "noe_summarized": "1"
+},
+{
+  "mdr_report_key": "1018495",
+  "event_key": null,
+  "report_number": "2954323-2008-00161",
+  "report_source_code": "M",
+  "manufacturer_link_flag": "Y",
+  "number_devices_in_event": null,
+  "number_patients_in_event": null,
+  "date_received": "01/03/2008",
+  "adverse_event_flag": "N",
+  "product_problem_flag": "Y",
+  "date_report": "01/03/2008",
+  "date_of_event": "10/04/2007",
+  "reprocessed_and_reused_flag": "N",
+  "reporter_occupation_code": "000",
+  "health_professional": "*",
+  "initial_report_to_fda": null,
+  "date_facility_aware": null,
+  "report_date": null,
+  "report_to_fda": null,
+  "date_report_to_fda": null,
+  "event_location": null,
+  "date_report_to_manufacturer": null,
+  "manufacturer_contact_t_name": null,
+  "manufacturer_contact_f_name": "TINA",
+  "manufacturer_contact_l_name": "MAZURKIEWICZ",
+  "manufacturer_contact_street_1": "1360 SOUTH LOOP RD.",
+  "manufacturer_contact_street_2": null,
+  "manufacturer_contact_city": "ALAMEDA",
+  "manufacturer_contact_state": "CA",
+  "manufacturer_contact_zip_code": "94502",
+  "manufacturer_contact_zip_ext": "7000",
+  "manufacturer_contact_country": "US",
+  "manufacturer_contact_postal": "945027000",
+  "manufacturer_contact_area_code": "510",
+  "manufacturer_contact_exchange": "510",
+  "manufacturer_contact_phone_no": "5107",
+  "manufacturer_contact_extension": null,
+  "manufacturer_contact_pcountry": null,
+  "manufacturer_contact_pcity": "51074963",
+  "manufacturer_contact_plocal": "5107496333",
+  "manufacturer_g1_name": "ABBOTT DIABETES CARE INC.",
+  "manufacturer_g1_street_1": "1360 SOUTH LOOP RD.",
+  "manufacturer_g1_street_2": null,
+  "manufacturer_g1_city": "ALAMEDA",
+  "manufacturer_g1_state_code": "CA",
+  "manufacturer_g1_zip_code": "94502",
+  "manufacturer_g1_zip_code_ext": "7000",
+  "manufacturer_g1_country_code": "US",
+  "manufacturer_g1_postal_code": "945027000",
+  "date_manufacturer_received": null,
+  "device_date_of_manufacture": "08/01/2004",
+  "single_use_flag": "N",
+  "remedial_action": null,
+  "previous_use_code": "U",
+  "removal_correction_number": null,
+  "event_type": "M",
+  "distributor_name": null,
+  "distributor_address_1": null,
+  "distributor_address_2": null,
+  "distributor_city": null,
+  "distributor_state_code": null,
+  "distributor_zip_code": null,
+  "distributor_zip_code_ext": null,
+  "report_to_manufacturer": null,
+  "manufacturer_name": null,
+  "manufacturer_address_1": null,
+  "manufacturer_address_2": null,
+  "manufacturer_city": null,
+  "manufacturer_state_code": null,
+  "manufacturer_zip_code": null,
+  "manufacturer_zip_code_ext": null,
+  "manufacturer_country_code": null,
+  "manufacturer_postal_code": null,
+  "type_of_report": "I",
+  "source_type": "04",
+  "date_added": "03/15/2024",
+  "date_changed": "03/26/2024",
+  "reporter_country_code": null,
+  "pma_pmn_num": null,
+  "exemption_number": null,
+  "summary_report": "N",
+  "noe_summarized": "1"
+}
+
+Merged_Table_8
+
+Source Tables: patient, patientAdd, patientChange, patientThru2023
+
+Fields:
+	•	mdr_report_key (TEXT): Unique key for an MDR report.
+	•	patient_sequence_number (TEXT): Sequence number to differentiate multiple patients within the same report.
+	•	date_received (TEXT): Date the patient record was received.
+	•	sequence_number_treatment (TEXT): Sequence number for treatments; may contain multiple values separated by commas.
+	•	sequence_number_outcome (TEXT): Sequence number for outcomes; may contain multiple values separated by commas.
+	•	patient_age (TEXT): Age of the patient at the time of the event. Format examples:
+	•	82 YR = 82 Years
+	•	Can be None if not provided.
+	•	patient_sex (TEXT): Sex of the patient at birth. Possible values:
+	•	Male
+	•	Female
+	•	None if not provided.
+	•	patient_weight (TEXT): Weight of the patient or best estimate. Can be None if not provided.
+	•	patient_ethnicity (TEXT): Ethnicity of the patient. Can be None if not provided.
+	•	patient_race (TEXT): Race of the patient. Can be None if not provided.
+
+Sample Records:
+
+{
+  "mdr_report_key": "1018495",
+  "patient_sequence_number": "1",
+  "date_received": "01/03/2008",
+  "sequence_number_treatment": null,
+  "sequence_number_outcome": null,
+  "patient_age": null,
+  "patient_sex": "Female",
+  "patient_weight": null,
+  "patient_ethnicity": null,
+  "patient_race": null
+},
+{
+  "mdr_report_key": "12",
+  "patient_sequence_number": "1",
+  "date_received": "03/10/1992",
+  "sequence_number_treatment": null,
+  "sequence_number_outcome": "O",
+  "patient_age": "82 YR",
+  "patient_sex": null,
+  "patient_weight": null,
+  "patient_ethnicity": null,
+  "patient_race": null
+},
+{
+  "mdr_report_key": "1928445",
+  "patient_sequence_number": "1",
+  "date_received": "12/15/2010",
+  "sequence_number_treatment": "7232CX ICD",
+  "sequence_number_outcome": "H; R",
+  "patient_age": null,
+  "patient_sex": null,
+  "patient_weight": null,
+  "patient_ethnicity": null,
+  "patient_race": null
+}
+
+Merged_Table_9
+
+Source Tables: foitext2003, foitext2001, foitext2013, foitext1999, foitext1998, foitext, foitext2010, foitext2000, foitext2008, foitext2009, foitext2018, foitext2021, foitext2006, foitextthru1995, foitext2014, foitext2019, foitext2022, foitext2007, foitext2004, foitext2023, foitext1997, foitext2017, foitext2012, foitext2015, foitext2005, foitextChange, foitextAdd, foitext1996, foitext2002, foitext2011, foitext2016, foitext2020
+
+Fields:
+	•	mdr_report_key (TEXT): Unique key for an MDR report.
+	•	mdr_text_key (TEXT): Unique key for the first narrative entered for this report.
+	•	text_type_code (TEXT): Code indicating the type of text. Possible values:
+	•	D = B5
+	•	E = H3
+	•	N = H10
+	•	patient_sequence_number (TEXT): Sequence number linking the text to a specific patient.
+	•	date_report (TEXT): Date of the text report.
+	•	foi_text (TEXT): Narrative text from the report.
+	•	foi_text_json (JSON): JSON representation of the narrative text.
+
+Sample Records:
+
+{
+  "mdr_report_key": "1246379",
+  "mdr_text_key": "975652",
+  "text_type_code": "D",
+  "patient_sequence_number": "1",
+  "date_report": null,
+  "foi_text": "PT HAD ACL SURGERY IN 2008. PT USED COLD THERAPY UNIT CONTINUOUSLY FOR 7 DAYS/24 HOURS A DAY AND DEVELOPED ALLEGED THERMAL INJURY. SKIN GRAFT PERFORMED THE FOLLOWING MONTH."
+},
+{
+  "mdr_report_key": "1286666",
+  "mdr_text_key": "980679",
+  "text_type_code": "D",
+  "patient_sequence_number": "1",
+  "date_report": null,
+  "foi_text": "THE CALLER REPORTED THAT THE MOM IS USING A SIZE 14FR SUCTION CATHETER WHICH SHE HAS A DOCTOR'S ORDER FOR. THE CALLER REPORTED THAT THE SUCTION CATHETER IS TIGHT. THE CALLER REPORTED THAT THE TRACHEOSTOMY TUBE WAS REMOVED THE FOLLOWING DAY AND REPLACED WITH A NEW 5.0PED TRACHEOSTOMY TUBE THAT PASSES THE 14FR SUCTION CATHETER."
+},
+{
+  "mdr_report_key": "6822800",
+  "mdr_text_key": "100001178",
+  "text_type_code": "N",
+  "patient_sequence_number": "1",
+  "date_report": null,
+  "foi_text": "A COMPLETE ANALYSIS AND TESTING OF THE INSULIN PUMP SHOWED THAT IT WAS FUNCTIONING PROPERLY AND PASSED ALL FUNCTIONAL TESTING. AFTER TESTING IT WAS CONCLUDED THAT THE DEVICE OPERATED WITHIN SPECIFICATIONS. PUMP PASSED STOP CURRENT TEST, RUN CURRENT TEST, SELF TEST, OFF NO POWER TEST, TEST AND DISPLACEMENT TEST. UNIT WAS RECEIVED WITH NORMAL OPERATING CURRENTS AND NO UNEXPECTED OFF NO POWER ALARM, LOW BATTERY ALARM OR FAILED BATTERY TEST ALARM NOTED. UNIT WAS RECEIVED WITH CORRODED BATTERY TUBE, CRACKED BATTERY TUBE THREADS, BROKEN BELT CLIP SLOT AT BATTERY TUBE THREADS AREA, CRACKED RESERVOIR TUBE LIP, CRACKED CASE AT DISPLAY WINDOW CORNER, CRACKED LCD WINDOW AND MINOR SCRATCHED LCD WINDOW."
+}
+
+Field Value Explanations
+
+Device Operator Codes
+
+Defines the type of person operating or using the suspect medical device.
+
+Code	Description
+0	OTHER
+1	PHYSICIAN
+2	NURSE
+3	NON-HEALTHCARE PROFESSIONAL
+0HP	HEALTH PROFESSIONAL
+0LP	LAY USER/PATIENT
+100	OTHER HEALTH CARE PROFESSIONAL
+101	AUDIOLOGIST
+102	DENTAL HYGIENIST
+103	DIETICIAN
+104	EMERGENCY MEDICAL TECHNICIAN
+105	MEDICAL TECHNOLOGIST
+106	NUCLEAR MEDICINE TECHNOLOGIST
+107	OCCUPATIONAL THERAPIST
+108	PARAMEDIC
+109	PHARMACIST
+110	PHLEBOTOMIST
+111	PHYSICAL THERAPIST
+112	PHYSICIAN ASSISTANT
+113	RADIOLOGIC TECHNOLOGIST
+114	RESPIRATORY THERAPIST
+115	SPEECH THERAPIST
+116	DENTIST
+117	NURSE PRACTITIONER
+300	OTHER CAREGIVERS
+301	DENTAL ASSISTANT
+302	HOME HEALTH AIDE
+303	MEDICAL ASSISTANT
+304	NURSING ASSISTANT
+305	PATIENT
+306	PATIENT FAMILY MEMBER OR FRIEND
+307	PERSONAL CARE ASSISTANT
+400	SERVICE AND TESTING PERSONNEL
+401	BIOMEDICAL ENGINEER
+402	HOSPITAL SERVICE TECHNICIAN
+403	MEDICAL EQUIPMENT COMPANY TECHNICIAN/REPRESENTATIVE
+404	PHYSICIST
+405	SERVICE PERSONNEL
+499	DEVICE UNATTENDED
+500	RISK MANAGER
+501	ADMINISTRATOR/SUPERVISOR
+600	ATTORNEY
+999	UNKNOWN
+NA	NOT APPLICABLE
+NI	NO INFORMATION
+UNK	UNKNOWN
+
+Event Location Codes
+
+Defines the specific location where the event occurred.
+
+Code	Description
+000	OTHER
+001	HOSPITAL
+002	HOME
+003	NURSING HOME
+004	OUTPATIENT TREATMENT FACILITY
+005	OUTPATIENT DIAGNOSTIC FACILITY
+006	AMBULATORY SURGICAL FACILITY
+500	HOSPITAL
+501	CATHETERIZATION SUITE
+502	CRITICAL CARE UNIT
+503	DIALYSIS UNIT
+504	EMERGENCY ROOM
+505	EXAMINATION ROOM
+506	LABORATORY/PATHOLOGY DEPARTMENT
+507	MATERNITY WARD - NURSERY
+508	OPERATING ROOM
+509	OUTPATIENT CLINIC/SURGERY
+510	PATIENT’S ROOM OR WARD
+511	RADIOLOGY DEPARTMENT
+600	AMBULATORY HEALTH CARE FACILITY
+601	AMBULATORY SURGICAL CENTER
+602	BLOOD BANK
+603	BLOODMOBILE
+604	CATHETERIZATION LAB - FREE STANDING
+605	CHEMOTHERAPY CENTER
+606	CLINIC - WALK IN, OTHER
+607	DIALYSIS CENTER
+608	DRUG CLINIC
+609	IMAGING CENTER - MOBILE
+610	IMAGING CENTER - STATIONARY
+611	LABORATORY
+612	MOBILE HEALTH UNIT
+613	MRI CENTERS
+614	PSYCHIATRIC CENTER - WALK IN, OTHER
+615	TUBERCULOSIS CLINIC
+616	URGENT CARE CENTER
+617	OUTPATIENT DIAGNOSTIC FACILITY
+700	LONG-TERM CARE FACILITY
+701	HOSPICE
+702	NURSING HOME
+703	PSYCHIATRIC FACILITY
+704	REHABILITATION CENTER
+705	RETIREMENT HOME
+810	PATIENT’S HOME
+820	IN TRANSIT TO USER/MEDICAL FACILITY
+830	PUBLIC VENUE
+831	OUTDOORS
+832	PARK
+833	PLAYGROUND
+834	PUBLIC BUILDING
+835	SCHOOL
+836	STREET
+999	UNKNOWN
+NA	NOT APPLICABLE
+NI	NO INFORMATION
+UNK	UNKNOWN
+
+Report Source Codes
+
+Defines the origin of the MDR report.
+
+Code	Description
+P	Voluntary report
+U	User Facility report
+D	Distributor report
+M	Manufacturer report
+
+Report Type Codes
+
+Defines the nature of the report.
+
+Code	Description
+M	Malfunction
+M-D	Malfunction with reported death
+IN	Serious Injury
+IN-D	Serious Injury with reported death
+D	Death
+
+Event Type Codes
+
+Defines the type of event reported.
+
+Code	Description
+D	Death
+IN	Injury
+M	Malfunction
+O	Other
+*	No answer provided
+
+Type of Report Codes
+
+Indicates whether the report is initial or follow-up.
+
+Code	Description
+I	Initial submission
+F	Follow-up
+X	Extra copy received
+O	Other information submitted
+
+Source Type Codes
+
+Indicates how the manufacturer became aware of the event.
+
+Code	Description
+00	Other
+01	Foreign
+02	Study
+03	Literature
+04	Consumer
+05	Health Professional
+06	User facility
+07	Company representation
+08	Distributor
+99	Unknown
+*	Invalid data
+
+Summary
+
+This documentation provides a comprehensive overview of the merged tables within the database, detailing each field’s purpose, data type, and possible values. Understanding these structures and codes is essential for accurately interpreting and utilizing the data contained within the database.
+
+For further information on specific codes or additional context, refer to the relevant sections of the MAUDE Database documentation or the MEDWATCH Form 3500A.
