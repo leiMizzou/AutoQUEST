@@ -1,0 +1,2720 @@
+{
+  "Merged_Table_1": {
+    "description": "Merged from ASR_2007, ASR_2017, ASR_2008, ASR_2005, ASR_2011, ASR_2006, ASR_2015, ASR_2013, ASR_2003, ASR_2001, ASR_2012, ASR_2018, ASR_2016, ASR_2009, ASR_2002, ASR_2000, ASR_2010, ASR_2014, ASR_2004, ASR_1999, ASR_PPC, ASR_2019",
+    "fields": {
+      "exemptn_no": {
+        "type": "TEXT",
+        "description": "Exemption ID number from the ASR approval letter."
+      },
+      "mfr_no": {
+        "type": "TEXT",
+        "description": "Manufacturer Registration Number (CFN or FEI) belonging to the reporting firm."
+      },
+      "mfr_name": {
+        "type": "TEXT",
+        "description": "Manufacturer Name, analogous to G1 Manufacturer Name on the 3500A form."
+      },
+      "report_id": {
+        "type": "TEXT",
+        "description": "Unique identifier for this ASR report. Duplicate values can indicate initial and supplement reports."
+      },
+      "date_of_event": {
+        "type": "TEXT",
+        "description": "The date of the adverse event."
+      },
+      "mfr_aware_date": {
+        "type": "TEXT",
+        "description": "The date the manufacturer became aware of the adverse event."
+      },
+      "event_type": {
+        "type": "TEXT",
+        "description": "The type of adverse event.",
+        "values": {
+          "M": "Malfunction",
+          "M-D": "Malfunction where a patient death was reported",
+          "IN": "Serious Injury",
+          "IN-D": "Serious Injury where a patient death was reported",
+          "D": "Death"
+        }
+      },
+      "dev_prob_cd": {
+        "type": "TEXT",
+        "description": "A semicolon-delimited list of Device Problem Codes describing the adverse event."
+      },
+      "report_year": {
+        "type": "TEXT",
+        "description": "The year the report was submitted."
+      },
+      "report_qtr": {
+        "type": "TEXT",
+        "description": "The quarter of the year the report was submitted."
+      },
+      "initial_report_flag": {
+        "type": "TEXT",
+        "description": "Indicates whether the report is an initial or supplement.",
+        "values": {
+          "I": "Initial",
+          "S": "Supplement"
+        }
+      },
+      "dev_id": {
+        "type": "TEXT",
+        "description": "Device ID in the ASR database, typically a model or catalog number."
+      },
+      "product_code": {
+        "type": "TEXT",
+        "description": "Product Code of the device."
+      },
+      "brand_name": {
+        "type": "TEXT",
+        "description": "Brand Name of the device."
+      },
+      "model_no": {
+        "type": "TEXT",
+        "description": "Model Number of the device."
+      },
+      "catalog_no": {
+        "type": "TEXT",
+        "description": "Catalog Number of the device."
+      },
+      "impl_avail_for_eval": {
+        "type": "TEXT",
+        "description": "Indicates whether the device is available for evaluation.",
+        "values": {
+          "1": "Yes",
+          "2": "No",
+          "7": "No Information"
+        }
+      },
+      "impl_ret_to_mfr": {
+        "type": "TEXT",
+        "description": "Indicates whether the device was returned to the manufacturer.",
+        "values": {
+          "1": "Yes",
+          "2": "No"
+        }
+      }
+    }
+  },
+  "Merged_Table_10": {
+    "description": "Merged from deviceproblemcodes, patientproblemdata",
+    "fields": {
+      "ï_1": {
+        "type": "TEXT",
+        "description": "Device problem code or patient problem code."
+      },
+      "old_to_be_deactivated": {
+        "type": "TEXT",
+        "description": "Description of the problem code to be deactivated."
+      }
+    }
+  },
+  "Merged_Table_11": {
+    "description": "Merged from DISCLAIM",
+    "fields": {
+      "lifeprod_life_products_inc_the_filing_of_this_report_is_not_an_": {
+        "type": "TEXT",
+        "description": "Manufacturer disclaimer text indicating that filing the report does not constitute an admission regarding the device event."
+      }
+    }
+  },
+  "Merged_Table_12": {
+    "description": "Merged from foidevproblem",
+    "fields": {
+      "619611": {
+        "type": "TEXT",
+        "description": "MDR Report Key reference or related identifier for the device problem data."
+      },
+      "1104": {
+        "type": "TEXT",
+        "description": "Code number describing a specific device problem."
+      }
+    }
+  },
+  "Merged_Table_13": {
+    "description": "Merged from patientproblemcode",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "MDR Report Key, a unique identifier for a given MDR."
+      },
+      "patient_sequence_no": {
+        "type": "TEXT",
+        "description": "Patient Sequence Number, distinguishing multiple patients in the same report."
+      },
+      "problem_code": {
+        "type": "TEXT",
+        "description": "Patient problem code describing adverse event(s) related to the patient."
+      },
+      "date_added": {
+        "type": "TEXT",
+        "description": "Date the patient problem code was added."
+      },
+      "date_changed": {
+        "type": "TEXT",
+        "description": "Date the patient problem code was changed."
+      }
+    }
+  },
+  "Merged_Table_14": {
+    "description": "Merged from table_statistics_selfdefined",
+    "fields": {
+      "table_name": {
+        "type": "VARCHAR(255)",
+        "description": "Name of the database table."
+      },
+      "num_fields": {
+        "type": "INTEGER",
+        "description": "Number of fields/columns in the table."
+      },
+      "num_rows": {
+        "type": "INTEGER",
+        "description": "Number of rows in the table."
+      },
+      "longest_field_name": {
+        "type": "VARCHAR(255)",
+        "description": "Longest field name in that table."
+      },
+      "longest_field_length": {
+        "type": "INTEGER",
+        "description": "Length (in characters) of the longest field name."
+      },
+      "description": {
+        "type": "TEXT",
+        "description": "Description or summary of the table."
+      }
+    }
+  },
+  "Merged_Table_4": {
+    "description": "Merged from DEVICE2009, DEVICE2010, DEVICEAdd, foidev1998, DEVICE2003, DEVICE2012, DEVICE2008, DEVICEChange, DEVICE2014, DEVICE2018, DEVICE2002, foidevthru1997, DEVICE2020, DEVICE2007, DEVICE2021, DEVICE2004, DEVICE2022, DEVICE2023, DEVICE2000, DEVICE2019, DEVICE2013, DEVICE2015, DEVICE2006, foidev1999, DEVICE2001, DEVICE2016, DEVICE2011, DEVICE2017, DEVICE2005, DEVICE",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "MDR Report Key, a unique key assigned by MAUDE."
+      },
+      "device_event_key": {
+        "type": "TEXT",
+        "description": "Device Event Key linking to specific device events."
+      },
+      "implant_flag": {
+        "type": "TEXT",
+        "description": "Indicates whether the device is implantable.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "A": "Not Applicable"
+        }
+      },
+      "date_removed_flag": {
+        "type": "TEXT",
+        "description": "Indicates the date removal status.",
+        "values": {
+          "M": "Month/year only",
+          "Y": "Year only",
+          "A": "Not Applicable"
+        }
+      },
+      "device_sequence_no": {
+        "type": "TEXT",
+        "description": "Device Sequence Number for distinguishing multiple devices in one report."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the device report was received by FDA or processed in the database."
+      },
+      "brand_name": {
+        "type": "TEXT",
+        "description": "Brand name of the device (D1)."
+      },
+      "generic_name": {
+        "type": "TEXT",
+        "description": "Generic or common name of the device (D2)."
+      },
+      "manufacturer_d_name": {
+        "type": "TEXT",
+        "description": "Manufacturer Name of the device (D3)."
+      },
+      "manufacturer_d_address_1": {
+        "type": "TEXT",
+        "description": "Manufacturer Address Line 1."
+      },
+      "manufacturer_d_address_2": {
+        "type": "TEXT",
+        "description": "Manufacturer Address Line 2."
+      },
+      "manufacturer_d_city": {
+        "type": "TEXT",
+        "description": "City where the manufacturer is located."
+      },
+      "manufacturer_d_state_code": {
+        "type": "TEXT",
+        "description": "State code where the manufacturer is located."
+      },
+      "manufacturer_d_zip_code": {
+        "type": "TEXT",
+        "description": "Zip code for the manufacturer address."
+      },
+      "manufacturer_d_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Zip code extension."
+      },
+      "manufacturer_d_country_code": {
+        "type": "TEXT",
+        "description": "Country code for the manufacturer."
+      },
+      "manufacturer_d_postal_code": {
+        "type": "TEXT",
+        "description": "Full postal code for the manufacturer."
+      },
+      "device_operator": {
+        "type": "TEXT",
+        "description": "Type of person operating the device (D5).",
+        "values": {
+          "0HP": "Health Professional",
+          "0LP": "Lay User/Patient",
+          "100": "Other Health Care Professional",
+          "101": "Audiologist",
+          "102": "Dental Hygienist",
+          "103": "Dietician",
+          "104": "Emergency Medical Technician",
+          "105": "Medical Technologist",
+          "106": "Nuclear Medicine Technologist",
+          "107": "Occupational Therapist",
+          "108": "Paramedic",
+          "109": "Pharmacist",
+          "110": "Phlebotomist",
+          "111": "Physical Therapist",
+          "112": "Physician Assistant",
+          "113": "Radiologic Technologist",
+          "114": "Respiratory Therapist",
+          "115": "Speech Therapist",
+          "116": "Dentist",
+          "117": "Nurse Practitioner",
+          "300": "Other Caregivers",
+          "301": "Dental Assistant",
+          "302": "Home Health Aide",
+          "303": "Medical Assistant",
+          "304": "Nursing Assistant",
+          "305": "Patient",
+          "306": "Patient Family Member or Friend",
+          "307": "Personal Care Assistant",
+          "400": "Service and Testing Personnel",
+          "401": "Biomedical Engineer",
+          "402": "Hospital Service Technician",
+          "403": "Medical Equipment Company Technician/Representative",
+          "404": "Physicist",
+          "405": "Service Personnel",
+          "499": "Device Unattended",
+          "500": "Risk Manager",
+          "501": "Administrator/Supervisor",
+          "600": "Attorney",
+          "999": "Unknown",
+          "NA": "Not Applicable",
+          "NI": "No Information",
+          "UNK": "Unknown"
+        }
+      },
+      "expiration_date_of_device": {
+        "type": "TEXT",
+        "description": "Device expiration date (D4)."
+      },
+      "model_number": {
+        "type": "TEXT",
+        "description": "Model number of the device (D4)."
+      },
+      "catalog_number": {
+        "type": "TEXT",
+        "description": "Catalog number of the device (D4)."
+      },
+      "lot_number": {
+        "type": "TEXT",
+        "description": "Lot number on the device label or packaging (D4)."
+      },
+      "other_id_number": {
+        "type": "TEXT",
+        "description": "Other device ID number (D4)."
+      },
+      "device_availability": {
+        "type": "TEXT",
+        "description": "Indicates whether the device was available for evaluation (D10).",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "R": "Device was returned to manufacturer",
+          "*": "No answer provided"
+        }
+      },
+      "date_returned_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Date the device was returned to the manufacturer (D10)."
+      },
+      "device_report_product_code": {
+        "type": "TEXT",
+        "description": "Product Code associated with the device."
+      },
+      "device_age_text": {
+        "type": "TEXT",
+        "description": "Text describing the device age."
+      },
+      "device_evaluated_by_manufactur": {
+        "type": "TEXT",
+        "description": "Indicates whether the manufacturer evaluated the device (H3).",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "R": "Device not returned to manufacturer",
+          "*": "No answer provided"
+        }
+      },
+      "combination_product_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is part of a combination product (G4).",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "udi_di": {
+        "type": "TEXT",
+        "description": "UDI-Device Identifier portion of the Unique Device Identifier."
+      },
+      "udi_public": {
+        "type": "TEXT",
+        "description": "Full UDI value with non-releasable PI values redacted."
+      },
+      "baseline_brand_name": {
+        "type": "TEXT",
+        "description": "Baseline brand name (pre-2009 records)."
+      },
+      "baseline_generic_name": {
+        "type": "TEXT",
+        "description": "Baseline generic name."
+      },
+      "baseline_model_no": {
+        "type": "TEXT",
+        "description": "Baseline model number."
+      },
+      "baseline_catalog_no": {
+        "type": "TEXT",
+        "description": "Baseline catalog number."
+      },
+      "baseline_other_id_no": {
+        "type": "TEXT",
+        "description": "Baseline other ID number."
+      },
+      "baseline_device_family": {
+        "type": "TEXT",
+        "description": "Baseline device family."
+      },
+      "baseline_shelf_life_contained": {
+        "type": "TEXT",
+        "description": "Indicates if shelf life is contained on the label.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "A": "Not Applicable",
+          "*": "No answer provided"
+        }
+      },
+      "baseline_shelf_life_in_months": {
+        "type": "TEXT",
+        "description": "Shelf life in months."
+      },
+      "baseline_pma_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device has a PMA."
+      },
+      "baseline_pma_no": {
+        "type": "TEXT",
+        "description": "Baseline PMA number."
+      },
+      "baseline_510_k__flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device has 510(k) clearance."
+      },
+      "baseline_510_k__no": {
+        "type": "TEXT",
+        "description": "Baseline 510(k) number."
+      },
+      "baseline_preamendment": {
+        "type": "TEXT",
+        "description": "Whether the device is preamendment."
+      },
+      "baseline_transitional": {
+        "type": "TEXT",
+        "description": "Whether the device is transitional."
+      },
+      "baseline_510_k__exempt_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is exempt from 510(k)."
+      },
+      "baseline_date_first_marketed": {
+        "type": "TEXT",
+        "description": "Date first marketed."
+      },
+      "baseline_date_ceased_marketing": {
+        "type": "TEXT",
+        "description": "Date ceased marketing."
+      }
+    }
+  },
+  "Merged_Table_5": {
+    "description": "Merged from foiclass",
+    "fields": {
+      "review_panel": {
+        "type": "TEXT",
+        "description": "Medical specialty panel code."
+      },
+      "medicalspecialty": {
+        "type": "TEXT",
+        "description": "Medical Specialty code (e.g., AN, CV, etc.)."
+      },
+      "productcode": {
+        "type": "TEXT",
+        "description": "Product code assigned to the device."
+      },
+      "devicename": {
+        "type": "TEXT",
+        "description": "Official device name, typically noun followed by modifiers."
+      },
+      "deviceclass": {
+        "type": "TEXT",
+        "description": "Class of the device (1, 2, or 3).",
+        "values": {
+          "1": "Class 1 - Devices subject to General Controls",
+          "2": "Class 2 - Devices subject to General Controls and Special Controls",
+          "3": "Class 3 - Devices subject to General Controls, Special Controls, and Premarket Approval"
+        }
+      },
+      "unclassified_reason": {
+        "type": "TEXT",
+        "description": "Reason for not being classified (if applicable)."
+      },
+      "gmpexemptflag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is exempt from GMP requirements.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "thirdpartyflag": {
+        "type": "TEXT",
+        "description": "Indicates if a third party is involved.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "reviewcode": {
+        "type": "TEXT",
+        "description": "Specific review code for the device."
+      },
+      "regulationnumber": {
+        "type": "TEXT",
+        "description": "CFR regulation number."
+      },
+      "submission_type_id": {
+        "type": "TEXT",
+        "description": "Submission type identifier."
+      },
+      "definition": {
+        "type": "TEXT",
+        "description": "Device definition."
+      },
+      "physicalstate": {
+        "type": "TEXT",
+        "description": "Physical state of the device."
+      },
+      "technicalmethod": {
+        "type": "TEXT",
+        "description": "Technical method used by the device."
+      },
+      "targetarea": {
+        "type": "TEXT",
+        "description": "Area of use or target site for the device."
+      },
+      "implant_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is implantable.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "life_sustain_support_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is life-sustaining or life-supporting.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "summarymalfunctionreporting": {
+        "type": "TEXT",
+        "description": "Indicates if malfunction reporting summary applies.",
+        "values": {
+          "Eligible": "Eligible",
+          "Ineligible": "Ineligible"
+        }
+      }
+    }
+  },
+  "Merged_Table_6": {
+    "description": "Merged from mdr89, mdr96, mdr97, mdr91, mdr90, mdr93, mdr84, mdr92, mdr95, mdr88, mdr94, mdr85, mdr87, mdr86",
+    "fields": {
+      "access_type_and_number": {
+        "type": "TEXT",
+        "description": "Access Type and Number referencing the event."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the report was received."
+      },
+      "product_description": {
+        "type": "TEXT",
+        "description": "Description of the product involved."
+      },
+      "manufacturer_name_code": {
+        "type": "TEXT",
+        "description": "Manufacturer name code."
+      },
+      "manufacturer_name": {
+        "type": "TEXT",
+        "description": "Manufacturer's full name."
+      },
+      "street_address": {
+        "type": "TEXT",
+        "description": "Street address of the manufacturer."
+      },
+      "city": {
+        "type": "TEXT",
+        "description": "Manufacturer city."
+      },
+      "state": {
+        "type": "TEXT",
+        "description": "Manufacturer state."
+      },
+      "zipcode": {
+        "type": "TEXT",
+        "description": "Manufacturer ZIP code."
+      },
+      "report_type": {
+        "type": "TEXT",
+        "description": "Type of report (e.g., Malfunction, Serious Injury)."
+      },
+      "model_number": {
+        "type": "TEXT",
+        "description": "Model number of the device."
+      },
+      "catalog_number": {
+        "type": "TEXT",
+        "description": "Catalog number of the device."
+      },
+      "fda_panel_code": {
+        "type": "TEXT",
+        "description": "FDA panel code (medical specialty)."
+      },
+      "fda_product_code": {
+        "type": "TEXT",
+        "description": "FDA product code."
+      },
+      "event_description_type": {
+        "type": "TEXT",
+        "description": "Type of event description (e.g., FINAL)."
+      },
+      "event_description": {
+        "type": "TEXT",
+        "description": "Narrative describing the event."
+      },
+      "closeout_text": {
+        "type": "TEXT",
+        "description": "Text regarding closeout status or final remarks."
+      }
+    }
+  },
+  "Merged_Table_7": {
+    "description": "Merged from mdrfoiChange, mdrfoiThru2023, mdrfoiAdd, mdrfoi",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "Unique MDR Report Key assigned by MAUDE."
+      },
+      "event_key": {
+        "type": "TEXT",
+        "description": "Event Key for linking to a specific event."
+      },
+      "report_number": {
+        "type": "TEXT",
+        "description": "Report Number. May include manufacturer, distributor, or user facility ID with year and sequential count."
+      },
+      "report_source_code": {
+        "type": "TEXT",
+        "description": "Source of the report.",
+        "values": {
+          "M": "Manufacturer",
+          "D": "Distributor",
+          "U": "User Facility",
+          "P": "Voluntary"
+        }
+      },
+      "manufacturer_link_flag": {
+        "type": "TEXT",
+        "description": "Internal link flag if a distributor report was followed by a manufacturer report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "number_devices_in_event": {
+        "type": "TEXT",
+        "description": "Number of devices involved in this event."
+      },
+      "number_patients_in_event": {
+        "type": "TEXT",
+        "description": "Number of patients involved in this event."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the report was received."
+      },
+      "adverse_event_flag": {
+        "type": "TEXT",
+        "description": "Indicates if this is an adverse event report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "product_problem_flag": {
+        "type": "TEXT",
+        "description": "Indicates if this is a product problem report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "date_report": {
+        "type": "TEXT",
+        "description": "The date the report was submitted."
+      },
+      "date_of_event": {
+        "type": "TEXT",
+        "description": "The date of the event’s occurrence."
+      },
+      "reprocessed_and_reused_flag": {
+        "type": "TEXT",
+        "description": "Indicates if a single-use device was reprocessed/reused.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "reporter_occupation_code": {
+        "type": "TEXT",
+        "description": "Occupation code of the initial reporter."
+      },
+      "health_professional": {
+        "type": "TEXT",
+        "description": "Whether the reporter was a health professional.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "*": "No answer provided"
+        }
+      },
+      "initial_report_to_fda": {
+        "type": "TEXT",
+        "description": "Whether this was initially reported to the FDA.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "U": "Unknown"
+        }
+      },
+      "date_facility_aware": {
+        "type": "TEXT",
+        "description": "Date the facility became aware of the event."
+      },
+      "report_date": {
+        "type": "TEXT",
+        "description": "The date the report was made."
+      },
+      "report_to_fda": {
+        "type": "TEXT",
+        "description": "Whether the user facility or importer also submitted the report to the FDA.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "date_report_to_fda": {
+        "type": "TEXT",
+        "description": "Date the report was sent to the FDA."
+      },
+      "event_location": {
+        "type": "TEXT",
+        "description": "Code for the location where the event occurred.",
+        "values": {
+          "000": "Other",
+          "001": "Hospital",
+          "002": "Home",
+          "003": "Nursing Home",
+          "004": "Outpatient Treatment Facility",
+          "005": "Outpatient Diagnostic Facility",
+          "006": "Ambulatory Surgical Facility",
+          "500": "Hospital",
+          "501": "Catheterization Suite",
+          "502": "Critical Care Unit",
+          "503": "Dialysis Unit",
+          "504": "Emergency Room",
+          "505": "Examination Room",
+          "506": "Laboratory/Pathology Department",
+          "507": "Maternity Ward - Nursery",
+          "508": "Operating Room",
+          "509": "Outpatient Clinic/Surgery",
+          "510": "Patient's Room or Ward",
+          "511": "Radiology Department",
+          "600": "Ambulatory Health Care Facility",
+          "601": "Ambulatory Surgical Center",
+          "602": "Blood Bank",
+          "603": "Bloodmobile",
+          "604": "Catheterization Lab - Free Standing",
+          "605": "Chemotherapy Center",
+          "606": "Clinic - Walk In, Other",
+          "607": "Dialysis Center",
+          "608": "Drug Clinic",
+          "609": "Imaging Center - Mobile",
+          "610": "Imaging Center - Stationary",
+          "611": "Laboratory",
+          "612": "Mobile Health Unit",
+          "613": "MRI Centers",
+          "614": "Psychiatric Center - Walk In, Other",
+          "615": "Tuberculosis Clinic",
+          "616": "Urgent Care Center",
+          "617": "Outpatient Diagnostic Facility",
+          "700": "Long-Term Care Facility",
+          "701": "Hospice",
+          "702": "Nursing Home",
+          "703": "Psychiatric Facility",
+          "704": "Rehabilitation Center",
+          "705": "Retirement Home",
+          "810": "Patient's Home",
+          "820": "In Transit to User/Medical Facility",
+          "830": "Public Venue",
+          "831": "Outdoors",
+          "832": "Park",
+          "833": "Playground",
+          "834": "Public Building",
+          "835": "School",
+          "836": "Street",
+          "999": "Unknown",
+          "NA": "Not Applicable",
+          "NI": "No Information",
+          "UNK": "Unknown"
+        }
+      },
+      "date_report_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Date the facility or importer reported to the manufacturer."
+      },
+      "manufacturer_contact_t_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact title."
+      },
+      "manufacturer_contact_f_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact first name."
+      },
+      "manufacturer_contact_l_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact last name."
+      },
+      "manufacturer_contact_street_1": {
+        "type": "TEXT",
+        "description": "Manufacturer contact address line 1."
+      },
+      "manufacturer_contact_street_2": {
+        "type": "TEXT",
+        "description": "Manufacturer contact address line 2."
+      },
+      "manufacturer_contact_city": {
+        "type": "TEXT",
+        "description": "City for the manufacturer contact."
+      },
+      "manufacturer_contact_state": {
+        "type": "TEXT",
+        "description": "State for the manufacturer contact."
+      },
+      "manufacturer_contact_zip_code": {
+        "type": "TEXT",
+        "description": "ZIP code for the manufacturer contact."
+      },
+      "manufacturer_contact_zip_ext": {
+        "type": "TEXT",
+        "description": "ZIP extension for the manufacturer contact."
+      },
+      "manufacturer_contact_country": {
+        "type": "TEXT",
+        "description": "Country code for the manufacturer contact."
+      },
+      "manufacturer_contact_postal": {
+        "type": "TEXT",
+        "description": "Full postal code for the manufacturer contact."
+      },
+      "manufacturer_contact_area_code": {
+        "type": "TEXT",
+        "description": "Phone area code."
+      },
+      "manufacturer_contact_exchange": {
+        "type": "TEXT",
+        "description": "Phone exchange code."
+      },
+      "manufacturer_contact_phone_no": {
+        "type": "TEXT",
+        "description": "Phone number."
+      },
+      "manufacturer_contact_extension": {
+        "type": "TEXT",
+        "description": "Phone extension."
+      },
+      "manufacturer_contact_pcountry": {
+        "type": "TEXT",
+        "description": "Phone country code."
+      },
+      "manufacturer_contact_pcity": {
+        "type": "TEXT",
+        "description": "Phone city code."
+      },
+      "manufacturer_contact_plocal": {
+        "type": "TEXT",
+        "description": "Local phone number."
+      },
+      "manufacturer_g1_name": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 name."
+      },
+      "manufacturer_g1_street_1": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 address line 1."
+      },
+      "manufacturer_g1_street_2": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 address line 2."
+      },
+      "manufacturer_g1_city": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 city."
+      },
+      "manufacturer_g1_state_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 state code."
+      },
+      "manufacturer_g1_zip_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 ZIP code."
+      },
+      "manufacturer_g1_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 ZIP code extension."
+      },
+      "manufacturer_g1_country_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 country code."
+      },
+      "manufacturer_g1_postal_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 postal code."
+      },
+      "date_manufacturer_received": {
+        "type": "TEXT",
+        "description": "Date the manufacturer received the report."
+      },
+      "device_date_of_manufacture": {
+        "type": "TEXT",
+        "description": "Date of the device’s manufacture."
+      },
+      "single_use_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is single-use.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "remedial_action": {
+        "type": "TEXT",
+        "description": "Whether a remedial action was initiated (e.g., recall, repair).",
+        "values": {
+          "RC": "Recall",
+          "RP": "Repair",
+          "RL": "Replace",
+          "RB": "Relabeling",
+          "OT": "Other",
+          "NO": "Notification",
+          "IN": "Inspection",
+          "PM": "Patient Monitoring",
+          "MA": "Modification/Adjustment",
+          "*": "Invalid Data"
+        }
+      },
+      "previous_use_code": {
+        "type": "TEXT",
+        "description": "Indicates prior usage of the device.",
+        "values": {
+          "I": "Initial Use",
+          "R": "Reuse",
+          "U": "Unknown"
+        }
+      },
+      "removal_correction_number": {
+        "type": "TEXT",
+        "description": "Removal or correction number following 21 CFR Part 806."
+      },
+      "event_type": {
+        "type": "TEXT",
+        "description": "Event type.",
+        "values": {
+          "D": "Death",
+          "IN": "Injury",
+          "M": "Malfunction",
+          "O": "Other"
+        }
+      },
+      "distributor_name": {
+        "type": "TEXT",
+        "description": "Name of the distributor, if applicable."
+      },
+      "distributor_address_1": {
+        "type": "TEXT",
+        "description": "Distributor’s address line 1."
+      },
+      "distributor_address_2": {
+        "type": "TEXT",
+        "description": "Distributor’s address line 2."
+      },
+      "distributor_city": {
+        "type": "TEXT",
+        "description": "Distributor’s city."
+      },
+      "distributor_state_code": {
+        "type": "TEXT",
+        "description": "Distributor’s state code."
+      },
+      "distributor_zip_code": {
+        "type": "TEXT",
+        "description": "Distributor’s ZIP code."
+      },
+      "distributor_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Distributor’s ZIP code extension."
+      },
+      "report_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Indicates if the report was sent to the manufacturer."
+      },
+      "manufacturer_name": {
+        "type": "TEXT",
+        "description": "Full manufacturer name."
+      },
+      "manufacturer_address_1": {
+        "type": "TEXT",
+        "description": "Manufacturer’s address line 1."
+      },
+      "manufacturer_address_2": {
+        "type": "TEXT",
+        "description": "Manufacturer’s address line 2."
+      },
+      "manufacturer_city": {
+        "type": "TEXT",
+        "description": "Manufacturer’s city."
+      },
+      "manufacturer_state_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s state code."
+      },
+      "manufacturer_zip_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s ZIP code."
+      },
+      "manufacturer_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Manufacturer’s ZIP code extension."
+      },
+      "manufacturer_country_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s country code."
+      },
+      "manufacturer_postal_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s postal code."
+      },
+      "type_of_report": {
+        "type": "TEXT",
+        "description": "Whether the report is initial or follow-up.",
+        "values": {
+          "I": "Initial submission",
+          "F": "Follow-up",
+          "X": "Extra copy received",
+          "O": "Other information submitted"
+        }
+      },
+      "source_type": {
+        "type": "TEXT",
+        "description": "Source(s) through which the manufacturer became aware of the event.",
+        "values": {
+          "00": "Other",
+          "01": "Foreign",
+          "02": "Study",
+          "03": "Literature",
+          "04": "Consumer",
+          "05": "Health Professional",
+          "06": "User facility",
+          "07": "Company representation",
+          "08": "Distributor",
+          "99": "Unknown",
+          "*": "Invalid data"
+        }
+      },
+      "date_added": {
+        "type": "TEXT",
+        "description": "Date the record was added."
+      },
+      "date_changed": {
+        "type": "TEXT",
+        "description": "Date the record was changed."
+      },
+      "reporter_country_code": {
+        "type": "TEXT",
+        "description": "Country code of the initial reporter."
+      },
+      "pma_pmn_num": {
+        "type": "TEXT",
+        "description": "PMA or 510(k) number."
+      },
+      "exemption_number": {
+        "type": "TEXT",
+        "description": "Exemption/variance number if relevant."
+      },
+      "summary_report": {
+        "type": "TEXT",
+        "description": "Y/N if this is a summary report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "noe_summarized": {
+        "type": "TEXT",
+        "description": "Number of events summarized."
+      }
+    }
+  },
+  "Merged_Table_8": {
+    "description": "Merged from patient, patientAdd, patientChange, patientThru2023",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "MDR Report Key (unique)."
+      },
+      "patient_sequence_number": {
+        "type": "TEXT",
+        "description": "Patient Sequence Number to distinguish multiple patients in the same MDR."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the patient record was received/processed."
+      },
+      "sequence_number_treatment": {
+        "type": "TEXT",
+        "description": "Treatment sequence identifier or details."
+      },
+      "sequence_number_outcome": {
+        "type": "TEXT",
+        "description": "Outcome sequence identifier or details."
+      },
+      "patient_age": {
+        "type": "TEXT",
+        "description": "Patient's age at the time of the event."
+      },
+      "patient_sex": {
+        "type": "TEXT",
+        "description": "Patient's sex at birth."
+      },
+      "patient_weight": {
+        "type": "TEXT",
+        "description": "Patient's weight or best estimate."
+      },
+      "patient_ethnicity": {
+        "type": "TEXT",
+        "description": "Patient's ethnicity."
+      },
+      "patient_race": {
+        "type": "TEXT",
+        "description": "Patient's race."
+      }
+    }
+  },
+  "Merged_Table_9": {
+    "description": "Merged from foitext2003, foitext2001, foitext2013, foitext1999, foitext1998, foitext, foitext2010, foitext2000, foitext2008, foitext2009, foitext2018, foitext2021, foitext2006, foitextthru1995, foitext2014, foitext2019, foitext2022, foitext2007, foitext2004, foitext2023, foitext1997, foitext2017, foitext2012, foitext2015, foitext2005, foitextChange, foitextAdd, foitext1996, foitext2002, foitext2011, foitext2016, foitext2020",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "Unique MDR Report Key referencing the same MDR in other tables."
+      },
+      "mdr_text_key": {
+        "type": "TEXT",
+        "description": "Unique text key for the narrative portion of the report."
+      },
+      "text_type_code": {
+        "type": "TEXT",
+        "description": "Indicates the text type.",
+        "values": {
+          "D": "B5",
+          "E": "H3",
+          "N": "H10"
+        }
+      },
+      "patient_sequence_number": {
+        "type": "TEXT",
+        "description": "Patient sequence number if referencing a specific patient in the report."
+      },
+      "date_report": {
+        "type": "TEXT",
+        "description": "Date associated with the text or narrative."
+      },
+      "foi_text": {
+        "type": "TEXT",
+        "description": "Narrative text describing the event or manufacturer narrative."
+      },
+      "foi_text_json": {
+        "type": "JSON",
+        "description": "Same text in JSON format."
+      }
+    }
+  },
+  "Merged_Table_14": {
+    "description": "Merged from table_statistics_selfdefined",
+    "fields": {
+      "table_name": {
+        "type": "VARCHAR(255)",
+        "description": "Name of the database table."
+      },
+      "num_fields": {
+        "type": "INTEGER",
+        "description": "Number of fields/columns in the table."
+      },
+      "num_rows": {
+        "type": "INTEGER",
+        "description": "Number of rows in the table."
+      },
+      "longest_field_name": {
+        "type": "VARCHAR(255)",
+        "description": "Longest field name in that table."
+      },
+      "longest_field_length": {
+        "type": "INTEGER",
+        "description": "Length (in characters) of the longest field name."
+      },
+      "description": {
+        "type": "TEXT",
+        "description": "Description or summary of the table."
+      }
+    }
+  },
+  "Merged_Table_4": {
+    "description": "Merged from DEVICE2009, DEVICE2010, DEVICEAdd, foidev1998, DEVICE2003, DEVICE2012, DEVICE2008, DEVICEChange, DEVICE2014, DEVICE2018, DEVICE2002, foidevthru1997, DEVICE2020, DEVICE2007, DEVICE2021, DEVICE2004, DEVICE2022, DEVICE2023, DEVICE2000, DEVICE2019, DEVICE2013, DEVICE2015, DEVICE2006, foidev1999, DEVICE2001, DEVICE2016, DEVICE2011, DEVICE2017, DEVICE2005, DEVICE",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "MDR Report Key, a unique key assigned by MAUDE."
+      },
+      "device_event_key": {
+        "type": "TEXT",
+        "description": "Device Event Key linking to specific device events."
+      },
+      "implant_flag": {
+        "type": "TEXT",
+        "description": "Indicates whether the device is implantable.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "date_removed_flag": {
+        "type": "TEXT",
+        "description": "Indicates the date removal status.",
+        "values": {
+          "M": "Month/year only",
+          "Y": "Year only",
+          "A": "Not Available",
+          "I": "No information at this time",
+          "U": "Unknown"
+        }
+      },
+      "device_sequence_no": {
+        "type": "TEXT",
+        "description": "Device Sequence Number from device report table."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the device report was received by FDA or processed in the database."
+      },
+      "brand_name": {
+        "type": "TEXT",
+        "description": "Brand name of the device (D1)."
+      },
+      "generic_name": {
+        "type": "TEXT",
+        "description": "Generic or common name of the device (D2)."
+      },
+      "manufacturer_d_name": {
+        "type": "TEXT",
+        "description": "Manufacturer Name of the device (D3)."
+      },
+      "manufacturer_d_address_1": {
+        "type": "TEXT",
+        "description": "Manufacturer Address Line 1 (D3)."
+      },
+      "manufacturer_d_address_2": {
+        "type": "TEXT",
+        "description": "Manufacturer Address Line 2 (D3)."
+      },
+      "manufacturer_d_city": {
+        "type": "TEXT",
+        "description": "City where the manufacturer is located (D3)."
+      },
+      "manufacturer_d_state_code": {
+        "type": "TEXT",
+        "description": "State code where the manufacturer is located (D3)."
+      },
+      "manufacturer_d_zip_code": {
+        "type": "TEXT",
+        "description": "Zip code for the manufacturer address (D3)."
+      },
+      "manufacturer_d_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Zip code extension (D3)."
+      },
+      "manufacturer_d_country_code": {
+        "type": "TEXT",
+        "description": "Country code for the manufacturer (D3)."
+      },
+      "manufacturer_d_postal_code": {
+        "type": "TEXT",
+        "description": "Full postal code for the manufacturer (D3)."
+      },
+      "device_operator": {
+        "type": "TEXT",
+        "description": "Type of person operating the device (D5).",
+        "values": {
+          "0HP": "Health Professional",
+          "0LP": "Lay User/Patient",
+          "100": "Other Health Care Professional",
+          "101": "Audiologist",
+          "102": "Dental Hygienist",
+          "103": "Dietician",
+          "104": "Emergency Medical Technician",
+          "105": "Medical Technologist",
+          "106": "Nuclear Medicine Technologist",
+          "107": "Occupational Therapist",
+          "108": "Paramedic",
+          "109": "Pharmacist",
+          "110": "Phlebotomist",
+          "111": "Physical Therapist",
+          "112": "Physician Assistant",
+          "113": "Radiologic Technologist",
+          "114": "Respiratory Therapist",
+          "115": "Speech Therapist",
+          "116": "Dentist",
+          "117": "Nurse Practitioner",
+          "300": "Other Caregivers",
+          "301": "Dental Assistant",
+          "302": "Home Health Aide",
+          "303": "Medical Assistant",
+          "304": "Nursing Assistant",
+          "305": "Patient",
+          "306": "Patient Family Member or Friend",
+          "307": "Personal Care Assistant",
+          "400": "Service and Testing Personnel",
+          "401": "Biomedical Engineer",
+          "402": "Hospital Service Technician",
+          "403": "Medical Equipment Company Technician/Representative",
+          "404": "Physicist",
+          "405": "Service Personnel",
+          "499": "Device Unattended",
+          "500": "Risk Manager",
+          "501": "Administrator/Supervisor",
+          "600": "Attorney",
+          "999": "Unknown",
+          "NA": "Not Applicable",
+          "NI": "No Information",
+          "UNK": "Unknown"
+        }
+      },
+      "expiration_date_of_device": {
+        "type": "TEXT",
+        "description": "Device expiration date (D4)."
+      },
+      "model_number": {
+        "type": "TEXT",
+        "description": "Model number of the device (D4)."
+      },
+      "catalog_number": {
+        "type": "TEXT",
+        "description": "Catalog number of the device (D4)."
+      },
+      "lot_number": {
+        "type": "TEXT",
+        "description": "Lot number on the device label or packaging (D4)."
+      },
+      "other_id_number": {
+        "type": "TEXT",
+        "description": "Other device ID number (D4)."
+      },
+      "device_availability": {
+        "type": "TEXT",
+        "description": "Indicates whether the device was available for evaluation (D10).",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "R": "Device was returned to manufacturer",
+          "*": "No answer provided"
+        }
+      },
+      "date_returned_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Date the device was returned to the manufacturer (D10)."
+      },
+      "device_report_product_code": {
+        "type": "TEXT",
+        "description": "Product Code associated with the device."
+      },
+      "device_age_text": {
+        "type": "TEXT",
+        "description": "Text describing the device age."
+      },
+      "device_evaluated_by_manufactur": {
+        "type": "TEXT",
+        "description": "Indicates whether the manufacturer evaluated the device (H3).",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "R": "Device not returned to manufacturer",
+          "*": "No answer provided"
+        }
+      },
+      "combination_product_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is part of a combination product (G4).",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "udi_di": {
+        "type": "TEXT",
+        "description": "UDI-Device Identifier portion of the Unique Device Identifier."
+      },
+      "udi_public": {
+        "type": "TEXT",
+        "description": "Full UDI value with non-releasable PI values redacted."
+      },
+      "baseline_brand_name": {
+        "type": "TEXT",
+        "description": "Baseline brand name (pre-2009 records)."
+      },
+      "baseline_generic_name": {
+        "type": "TEXT",
+        "description": "Baseline generic name."
+      },
+      "baseline_model_no": {
+        "type": "TEXT",
+        "description": "Baseline model number."
+      },
+      "baseline_catalog_no": {
+        "type": "TEXT",
+        "description": "Baseline catalog number."
+      },
+      "baseline_other_id_no": {
+        "type": "TEXT",
+        "description": "Baseline other ID number."
+      },
+      "baseline_device_family": {
+        "type": "TEXT",
+        "description": "Baseline device family."
+      },
+      "baseline_shelf_life_contained": {
+        "type": "TEXT",
+        "description": "Indicates if shelf life is contained on the label.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "A": "Not Applicable",
+          "*": "No answer provided"
+        }
+      },
+      "baseline_shelf_life_in_months": {
+        "type": "TEXT",
+        "description": "Shelf life in months."
+      },
+      "baseline_pma_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device has a PMA."
+      },
+      "baseline_pma_no": {
+        "type": "TEXT",
+        "description": "Baseline PMA number."
+      },
+      "baseline_510_k__flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device has 510(k) clearance."
+      },
+      "baseline_510_k__no": {
+        "type": "TEXT",
+        "description": "Baseline 510(k) number."
+      },
+      "baseline_preamendment": {
+        "type": "TEXT",
+        "description": "Whether the device is preamendment."
+      },
+      "baseline_transitional": {
+        "type": "TEXT",
+        "description": "Whether the device is transitional."
+      },
+      "baseline_510_k__exempt_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is exempt from 510(k)."
+      },
+      "baseline_date_first_marketed": {
+        "type": "TEXT",
+        "description": "Date first marketed."
+      },
+      "baseline_date_ceased_marketing": {
+        "type": "TEXT",
+        "description": "Date ceased marketing."
+      }
+    }
+  },
+  "Merged_Table_5": {
+    "description": "Merged from foiclass",
+    "fields": {
+      "review_panel": {
+        "type": "TEXT",
+        "description": "Medical specialty panel code."
+      },
+      "medicalspecialty": {
+        "type": "TEXT",
+        "description": "Medical Specialty code (e.g., AN, CV, etc.).",
+        "values": {
+          "AN": "Anesthesiology",
+          "CV": "Cardiovascular",
+          "CH": "Clinical Chemistry",
+          "DE": "Dental",
+          "EN": "Ear, Nose, & Throat",
+          "GU": "Gastroenterology & Urology",
+          "HO": "General Hospital",
+          "HE": "Hematology",
+          "IM": "Immunology",
+          "MI": "Microbiology",
+          "NE": "Neurology",
+          "OB": "Obstetrics/Gynecology",
+          "OP": "Ophthalmic",
+          "OR": "Orthopedic",
+          "PA": "Pathology",
+          "PM": "Physical Medicine",
+          "RA": "Radiology",
+          "SU": "General & Plastic Surgery",
+          "TX": "Clinical Toxicology"
+        }
+      },
+      "productcode": {
+        "type": "TEXT",
+        "description": "Product code assigned to the device."
+      },
+      "devicename": {
+        "type": "TEXT",
+        "description": "Official device name, typically noun followed by modifiers."
+      },
+      "deviceclass": {
+        "type": "TEXT",
+        "description": "Class of the device (1, 2, or 3).",
+        "values": {
+          "1": "Class 1 - Devices subject to General Controls",
+          "2": "Class 2 - Devices subject to General Controls and Special Controls",
+          "3": "Class 3 - Devices subject to General Controls, Special Controls, and Premarket Approval"
+        }
+      },
+      "unclassified_reason": {
+        "type": "TEXT",
+        "description": "Reason for not being classified (if applicable)."
+      },
+      "gmpexemptflag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is exempt from GMP requirements.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "thirdpartyflag": {
+        "type": "TEXT",
+        "description": "Indicates if a third party is involved.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "reviewcode": {
+        "type": "TEXT",
+        "description": "Specific review code for the device."
+      },
+      "regulationnumber": {
+        "type": "TEXT",
+        "description": "CFR regulation number."
+      },
+      "submission_type_id": {
+        "type": "TEXT",
+        "description": "Submission type identifier."
+      },
+      "definition": {
+        "type": "TEXT",
+        "description": "Device definition."
+      },
+      "physicalstate": {
+        "type": "TEXT",
+        "description": "Physical state of the device."
+      },
+      "technicalmethod": {
+        "type": "TEXT",
+        "description": "Technical method used by the device."
+      },
+      "targetarea": {
+        "type": "TEXT",
+        "description": "Area of use or target site for the device."
+      },
+      "implant_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is implantable.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "life_sustain_support_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is life-sustaining or life-supporting.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "summarymalfunctionreporting": {
+        "type": "TEXT",
+        "description": "Indicates if malfunction reporting summary applies.",
+        "values": {
+          "Eligible": "Eligible",
+          "Ineligible": "Ineligible"
+        }
+      }
+    }
+  },
+  "Merged_Table_6": {
+    "description": "Merged from mdr89, mdr96, mdr97, mdr91, mdr90, mdr93, mdr84, mdr92, mdr95, mdr88, mdr94, mdr85, mdr87, mdr86",
+    "fields": {
+      "access_type_and_number": {
+        "type": "TEXT",
+        "description": "Access Type and Number referencing the event."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the report was received."
+      },
+      "product_description": {
+        "type": "TEXT",
+        "description": "Description of the product involved."
+      },
+      "manufacturer_name_code": {
+        "type": "TEXT",
+        "description": "Manufacturer name code."
+      },
+      "manufacturer_name": {
+        "type": "TEXT",
+        "description": "Manufacturer's full name."
+      },
+      "street_address": {
+        "type": "TEXT",
+        "description": "Street address of the manufacturer."
+      },
+      "city": {
+        "type": "TEXT",
+        "description": "Manufacturer city."
+      },
+      "state": {
+        "type": "TEXT",
+        "description": "Manufacturer state."
+      },
+      "zipcode": {
+        "type": "TEXT",
+        "description": "Manufacturer ZIP code."
+      },
+      "report_type": {
+        "type": "TEXT",
+        "description": "Type of report (e.g., Malfunction, Serious Injury)."
+      },
+      "model_number": {
+        "type": "TEXT",
+        "description": "Model number of the device."
+      },
+      "catalog_number": {
+        "type": "TEXT",
+        "description": "Catalog number of the device."
+      },
+      "fda_panel_code": {
+        "type": "TEXT",
+        "description": "FDA panel code (medical specialty)."
+      },
+      "fda_product_code": {
+        "type": "TEXT",
+        "description": "FDA product code."
+      },
+      "event_description_type": {
+        "type": "TEXT",
+        "description": "Type of event description (e.g., FINAL)."
+      },
+      "event_description": {
+        "type": "TEXT",
+        "description": "Narrative describing the event."
+      },
+      "closeout_text": {
+        "type": "TEXT",
+        "description": "Text regarding closeout status or final remarks."
+      }
+    }
+  },
+  "Merged_Table_7": {
+    "description": "Merged from mdrfoiChange, mdrfoiThru2023, mdrfoiAdd, mdrfoi",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "Unique MDR Report Key assigned by MAUDE."
+      },
+      "event_key": {
+        "type": "TEXT",
+        "description": "Event Key for linking to a specific event."
+      },
+      "report_number": {
+        "type": "TEXT",
+        "description": "Report Number, consisting of components based on the submitter."
+      },
+      "report_source_code": {
+        "type": "TEXT",
+        "description": "Source of the report.",
+        "values": {
+          "M": "Manufacturer",
+          "D": "Distributor",
+          "U": "User Facility",
+          "P": "Voluntary"
+        }
+      },
+      "manufacturer_link_flag": {
+        "type": "TEXT",
+        "description": "Flag indicating if a distributor report was followed by a manufacturer report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "number_devices_in_event": {
+        "type": "TEXT",
+        "description": "Number of devices involved in this event."
+      },
+      "number_patients_in_event": {
+        "type": "TEXT",
+        "description": "Number of patients involved in this event."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the report was received."
+      },
+      "adverse_event_flag": {
+        "type": "TEXT",
+        "description": "Indicates if this is an adverse event report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "product_problem_flag": {
+        "type": "TEXT",
+        "description": "Indicates if this is a product problem report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "date_report": {
+        "type": "TEXT",
+        "description": "The date the report was submitted."
+      },
+      "date_of_event": {
+        "type": "TEXT",
+        "description": "The date of the event’s occurrence."
+      },
+      "reprocessed_and_reused_flag": {
+        "type": "TEXT",
+        "description": "Indicates if a single-use device was reprocessed/reused.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "reporter_occupation_code": {
+        "type": "TEXT",
+        "description": "Occupation code of the initial reporter."
+      },
+      "health_professional": {
+        "type": "TEXT",
+        "description": "Whether the reporter was a health professional.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "*": "No answer provided"
+        }
+      },
+      "initial_report_to_fda": {
+        "type": "TEXT",
+        "description": "Whether this was initially reported to the FDA.",
+        "values": {
+          "Y": "Yes",
+          "N": "No",
+          "U": "Unknown"
+        }
+      },
+      "date_facility_aware": {
+        "type": "TEXT",
+        "description": "Date the facility became aware of the event."
+      },
+      "report_date": {
+        "type": "TEXT",
+        "description": "The date the report was made."
+      },
+      "report_to_fda": {
+        "type": "TEXT",
+        "description": "Whether the user facility or importer also submitted the report to the FDA.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "date_report_to_fda": {
+        "type": "TEXT",
+        "description": "Date the report was sent to the FDA."
+      },
+      "event_location": {
+        "type": "TEXT",
+        "description": "Code for the location where the event occurred.",
+        "values": {
+          "000": "Other",
+          "001": "Hospital",
+          "002": "Home",
+          "003": "Nursing Home",
+          "004": "Outpatient Treatment Facility",
+          "005": "Outpatient Diagnostic Facility",
+          "006": "Ambulatory Surgical Facility",
+          "500": "Hospital",
+          "501": "Catheterization Suite",
+          "502": "Critical Care Unit",
+          "503": "Dialysis Unit",
+          "504": "Emergency Room",
+          "505": "Examination Room",
+          "506": "Laboratory/Pathology Department",
+          "507": "Maternity Ward - Nursery",
+          "508": "Operating Room",
+          "509": "Outpatient Clinic/Surgery",
+          "510": "Patient's Room or Ward",
+          "511": "Radiology Department",
+          "600": "Ambulatory Health Care Facility",
+          "601": "Ambulatory Surgical Center",
+          "602": "Blood Bank",
+          "603": "Bloodmobile",
+          "604": "Catheterization Lab - Free Standing",
+          "605": "Chemotherapy Center",
+          "606": "Clinic - Walk In, Other",
+          "607": "Dialysis Center",
+          "608": "Drug Clinic",
+          "609": "Imaging Center - Mobile",
+          "610": "Imaging Center - Stationary",
+          "611": "Laboratory",
+          "612": "Mobile Health Unit",
+          "613": "MRI Centers",
+          "614": "Psychiatric Center - Walk In, Other",
+          "615": "Tuberculosis Clinic",
+          "616": "Urgent Care Center",
+          "617": "Outpatient Diagnostic Facility",
+          "700": "Long-Term Care Facility",
+          "701": "Hospice",
+          "702": "Nursing Home",
+          "703": "Psychiatric Facility",
+          "704": "Rehabilitation Center",
+          "705": "Retirement Home",
+          "810": "Patient's Home",
+          "820": "In Transit to User/Medical Facility",
+          "830": "Public Venue",
+          "831": "Outdoors",
+          "832": "Park",
+          "833": "Playground",
+          "834": "Public Building",
+          "835": "School",
+          "836": "Street",
+          "999": "Unknown",
+          "NA": "Not Applicable",
+          "NI": "No Information",
+          "UNK": "Unknown"
+        }
+      },
+      "date_report_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Date the facility or importer reported to the manufacturer."
+      },
+      "manufacturer_contact_t_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact title."
+      },
+      "manufacturer_contact_f_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact first name."
+      },
+      "manufacturer_contact_l_name": {
+        "type": "TEXT",
+        "description": "Manufacturer contact last name."
+      },
+      "manufacturer_contact_street_1": {
+        "type": "TEXT",
+        "description": "Manufacturer contact address line 1."
+      },
+      "manufacturer_contact_street_2": {
+        "type": "TEXT",
+        "description": "Manufacturer contact address line 2."
+      },
+      "manufacturer_contact_city": {
+        "type": "TEXT",
+        "description": "City for the manufacturer contact."
+      },
+      "manufacturer_contact_state": {
+        "type": "TEXT",
+        "description": "State for the manufacturer contact."
+      },
+      "manufacturer_contact_zip_code": {
+        "type": "TEXT",
+        "description": "ZIP code for the manufacturer contact."
+      },
+      "manufacturer_contact_zip_ext": {
+        "type": "TEXT",
+        "description": "ZIP extension for the manufacturer contact."
+      },
+      "manufacturer_contact_country": {
+        "type": "TEXT",
+        "description": "Country code for the manufacturer contact."
+      },
+      "manufacturer_contact_postal": {
+        "type": "TEXT",
+        "description": "Full postal code for the manufacturer contact."
+      },
+      "manufacturer_contact_area_code": {
+        "type": "TEXT",
+        "description": "Phone area code."
+      },
+      "manufacturer_contact_exchange": {
+        "type": "TEXT",
+        "description": "Phone exchange code."
+      },
+      "manufacturer_contact_phone_no": {
+        "type": "TEXT",
+        "description": "Phone number."
+      },
+      "manufacturer_contact_extension": {
+        "type": "TEXT",
+        "description": "Phone extension."
+      },
+      "manufacturer_contact_pcountry": {
+        "type": "TEXT",
+        "description": "Phone country code."
+      },
+      "manufacturer_contact_pcity": {
+        "type": "TEXT",
+        "description": "Phone city code."
+      },
+      "manufacturer_contact_plocal": {
+        "type": "TEXT",
+        "description": "Local phone number."
+      },
+      "manufacturer_g1_name": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 name."
+      },
+      "manufacturer_g1_street_1": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 address line 1."
+      },
+      "manufacturer_g1_street_2": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 address line 2."
+      },
+      "manufacturer_g1_city": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 city."
+      },
+      "manufacturer_g1_state_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 state code."
+      },
+      "manufacturer_g1_zip_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 ZIP code."
+      },
+      "manufacturer_g1_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 ZIP code extension."
+      },
+      "manufacturer_g1_country_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 country code."
+      },
+      "manufacturer_g1_postal_code": {
+        "type": "TEXT",
+        "description": "Manufacturer G1 postal code."
+      },
+      "date_manufacturer_received": {
+        "type": "TEXT",
+        "description": "Date the manufacturer received the report."
+      },
+      "device_date_of_manufacture": {
+        "type": "TEXT",
+        "description": "Date of the device’s manufacture."
+      },
+      "single_use_flag": {
+        "type": "TEXT",
+        "description": "Indicates if the device is single-use.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "remedial_action": {
+        "type": "TEXT",
+        "description": "Whether a remedial action was initiated (e.g., recall, repair).",
+        "values": {
+          "RC": "Recall",
+          "RP": "Repair",
+          "RL": "Replace",
+          "RB": "Relabeling",
+          "OT": "Other",
+          "NO": "Notification",
+          "IN": "Inspection",
+          "PM": "Patient Monitoring",
+          "MA": "Modification/Adjustment",
+          "*": "Invalid Data"
+        }
+      },
+      "previous_use_code": {
+        "type": "TEXT",
+        "description": "Indicates prior usage of the device.",
+        "values": {
+          "I": "Initial Use",
+          "R": "Reuse",
+          "U": "Unknown"
+        }
+      },
+      "removal_correction_number": {
+        "type": "TEXT",
+        "description": "Removal or correction number following 21 CFR Part 806."
+      },
+      "event_type": {
+        "type": "TEXT",
+        "description": "Event type.",
+        "values": {
+          "D": "Death",
+          "IN": "Injury",
+          "M": "Malfunction",
+          "O": "Other"
+        }
+      },
+      "distributor_name": {
+        "type": "TEXT",
+        "description": "Name of the distributor, if applicable."
+      },
+      "distributor_address_1": {
+        "type": "TEXT",
+        "description": "Distributor’s address line 1."
+      },
+      "distributor_address_2": {
+        "type": "TEXT",
+        "description": "Distributor’s address line 2."
+      },
+      "distributor_city": {
+        "type": "TEXT",
+        "description": "Distributor’s city."
+      },
+      "distributor_state_code": {
+        "type": "TEXT",
+        "description": "Distributor’s state code."
+      },
+      "distributor_zip_code": {
+        "type": "TEXT",
+        "description": "Distributor’s ZIP code."
+      },
+      "distributor_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Distributor’s ZIP code extension."
+      },
+      "report_to_manufacturer": {
+        "type": "TEXT",
+        "description": "Indicates if the report was sent to the manufacturer."
+      },
+      "manufacturer_name": {
+        "type": "TEXT",
+        "description": "Full manufacturer name."
+      },
+      "manufacturer_address_1": {
+        "type": "TEXT",
+        "description": "Manufacturer’s address line 1."
+      },
+      "manufacturer_address_2": {
+        "type": "TEXT",
+        "description": "Manufacturer’s address line 2."
+      },
+      "manufacturer_city": {
+        "type": "TEXT",
+        "description": "Manufacturer’s city."
+      },
+      "manufacturer_state_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s state code."
+      },
+      "manufacturer_zip_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s ZIP code."
+      },
+      "manufacturer_zip_code_ext": {
+        "type": "TEXT",
+        "description": "Manufacturer’s ZIP code extension."
+      },
+      "manufacturer_country_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s country code."
+      },
+      "manufacturer_postal_code": {
+        "type": "TEXT",
+        "description": "Manufacturer’s postal code."
+      },
+      "type_of_report": {
+        "type": "TEXT",
+        "description": "Whether the report is initial or follow-up.",
+        "values": {
+          "I": "Initial submission",
+          "F": "Follow-up",
+          "X": "Extra copy received",
+          "O": "Other information submitted"
+        }
+      },
+      "source_type": {
+        "type": "TEXT",
+        "description": "Source(s) through which the manufacturer became aware of the event.",
+        "values": {
+          "00": "Other",
+          "01": "Foreign",
+          "02": "Study",
+          "03": "Literature",
+          "04": "Consumer",
+          "05": "Health Professional",
+          "06": "User facility",
+          "07": "Company representation",
+          "08": "Distributor",
+          "99": "Unknown",
+          "*": "Invalid data"
+        }
+      },
+      "date_added": {
+        "type": "TEXT",
+        "description": "Date the record was added."
+      },
+      "date_changed": {
+        "type": "TEXT",
+        "description": "Date the record was changed."
+      },
+      "reporter_country_code": {
+        "type": "TEXT",
+        "description": "Country code of the initial reporter."
+      },
+      "pma_pmn_num": {
+        "type": "TEXT",
+        "description": "PMA or 510(k) number."
+      },
+      "exemption_number": {
+        "type": "TEXT",
+        "description": "Exemption/variance number if relevant."
+      },
+      "summary_report": {
+        "type": "TEXT",
+        "description": "Y/N if this is a summary report.",
+        "values": {
+          "Y": "Yes",
+          "N": "No"
+        }
+      },
+      "noe_summarized": {
+        "type": "TEXT",
+        "description": "Number of events summarized."
+      }
+    }
+  },
+  "Merged_Table_8": {
+    "description": "Merged from patient, patientAdd, patientChange, patientThru2023",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "MDR Report Key (unique)."
+      },
+      "patient_sequence_number": {
+        "type": "TEXT",
+        "description": "Patient Sequence Number to distinguish multiple patients in the same MDR."
+      },
+      "date_received": {
+        "type": "TEXT",
+        "description": "Date the patient record was received/processed."
+      },
+      "sequence_number_treatment": {
+        "type": "TEXT",
+        "description": "Treatment sequence identifier or details."
+      },
+      "sequence_number_outcome": {
+        "type": "TEXT",
+        "description": "Outcome sequence identifier or details."
+      },
+      "patient_age": {
+        "type": "TEXT",
+        "description": "Patient's age at the time of event onset."
+      },
+      "patient_sex": {
+        "type": "TEXT",
+        "description": "Patient's sex at birth."
+      },
+      "patient_weight": {
+        "type": "TEXT",
+        "description": "Patient's weight or best estimate."
+      },
+      "patient_ethnicity": {
+        "type": "TEXT",
+        "description": "Patient's ethnicity."
+      },
+      "patient_race": {
+        "type": "TEXT",
+        "description": "Patient's race."
+      }
+    }
+  },
+  "Merged_Table_9": {
+    "description": "Merged from foitext2003, foitext2001, foitext2013, foitext1999, foitext1998, foitext, foitext2010, foitext2000, foitext2008, foitext2009, foitext2018, foitext2021, foitext2006, foitextthru1995, foitext2014, foitext2019, foitext2022, foitext2007, foitext2004, foitext2023, foitext1997, foitext2017, foitext2012, foitext2015, foitext2005, foitextChange, foitextAdd, foitext1996, foitext2002, foitext2011, foitext2016, foitext2020",
+    "fields": {
+      "mdr_report_key": {
+        "type": "TEXT",
+        "description": "Unique MDR Report Key referencing the same MDR in other tables."
+      },
+      "mdr_text_key": {
+        "type": "TEXT",
+        "description": "Unique text key for the narrative portion of the report."
+      },
+      "text_type_code": {
+        "type": "TEXT",
+        "description": "Indicates the text type.",
+        "values": {
+          "D": "B5",
+          "E": "H3",
+          "N": "H10"
+        }
+      },
+      "patient_sequence_number": {
+        "type": "TEXT",
+        "description": "Patient sequence number if referencing a specific patient in the report."
+      },
+      "date_report": {
+        "type": "TEXT",
+        "description": "Date associated with the text or narrative."
+      },
+      "foi_text": {
+        "type": "TEXT",
+        "description": "Narrative text describing the event or manufacturer narrative."
+      },
+      "foi_text_json": {
+        "type": "JSON",
+        "description": "Same text in JSON format."
+      }
+    }
+  },
+  "Description_of_Fields_in_MAUDE_Database": {
+    "fields": {
+      "Model Number": {
+        "description": "Model number found on the device label or accompanying packaging."
+      },
+      "Device Problem": {
+        "description": "Codes describing medical device failures or problems related to the adverse event."
+      },
+      "Patient Problem": {
+        "description": "Codes describing patient problems related to the adverse event."
+      },
+      "Event Date": {
+        "description": "Date of the actual or best estimate of the first onset of the adverse event."
+      },
+      "Event Type": {
+        "description": "Type of reportable event, e.g., death, injury, or malfunction."
+      },
+      "Manufacturer Narrative": {
+        "description": "Additional information, evaluation, or clarification provided by the manufacturer in narrative form."
+      },
+      "Event Description": {
+        "description": "Description of reported event in narrative form."
+      },
+      "Brand Name": {
+        "description": "Trade or proprietary name of the suspect medical device as used in product labeling or in the catalogue."
+      },
+      "Type of Device": {
+        "description": "Generic or common name of the suspect medical device or a generally descriptive name."
+      },
+      "Manufacturer (Section D)": {
+        "description": "Full name and address of the manufacturer of the suspect medical device."
+      },
+      "Manufacturer (Section G)": {
+        "description": "Full name and address of the manufacturer site."
+      },
+      "Manufacturer Contact": {
+        "description": "Full name and address of the manufacturer reporting contact."
+      },
+      "MDR Report Key": {
+        "description": "Unique key for an MDR, assigned by MAUDE."
+      },
+      "MDR Text Key": {
+        "description": "Unique key for the first narrative entered for this report, assigned by MAUDE."
+      },
+      "Report Number": {
+        "description": "Number assigned to the MDR, format varies based on the source."
+      },
+      "Device Sequence Number": {
+        "description": "Differentiates between each device in reports with multiple devices."
+      },
+      "Product Code": {
+        "description": "Product Code of the suspected medical device."
+      },
+      "UDI-Device Identifier": {
+        "description": "DI portion of the Unique Device Identifier."
+      },
+      "UDI-Public": {
+        "description": "Full UDI value with certain PI values redacted."
+      },
+      "Combination Product (y/n)": {
+        "description": "Denotes whether the suspect product is part of a combination product."
+      },
+      "Reporter Country Code": {
+        "description": "Country of the initial reporter."
+      },
+      "PMA/PMN Number": {
+        "description": "Approved PMA or cleared 510(k), or premarket notification number for the device."
+      },
+      "Exemption Number": {
+        "description": "Exemption/Variance Number identifying MDR reports under special reporting conditions."
+      },
+      "Number of Events Reported": {
+        "description": "Number of events described in the report."
+      },
+      "Summary Report (Y/N)": {
+        "description": "Denotes whether the report summarizes multiple reports."
+      },
+      "Report Source": {
+        "description": "Denotes whether the report was submitted by a Manufacturer, Distributor, User Facility, or Voluntary reporter."
+      },
+      "Source Type": {
+        "description": "How the manufacturer became aware of the reported adverse event."
+      },
+      "Reporter Occupation": {
+        "description": "Occupation of the initial reporter."
+      },
+      "Remedial Action": {
+        "description": "Whether a remedial action (e.g., recall) was initiated.",
+        "values": {
+          "RC": "Recall",
+          "RP": "Repair",
+          "RL": "Replace",
+          "RB": "Relabeling",
+          "OT": "Other",
+          "NO": "Notification",
+          "IN": "Inspection",
+          "PM": "Patient Monitoring",
+          "MA": "Modification/Adjustment",
+          "*": "Invalid Data"
+        }
+      },
+      "Type of Report": {
+        "description": "Denotes whether the report is an initial report or a follow-up report.",
+        "values": {
+          "I": "Initial submission",
+          "F": "Follow-up",
+          "X": "Extra copy received",
+          "O": "Other information submitted"
+        }
+      },
+      "Report Date": {
+        "description": "Date the report was submitted to FDA."
+      },
+      "Device was involved in event": {
+        "description": "Number of devices included in the report."
+      },
+      "Patient was involved in event": {
+        "description": "Number of patients included in the report."
+      },
+      "Is this an Adverse Event Report?": {
+        "description": "Denotes whether the use of a medical device is suspected to have resulted in an adverse outcome in a patient."
+      },
+      "Is this a Product Problem Report?": {
+        "description": "Denotes device malfunctions."
+      },
+      "Device Operator": {
+        "description": "Denotes the type of person operating or using the suspect medical device.",
+        "values": {
+          "0HP": "Health Professional",
+          "0LP": "Lay User/Patient",
+          "100": "Other Health Care Professional",
+          "101": "Audiologist",
+          "102": "Dental Hygienist",
+          "103": "Dietician",
+          "104": "Emergency Medical Technician",
+          "105": "Medical Technologist",
+          "106": "Nuclear Medicine Technologist",
+          "107": "Occupational Therapist",
+          "108": "Paramedic",
+          "109": "Pharmacist",
+          "110": "Phlebotomist",
+          "111": "Physical Therapist",
+          "112": "Physician Assistant",
+          "113": "Radiologic Technologist",
+          "114": "Respiratory Therapist",
+          "115": "Speech Therapist",
+          "116": "Dentist",
+          "117": "Nurse Practitioner",
+          "300": "Other Caregivers",
+          "301": "Dental Assistant",
+          "302": "Home Health Aide",
+          "303": "Medical Assistant",
+          "304": "Nursing Assistant",
+          "305": "Patient",
+          "306": "Patient Family Member or Friend",
+          "307": "Personal Care Assistant",
+          "400": "Service and Testing Personnel",
+          "401": "Biomedical Engineer",
+          "402": "Hospital Service Technician",
+          "403": "Medical Equipment Company Technician/Representative",
+          "404": "Physicist",
+          "405": "Service Personnel",
+          "499": "Device Unattended",
+          "500": "Risk Manager",
+          "501": "Administrator/Supervisor",
+          "600": "Attorney",
+          "999": "Unknown",
+          "NA": "Not Applicable",
+          "NI": "No Information",
+          "UNK": "Unknown"
+        }
+      },
+      "Device Expiration Date": {
+        "description": "The expiration date found on the device itself or printed on the accompanying packaging."
+      },
+      "Device Model Number": {
+        "description": "Model number found on the device label or accompanying packaging."
+      },
+      "Device Catalogue Number": {
+        "description": "Catalogue number found in the manufacturer's catalogue, device labeling, or accompanying packaging."
+      },
+      "Device Lot Number": {
+        "description": "Lot number found on the label or packaging material."
+      },
+      "Other Device ID Number": {
+        "description": "Subfield retired in 2018 for additional device identifiers."
+      },
+      "Was Device Available for Evaluation?": {
+        "description": "Denotes whether the device was available for manufacturer evaluation."
+      },
+      "Date Returned to Manufacturer": {
+        "description": "If returned, the date the device was sent back to the manufacturer."
+      },
+      "Is the Reporter a Health Professional?": {
+        "description": "Denotes whether the initial reporter is a health professional."
+      },
+      "Was the Report Sent to FDA?": {
+        "description": "Denotes whether a user facility or importer sent a separate report of the same event to FDA."
+      },
+      "Distributor Facility Aware Date": {
+        "type": "TEXT",
+        "description": "Date that the user facility's medical personnel or the importer became aware of the event."
+      },
+      "Device Age": {
+        "type": "TEXT",
+        "description": "Age of the device or a best estimate."
+      },
+      "Event Location": {
+        "type": "TEXT",
+        "description": "Location of actual occurrence of the event."
+      },
+      "Date Report to Manufacturer": {
+        "type": "TEXT",
+        "description": "Date report was sent to manufacturer from a user facility or importer."
+      },
+      "Initial Date FDA Received": {
+        "type": "TEXT",
+        "description": "Date that the initial report was received in eMDR by FDA."
+      },
+      "Supplement Dates FDA Received": {
+        "type": "TEXT",
+        "description": "Dates that any supplement or follow-up reports were received in eMDR by FDA."
+      },
+      "Initial Date Manufacturer Received": {
+        "type": "TEXT",
+        "description": "Date when a manufacturer received information that a reportable event occurred."
+      },
+      "Supplement Dates Manufacturer Received": {
+        "type": "TEXT",
+        "description": "Dates that the manufacturer received follow-up information."
+      },
+      "Was Device Evaluated by Manufacturer?": {
+        "type": "TEXT",
+        "description": "Denotes whether the manufacturer evaluated the suspect or a related device."
+      },
+      "Date Device Manufactured": {
+        "type": "TEXT",
+        "description": "Date of the manufacturing of the suspect medical device."
+      },
+      "Is the Device Single Use?": {
+        "type": "TEXT",
+        "description": "Denotes whether the device was labeled for single use or not."
+      },
+      "Is This a Reprocessed and Reused Single-Use Device?": {
+        "type": "TEXT",
+        "description": "Denotes whether a single use device was reprocessed or reused on a patient."
+      },
+      "Type of Device Usage": {
+        "type": "TEXT",
+        "description": "Denotes whether the use of the suspect medical device was the initial use, reuse, or unknown."
+      },
+      "Removal/Correction Number": {
+        "type": "TEXT",
+        "description": "Correction or removal number following the format directed by 21 CFR Part 806."
+      }
+    }
+  },
+  "Description_of_Other_Fields_and_Meanings": {
+    "fields": {
+      "MDRFOI": {
+        "description": "Contains master/base event records for each report."
+      },
+      "DEVICE": {
+        "description": "Contains device details for each event."
+      },
+      "PATIENT": {
+        "description": "Contains patient details."
+      },
+      "TEXT": {
+        "description": "Contains narrative text from sections B5, H3, H10."
+      },
+      "foidevproblem": {
+        "description": "Contains Device Problem Codes."
+      },
+      "DEVICEPROBLEMCODES": {
+        "description": "Contains additional Device Problem Codes."
+      },
+      "patientproblemdata": {
+        "description": "Contains Patient Problem Codes."
+      },
+      "patientproblemcode": {
+        "description": "Contains Patient Problem Codes."
+      },
+      "MDR Report Key": {
+        "description": "Unique identifier assigned by MAUDE for an MDR."
+      },
+      "Manufacturer Narrative": {
+        "description": "Additional information or evaluation from the manufacturer."
+      },
+      "Event Description": {
+        "description": "Narrative description of the reported event."
+      },
+      "Review Panel Codes": {
+        "description": "Two-letter codes indicating the medical specialty panel responsible for reviewing the product.",
+        "values": {
+          "AN": "Anesthesiology",
+          "CV": "Cardiovascular",
+          "CH": "Clinical Chemistry",
+          "DE": "Dental",
+          "EN": "Ear, Nose, & Throat",
+          "GU": "Gastroenterology & Urology",
+          "HO": "General Hospital",
+          "HE": "Hematology",
+          "IM": "Immunology",
+          "MI": "Microbiology",
+          "NE": "Neurology",
+          "OB": "Obstetrics/Gynecology",
+          "OP": "Ophthalmic",
+          "OR": "Orthopedic",
+          "PA": "Pathology",
+          "PM": "Physical Medicine",
+          "RA": "Radiology",
+          "SU": "General & Plastic Surgery",
+          "TX": "Clinical Toxicology"
+        }
+      },
+      "Device Class": {
+        "description": "Refers to the level of CDRH regulation of a given device.",
+        "values": {
+          "1": "Class 1 - Devices subject to General Controls",
+          "2": "Class 2 - Devices subject to General Controls and Special Controls",
+          "3": "Class 3 - Devices subject to General Controls, Special Controls, and Premarket Approval"
+        }
+      }
+    }
+  },
+  "MAUDE_Downloadable_Files": {
+    "description": "Provides downloadable zipped data files that consist of various types of medical device reports.",
+    "fields": {
+      "File Name": {
+        "type": "TEXT",
+        "description": "Name of the downloadable file."
+      },
+      "Compressed Size in Bytes": {
+        "type": "TEXT",
+        "description": "Size of the compressed file in bytes."
+      },
+      "Uncompressed Size in Bytes": {
+        "type": "TEXT",
+        "description": "Size of the uncompressed file in bytes."
+      },
+      "Total Records": {
+        "type": "INTEGER",
+        "description": "Total number of records in the file."
+      },
+      "Description": {
+        "type": "TEXT",
+        "description": "Description of the file contents."
+      }
+    }
+  },
+  "Code_Definitions": {
+    "reporter_occupation_code": {
+      "description": "Codes representing the occupation of the initial reporter.",
+      "values": {
+        "000": "OTHER",
+        "001": "PHYSICIAN",
+        "002": "NURSE",
+        "003": "NON-HEALTHCARE PROFESSIONAL",
+        "0HP": "HEALTH PROFESSIONAL",
+        "0LP": "LAY USER/PATIENT",
+        "100": "OTHER HEALTH CARE PROFESSIONAL",
+        "101": "AUDIOLOGIST",
+        "102": "DENTAL HYGIENIST",
+        "103": "DIETICIAN",
+        "104": "EMERGENCY MEDICAL TECHNICIAN",
+        "105": "MEDICAL TECHNOLOGIST",
+        "106": "NUCLEAR MEDICINE TECHNOLOGIST",
+        "107": "OCCUPATIONAL THERAPIST",
+        "108": "PARAMEDIC",
+        "109": "PHARMACIST",
+        "110": "PHLEBOTOMIST",
+        "111": "PHYSICAL THERAPIST",
+        "112": "PHYSICIAN ASSISTANT",
+        "113": "RADIOLOGIC TECHNOLOGIST",
+        "114": "RESPIRATORY THERAPIST",
+        "115": "SPEECH THERAPIST",
+        "116": "DENTIST",
+        "117": "NURSE PRACTITIONER",
+        "300": "OTHER CAREGIVERS",
+        "301": "DENTAL ASSISTANT",
+        "302": "HOME HEALTH AIDE",
+        "303": "MEDICAL ASSISTANT",
+        "304": "NURSING ASSISTANT",
+        "305": "PATIENT",
+        "306": "PATIENT FAMILY MEMBER OR FRIEND",
+        "307": "PERSONAL CARE ASSISTANT",
+        "400": "SERVICE AND TESTING PERSONNEL",
+        "401": "BIOMEDICAL ENGINEER",
+        "402": "HOSPITAL SERVICE TECHNICIAN",
+        "403": "MEDICAL EQUIPMENT COMPANY TECHNICIAN/REPRESENTATIVE",
+        "404": "PHYSICIST",
+        "405": "SERVICE PERSONNEL",
+        "499": "DEVICE UNATTENDED",
+        "500": "RISK MANAGER",
+        "501": "ADMINISTRATOR/SUPERVISOR",
+        "600": "ATTORNEY",
+        "999": "UNKNOWN",
+        "NA": "NOT APPLICABLE",
+        "NI": "NO INFORMATION",
+        "UNK": "UNKNOWN"
+      }
+    },
+    "event_location_code_key": {
+      "description": "Codes representing the location where the event occurred.",
+      "values": {
+        "000": "OTHER",
+        "001": "HOSPITAL",
+        "002": "HOME",
+        "003": "NURSING HOME",
+        "004": "OUTPATIENT TREATMENT FACILITY",
+        "005": "OUTPATIENT DIAGNOSTIC FACILITY",
+        "006": "AMBULATORY SURGICAL FACILITY",
+        "500": "HOSPITAL",
+        "501": "CATHETERIZATION SUITE",
+        "502": "CRITICAL CARE UNIT",
+        "503": "DIALYSIS UNIT",
+        "504": "EMERGENCY ROOM",
+        "505": "EXAMINATION ROOM",
+        "506": "LABORATORY/PATHOLOGY DEPARTMENT",
+        "507": "MATERNITY WARD - NURSERY",
+        "508": "OPERATING ROOM",
+        "509": "OUTPATIENT CLINIC/SURGERY",
+        "510": "PATIENT'S ROOM OR WARD",
+        "511": "RADIOLOGY DEPARTMENT",
+        "600": "AMBULATORY HEALTH CARE FACILITY",
+        "601": "AMBULATORY SURGICAL CENTER",
+        "602": "BLOOD BANK",
+        "603": "BLOODMOBILE",
+        "604": "CATHETERIZATION LAB - FREE STANDING",
+        "605": "CHEMOTHERAPY CENTER",
+        "606": "CLINIC - WALK IN, OTHER",
+        "607": "DIALYSIS CENTER",
+        "608": "DRUG CLINIC",
+        "609": "IMAGING CENTER - MOBILE",
+        "610": "IMAGING CENTER - STATIONARY",
+        "611": "LABORATORY",
+        "612": "MOBILE HEALTH UNIT",
+        "613": "MRI CENTERS",
+        "614": "PSYCHIATRIC CENTER - WALK IN, OTHER",
+        "615": "TUBERCULOSIS CLINIC",
+        "616": "URGENT CARE CENTER",
+        "617": "OUTPATIENT DIAGNOSTIC FACILITY",
+        "700": "LONG-TERM CARE FACILITY",
+        "701": "HOSPICE",
+        "702": "NURSING HOME",
+        "703": "PSYCHIATRIC FACILITY",
+        "704": "REHABILITATION CENTER",
+        "705": "RETIREMENT HOME",
+        "810": "PATIENT'S HOME",
+        "820": "IN TRANSIT TO USER/MEDICAL FACILITY",
+        "830": "PUBLIC VENUE",
+        "831": "OUTDOORS",
+        "832": "PARK",
+        "833": "PLAYGROUND",
+        "834": "PUBLIC BUILDING",
+        "835": "SCHOOL",
+        "836": "STREET",
+        "999": "UNKNOWN",
+        "NA": "NOT APPLICABLE",
+        "NI": "NO INFORMATION",
+        "UNK": "UNKNOWN"
+      }
+    }
+  }
+}
