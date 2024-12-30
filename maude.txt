@@ -1312,8 +1312,3 @@ Code	Description
 99	Unknown
 *	Invalid data
 
-Summary
-
-This documentation provides a comprehensive overview of the merged tables within the database, detailing each field’s purpose, data type, and possible values. Understanding these structures and codes is essential for accurately interpreting and utilizing the data contained within the database.
-
-For further information on specific codes or additional context, refer to the relevant sections of the MAUDE Database documentation or the MEDWATCH Form 3500A.
