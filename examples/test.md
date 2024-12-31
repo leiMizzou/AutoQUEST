@@ -1,3 +1,8 @@
+CUSTOM_RESEARCH_QUESTIONS = [
+    "请生成2023年的器械相关不良事件趋势报告，并分析原因。",
+    "请检查ASR_2019和mdrfoiThru2023数据集之间是否存在主键重复问题，并给出示例。"
+]
+
 2024-12-31 23:22:04,119 [INFO] Logging is configured correctly.
 2024-12-31 23:22:04,149 [INFO] Custom research question provided. Proceeding to optimize it. [Q1]
 
