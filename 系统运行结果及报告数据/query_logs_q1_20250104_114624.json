@@ -1,0 +1,132 @@
+[
+  {
+    "query_text": "-- Phase 2: Comparative Analysis of Event Types - Step 2.1: Calculate Event Type Frequencies in ASR Data\nWITH asr_event_counts AS (\n    SELECT\n        event_type,\n        COUNT(*) AS count\n    FROM \"maude\".\"ASR_2019\"\n    GROUP BY event_type\n)\nSELECT\n    event_type,\n    count,\n    ROUND((count * 100.0 / SUM(count) OVER()), 2) AS percentage\nFROM asr_event_counts\nORDER BY count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:47:50.405738",
+    "end_time": "2025-01-04T11:47:50.436354",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 2: Comparative Analysis of Event Types - Step 2.2: Calculate Event Type Frequencies in Standard MDR Data\nWITH mdr_event_counts AS (\n    SELECT\n        event_type,\n        COUNT(*) AS count\n    FROM \"maude\".\"mdrfoiThru2023\"\n    GROUP BY event_type\n)\nSELECT\n    event_type,\n    count,\n    ROUND((count * 100.0 / SUM(count) OVER()), 2) AS percentage\nFROM mdr_event_counts\nORDER BY count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:47:50.438026",
+    "end_time": "2025-01-04T11:47:54.703614",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 3: Comparative Analysis of Device Problems - Step 3.1: Analyze Device Problem Codes in ASR Data\nWITH asr_problem_codes AS (\n    SELECT\n        trim(code) AS device_problem_code\n    FROM \"maude\".\"ASR_2019\"\n    CROSS JOIN LATERAL unnest(string_to_array(device_problem_codes, ';')) AS code\n)\nSELECT\n    device_problem_code,\n    COUNT(*) AS count,\n    ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM asr_problem_codes)), 2) AS percentage\nFROM asr_problem_codes\nGROUP BY device_problem_code\nORDER BY count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:47:54.707097",
+    "end_time": "2025-01-04T11:47:54.740577",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 3: Comparative Analysis of Device Problems - Step 3.2: Analyze Device Problems in Standard MDR Data (Narrative Text)\nSELECT\n    \"MDR Report Key\",\n    \"Text\"\nFROM \"maude\".\"TEXT\"\nWHERE \"Text Type Code\" = 'N'\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:47:54.742500",
+    "end_time": "2025-01-04T11:47:54.755977",
+    "error_message": "relation \"maude.TEXT\" does not exist\nLINE 4: FROM \"maude\".\"TEXT\"\n             ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "SELECT\n    \"MDR Report Key\",\n    \"Text\"\nFROM \"TEXT\"\nWHERE \"Text Type Code\" = 'N'\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:01.383696",
+    "end_time": "2025-01-04T11:48:01.400537",
+    "error_message": "relation \"TEXT\" does not exist\nLINE 4: FROM \"TEXT\"\n             ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "SELECT\n    \"MDR Report Key\",\n    \"Text\"\nFROM \"maude\".\"text\"\nWHERE \"Text Type Code\" = 'N'\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:05.784643",
+    "end_time": "2025-01-04T11:48:05.804312",
+    "error_message": "relation \"maude.text\" does not exist\nLINE 4: FROM \"maude\".\"text\"\n             ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "SELECT\n    \"MDR Report Key\",\n    \"Text\"\nFROM \"mdrfoiThru2023\".\"TEXT\"\nWHERE \"Text Type Code\" = 'N'\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:11.112750",
+    "end_time": "2025-01-04T11:48:11.136829",
+    "error_message": "relation \"mdrfoiThru2023.TEXT\" does not exist\nLINE 4: FROM \"mdrfoiThru2023\".\"TEXT\"\n             ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "SELECT\n    \"MDR Report Key\",\n    \"Text\"\nFROM \"maude\".\"TEXT\"\nWHERE \"Text Type Code\" = 'N'\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 4,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:15.916834",
+    "end_time": "2025-01-04T11:48:15.934405",
+    "error_message": "relation \"maude.TEXT\" does not exist\nLINE 4: FROM \"maude\".\"TEXT\"\n             ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 4: Temporal Analysis of ASR Utilization - Step 4.1: Track ASR Reports Over Time\nSELECT\n    report_year,\n    report_quarter,\n    COUNT(DISTINCT report_id) AS num_reports\nFROM \"maude\".\"ASR_2019\"\nGROUP BY report_year, report_quarter\nORDER BY report_year DESC, report_quarter DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:20.537290",
+    "end_time": "2025-01-04T11:48:20.578017",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 5: Exploring Other Potential Differences (Secondary Analysis) - Step 5.1: Manufacturer-Specific Analysis (Event Types)\nSELECT\n    asr.manufacturer_name,\n    asr.event_type,\n    COUNT(*) AS count,\n    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY asr.manufacturer_name)), 2) AS percentage\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.manufacturer_name, asr.event_type\nORDER BY asr.manufacturer_name, count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:20.579760",
+    "end_time": "2025-01-04T11:48:20.596362",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 5: Exploring Other Potential Differences (Secondary Analysis) - Step 5.1: Manufacturer-Specific Analysis (Problem Codes)\nWITH manufacturer_problem_codes AS (\n    SELECT\n        asr.manufacturer_name,\n        trim(code) AS device_problem_code\n    FROM \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL unnest(string_to_array(asr.device_problem_codes, ';')) AS code\n)\nSELECT\n    manufacturer_name,\n    device_problem_code,\n    COUNT(*) AS count,\n    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY manufacturer_name)), 2) AS percentage\nFROM manufacturer_problem_codes\nGROUP BY manufacturer_name, device_problem_code\nORDER BY manufacturer_name, count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:20.597996",
+    "end_time": "2025-01-04T11:48:20.627633",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 5: Exploring Other Potential Differences (Secondary Analysis) - Step 5.2: Device-Specific Analysis (Event Types)\nSELECT\n    asr.brand_name,\n    asr.model_number,\n    asr.event_type,\n    COUNT(*) AS count,\n    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY asr.brand_name, asr.model_number)), 2) AS percentage\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.brand_name, asr.model_number, asr.event_type\nORDER BY asr.brand_name, asr.model_number, count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:20.628978",
+    "end_time": "2025-01-04T11:48:20.647671",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Phase 5: Exploring Other Potential Differences (Secondary Analysis) - Step 5.2: Device-Specific Analysis (Problem Codes)\nWITH device_problem_codes AS (\n    SELECT\n        asr.brand_name,\n        asr.model_number,\n        trim(code) AS device_problem_code\n    FROM \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL unnest(string_to_array(asr.device_problem_codes, ';')) AS code\n)\nSELECT\n    brand_name,\n    model_number,\n    device_problem_code,\n    COUNT(*) AS count,\n    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY brand_name, model_number)), 2) AS percentage\nFROM device_problem_codes\nGROUP BY brand_name, model_number, device_problem_code\nORDER BY brand_name, model_number, count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:48:20.649114",
+    "end_time": "2025-01-04T11:48:20.680116",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  }
+]

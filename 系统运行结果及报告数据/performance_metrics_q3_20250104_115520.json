@@ -1,0 +1,174 @@
+{
+  "script_start_time": 1735962920.59428,
+  "script_end_time": 1735963054.9693198,
+  "total_duration_seconds": 134.375,
+  "model_calls": [
+    {
+      "timestamp": 1735962939.5217018,
+      "prompt_token_count": 16692,
+      "candidates_token_count": 2492,
+      "total_token_count": 19184,
+      "call_duration_seconds": 18.927
+    },
+    {
+      "timestamp": 1735962966.034924,
+      "prompt_token_count": 8747,
+      "candidates_token_count": 3588,
+      "total_token_count": 12335,
+      "call_duration_seconds": 26.511
+    },
+    {
+      "timestamp": 1735962991.376929,
+      "prompt_token_count": 13718,
+      "candidates_token_count": 3360,
+      "total_token_count": 17078,
+      "call_duration_seconds": 25.196
+    },
+    {
+      "timestamp": 1735963006.2860029,
+      "prompt_token_count": 13738,
+      "candidates_token_count": 1927,
+      "total_token_count": 15665,
+      "call_duration_seconds": 14.906
+    },
+    {
+      "timestamp": 1735963012.4984052,
+      "prompt_token_count": 10558,
+      "candidates_token_count": 428,
+      "total_token_count": 10986,
+      "call_duration_seconds": 4.062
+    },
+    {
+      "timestamp": 1735963018.366106,
+      "prompt_token_count": 10566,
+      "candidates_token_count": 387,
+      "total_token_count": 10953,
+      "call_duration_seconds": 3.826
+    },
+    {
+      "timestamp": 1735963024.277643,
+      "prompt_token_count": 10549,
+      "candidates_token_count": 407,
+      "total_token_count": 10956,
+      "call_duration_seconds": 3.881
+    },
+    {
+      "timestamp": 1735963030.187603,
+      "prompt_token_count": 10575,
+      "candidates_token_count": 398,
+      "total_token_count": 10973,
+      "call_duration_seconds": 3.79
+    },
+    {
+      "timestamp": 1735963054.965535,
+      "prompt_token_count": 9120,
+      "candidates_token_count": 3360,
+      "total_token_count": 12480,
+      "call_duration_seconds": 24.748
+    }
+  ],
+  "total_sql_queries": 7,
+  "total_retry_count": 4,
+  "final_success_queries": [
+    {
+      "query": "-- Phase 1: Data Extraction and Preparation - Combining ASR data with device problem descriptions\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        asr.report_year,\n        asr.event_type,\n        trim(prob_code) AS device_problem_code,\n        asr.report_id,\n        asr.initial_report_flag\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n)\nSELECT\n    ep.manufacturer_name,\n    ep.report_year,\n    ep.event_type,\n    dp.old_to_be_deactivated AS device_problem_description,\n    COUNT(*) AS report_count\nFROM exploded_problems ep\nJOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\nGROUP BY ep.manufacturer_name, ep.report_year, ep.event_type, dp.old_to_be_deactivated\nORDER BY ep.manufacturer_name, ep.report_year, ep.event_type DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 12
+    },
+    {
+      "query": "-- Phase 2: Temporal Analysis of Malfunctions by Manufacturer - Annual Malfunction Counts\nSELECT\n    manufacturer_name,\n    report_year,\n    event_type,\n    COUNT(*) AS malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name,\n    report_year,\n    event_type\nORDER BY\n    manufacturer_name,\n    report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "WITH annual_counts AS (\n    SELECT\n        manufacturer_name,\n        CAST(report_year AS INTEGER) AS report_year,\n        COUNT(*) AS malfunction_count\n    FROM\n        \"maude\".\"ASR_2019\"\n    WHERE\n        event_type IN ('M', 'M-D')\n    GROUP BY\n        manufacturer_name,\n        CAST(report_year AS INTEGER)\n)\nSELECT\n    ac1.manufacturer_name,\n    ac1.report_year,\n    ac1.malfunction_count,\n    LAG(ac1.malfunction_count, 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year) AS previous_year_count,\n    (ac1.malfunction_count - LAG(ac1.malfunction_count, 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year)) AS year_over_year_change\nFROM annual_counts ac1\nORDER BY ac1.manufacturer_name, ac1.report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Phase 3: Comparative Analysis Across Manufacturers - Total Malfunction Counts\nSELECT\n    manufacturer_name,\n    COUNT(*) AS total_malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name\nORDER BY\n    total_malfunction_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Phase 3: Comparative Analysis Across Manufacturers - Percentage of total malfunctions by manufacturer\nWITH total_malfunctions AS (\n    SELECT COUNT(*) AS total FROM \"maude\".\"ASR_2019\" WHERE event_type IN ('M', 'M-D')\n)\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS manufacturer_malfunction_count,\n    (COUNT(*) * 100.0 / tm.total) AS percentage_of_total\nFROM\n    \"maude\".\"ASR_2019\" asr,\n    total_malfunctions tm\nWHERE\n    asr.event_type IN ('M', 'M-D')\nGROUP BY\n    asr.manufacturer_name, tm.total\nORDER BY\n    percentage_of_total DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Phase 3: Comparative Analysis Across Manufacturers - Top device problems reported by each manufacturer\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        trim(prob_code) AS device_problem_code\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n),\nproblem_counts AS (\n    SELECT\n        ep.manufacturer_name,\n        dp.old_to_be_deactivated AS device_problem_description,\n        COUNT(*) AS problem_count,\n        ROW_NUMBER() OVER (PARTITION BY ep.manufacturer_name ORDER BY COUNT(*) DESC) as rn\n    FROM exploded_problems ep\n    JOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\n    GROUP BY ep.manufacturer_name, dp.old_to_be_deactivated\n)\nSELECT\n    manufacturer_name,\n    device_problem_description,\n    problem_count\nFROM problem_counts\nWHERE rn <= 5\nORDER BY manufacturer_name, problem_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 9
+    },
+    {
+      "query": "WITH mfr1_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr1_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ALLERGAN' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n),\nmfr2_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr2_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ABBVIE MEDICAL DEVICE CENTRE' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n)\nSELECT\n    COALESCE(m1.report_year, m2.report_year) AS report_year,\n    COALESCE(m1.mfr1_count, 0) AS allergan_malfunctions,\n    COALESCE(m2.mfr2_count, 0) AS abbvie_malfunctions\nFROM mfr1_counts m1\nFULL OUTER JOIN mfr2_counts m2 ON m1.report_year = m2.report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    }
+  ],
+  "query_statistics": {
+    "Advanced Analysis Query 1": {
+      "original_query": "-- Phase 1: Data Extraction and Preparation - Combining ASR data with device problem descriptions\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        asr.report_year,\n        asr.event_type,\n        trim(prob_code) AS device_problem_code,\n        asr.report_id,\n        asr.initial_report_flag\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n)\nSELECT\n    ep.manufacturer_name,\n    ep.report_year,\n    ep.event_type,\n    dp.old_to_be_deactivated AS device_problem_description,\n    COUNT(*) AS report_count\nFROM exploded_problems ep\nJOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\nGROUP BY ep.manufacturer_name, ep.report_year, ep.event_type, dp.old_to_be_deactivated\nORDER BY ep.manufacturer_name, ep.report_year, ep.event_type DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Phase 1: Data Extraction and Preparation - Combining ASR data with device problem descriptions\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        asr.report_year,\n        asr.event_type,\n        trim(prob_code) AS device_problem_code,\n        asr.report_id,\n        asr.initial_report_flag\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n)\nSELECT\n    ep.manufacturer_name,\n    ep.report_year,\n    ep.event_type,\n    dp.old_to_be_deactivated AS device_problem_description,\n    COUNT(*) AS report_count\nFROM exploded_problems ep\nJOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\nGROUP BY ep.manufacturer_name, ep.report_year, ep.event_type, dp.old_to_be_deactivated\nORDER BY ep.manufacturer_name, ep.report_year, ep.event_type DESC\nLIMIT 32;",
+      "rows_returned": 12
+    },
+    "Advanced Analysis Query 2": {
+      "original_query": "-- Phase 2: Temporal Analysis of Malfunctions by Manufacturer - Annual Malfunction Counts\nSELECT\n    manufacturer_name,\n    report_year,\n    event_type,\n    COUNT(*) AS malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name,\n    report_year,\n    event_type\nORDER BY\n    manufacturer_name,\n    report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Phase 2: Temporal Analysis of Malfunctions by Manufacturer - Annual Malfunction Counts\nSELECT\n    manufacturer_name,\n    report_year,\n    event_type,\n    COUNT(*) AS malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name,\n    report_year,\n    event_type\nORDER BY\n    manufacturer_name,\n    report_year\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 3": {
+      "original_query": "-- Phase 2: Temporal Analysis of Malfunctions by Manufacturer - Year-over-year change in malfunction counts\nWITH annual_counts AS (\n    SELECT\n        manufacturer_name,\n        report_year,\n        COUNT(*) AS malfunction_count\n    FROM\n        \"maude\".\"ASR_2019\"\n    WHERE\n        event_type IN ('M', 'M-D')\n    GROUP BY\n        manufacturer_name,\n        report_year\n)\nSELECT\n    ac1.manufacturer_name,\n    ac1.report_year,\n    ac1.malfunction_count,\n    LAG(ac1.malfunction_count, 1, 0) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year) AS previous_year_count,\n    (ac1.malfunction_count - LAG(ac1.malfunction_count, 1, 0) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year)) AS year_over_year_change\nFROM annual_counts ac1\nORDER BY ac1.manufacturer_name, ac1.report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 3,
+      "no_data_retries": 0,
+      "final_query": "WITH annual_counts AS (\n    SELECT\n        manufacturer_name,\n        CAST(report_year AS INTEGER) AS report_year,\n        COUNT(*) AS malfunction_count\n    FROM\n        \"maude\".\"ASR_2019\"\n    WHERE\n        event_type IN ('M', 'M-D')\n    GROUP BY\n        manufacturer_name,\n        CAST(report_year AS INTEGER)\n)\nSELECT\n    ac1.manufacturer_name,\n    ac1.report_year,\n    ac1.malfunction_count,\n    LAG(ac1.malfunction_count, 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year) AS previous_year_count,\n    (ac1.malfunction_count - LAG(ac1.malfunction_count, 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ac1.manufacturer_name ORDER BY ac1.report_year)) AS year_over_year_change\nFROM annual_counts ac1\nORDER BY ac1.manufacturer_name, ac1.report_year\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 4": {
+      "original_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Total Malfunction Counts\nSELECT\n    manufacturer_name,\n    COUNT(*) AS total_malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name\nORDER BY\n    total_malfunction_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Total Malfunction Counts\nSELECT\n    manufacturer_name,\n    COUNT(*) AS total_malfunction_count\nFROM\n    \"maude\".\"ASR_2019\"\nWHERE\n    event_type IN ('M', 'M-D')\nGROUP BY\n    manufacturer_name\nORDER BY\n    total_malfunction_count DESC\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 5": {
+      "original_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Percentage of total malfunctions by manufacturer\nWITH total_malfunctions AS (\n    SELECT COUNT(*) AS total FROM \"maude\".\"ASR_2019\" WHERE event_type IN ('M', 'M-D')\n)\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS manufacturer_malfunction_count,\n    (COUNT(*) * 100.0 / tm.total) AS percentage_of_total\nFROM\n    \"maude\".\"ASR_2019\" asr,\n    total_malfunctions tm\nWHERE\n    asr.event_type IN ('M', 'M-D')\nGROUP BY\n    asr.manufacturer_name, tm.total\nORDER BY\n    percentage_of_total DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Percentage of total malfunctions by manufacturer\nWITH total_malfunctions AS (\n    SELECT COUNT(*) AS total FROM \"maude\".\"ASR_2019\" WHERE event_type IN ('M', 'M-D')\n)\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS manufacturer_malfunction_count,\n    (COUNT(*) * 100.0 / tm.total) AS percentage_of_total\nFROM\n    \"maude\".\"ASR_2019\" asr,\n    total_malfunctions tm\nWHERE\n    asr.event_type IN ('M', 'M-D')\nGROUP BY\n    asr.manufacturer_name, tm.total\nORDER BY\n    percentage_of_total DESC\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 6": {
+      "original_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Top device problems reported by each manufacturer\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        trim(prob_code) AS device_problem_code\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n),\nproblem_counts AS (\n    SELECT\n        ep.manufacturer_name,\n        dp.old_to_be_deactivated AS device_problem_description,\n        COUNT(*) AS problem_count,\n        ROW_NUMBER() OVER (PARTITION BY ep.manufacturer_name ORDER BY COUNT(*) DESC) as rn\n    FROM exploded_problems ep\n    JOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\n    GROUP BY ep.manufacturer_name, dp.old_to_be_deactivated\n)\nSELECT\n    manufacturer_name,\n    device_problem_description,\n    problem_count\nFROM problem_counts\nWHERE rn <= 5\nORDER BY manufacturer_name, problem_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Top device problems reported by each manufacturer\nWITH exploded_problems AS (\n    SELECT\n        asr.manufacturer_name,\n        trim(prob_code) AS device_problem_code\n    FROM\n        \"maude\".\"ASR_2019\" asr\n    CROSS JOIN LATERAL UNNEST(string_to_array(asr.device_problem_codes, ';')) as prob_code\n    WHERE asr.event_type IN ('M', 'M-D')\n),\nproblem_counts AS (\n    SELECT\n        ep.manufacturer_name,\n        dp.old_to_be_deactivated AS device_problem_description,\n        COUNT(*) AS problem_count,\n        ROW_NUMBER() OVER (PARTITION BY ep.manufacturer_name ORDER BY COUNT(*) DESC) as rn\n    FROM exploded_problems ep\n    JOIN \"maude\".\"deviceproblemcodes\" dp ON ep.device_problem_code = dp.ï_1\n    GROUP BY ep.manufacturer_name, dp.old_to_be_deactivated\n)\nSELECT\n    manufacturer_name,\n    device_problem_description,\n    problem_count\nFROM problem_counts\nWHERE rn <= 5\nORDER BY manufacturer_name, problem_count DESC\nLIMIT 32;",
+      "rows_returned": 9
+    },
+    "Advanced Analysis Query 7": {
+      "original_query": "-- Phase 3: Comparative Analysis Across Manufacturers - Reporting trend comparison between two manufacturers\nWITH mfr1_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr1_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ALLERGAN' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n),\nmfr2_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr2_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ABBVIE MEDICAL DEVICE CENTRE' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n)\nSELECT\n    COALESCE(m1.report_year, m2.report_year) AS report_year,\n    COALESCE(m1_count, 0) AS allergan_malfunctions,\n    COALESCE(m2_count, 0) AS abbvie_malfunctions\nFROM mfr1_counts m1\nFULL OUTER JOIN mfr2_counts m2 ON m1.report_year = m2.report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "WITH mfr1_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr1_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ALLERGAN' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n),\nmfr2_counts AS (\n    SELECT\n        report_year,\n        COUNT(*) AS mfr2_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE manufacturer_name = 'ABBVIE MEDICAL DEVICE CENTRE' AND event_type IN ('M', 'M-D')\n    GROUP BY report_year\n)\nSELECT\n    COALESCE(m1.report_year, m2.report_year) AS report_year,\n    COALESCE(m1.mfr1_count, 0) AS allergan_malfunctions,\n    COALESCE(m2.mfr2_count, 0) AS abbvie_malfunctions\nFROM mfr1_counts m1\nFULL OUTER JOIN mfr2_counts m2 ON m1.report_year = m2.report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "summary": {
+      "total_queries": 7,
+      "successful_queries": 7,
+      "failed_queries": 0,
+      "pass_rate": 100.0
+    }
+  },
+  "query_execution_time": 23.845
+}

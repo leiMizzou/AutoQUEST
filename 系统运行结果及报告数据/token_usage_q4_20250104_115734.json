@@ -1,0 +1,37 @@
+[
+  {
+    "timestamp": 1735963075.284748,
+    "prompt_token_count": 16692,
+    "candidates_token_count": 2699,
+    "total_token_count": 19391,
+    "call_duration_seconds": 20.303
+  },
+  {
+    "timestamp": 1735963101.2194052,
+    "prompt_token_count": 8909,
+    "candidates_token_count": 3507,
+    "total_token_count": 12416,
+    "call_duration_seconds": 25.932
+  },
+  {
+    "timestamp": 1735963130.1908438,
+    "prompt_token_count": 22096,
+    "candidates_token_count": 3866,
+    "total_token_count": 25962,
+    "call_duration_seconds": 28.781
+  },
+  {
+    "timestamp": 1735963148.370549,
+    "prompt_token_count": 22694,
+    "candidates_token_count": 2369,
+    "total_token_count": 25063,
+    "call_duration_seconds": 18.176
+  },
+  {
+    "timestamp": 1735963269.700934,
+    "prompt_token_count": 18597,
+    "candidates_token_count": 6271,
+    "total_token_count": 24868,
+    "call_duration_seconds": 45.534
+  }
+]

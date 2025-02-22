@@ -1,0 +1,312 @@
+[
+  {
+    "query_text": "-- Query 1: Trend of total malfunction reports over time\nWITH yearly_malfunctions AS (\n  SELECT\n    report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY report_year\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:23.126635",
+    "end_time": "2025-01-04T11:50:23.146984",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 12:   LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) ...\n           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY report_year\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:28.877477",
+    "end_time": "2025-01-04T11:50:28.901811",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 12:   LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) ...\n           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY report_year\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:35.187641",
+    "end_time": "2025-01-04T11:50:35.211546",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 12:   LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) ...\n           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY CAST(report_year AS INTEGER)\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:41.127840",
+    "end_time": "2025-01-04T11:50:41.152142",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 12:   LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) ...\n           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY CAST(report_year AS INTEGER)\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 4,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:46.966220",
+    "end_time": "2025-01-04T11:50:46.992646",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 2: Top 5 most frequent malfunction problem descriptions in the latest year\nWITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    WHERE report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:46.996143",
+    "end_time": "2025-01-04T11:50:47.020393",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(code)\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc.code = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    WHERE report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 5;",
+    "status": "SUCCESS",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:50:58.090956",
+    "end_time": "2025-01-04T11:50:58.114714",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        dpc.code AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(code)\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 5;",
+    "status": "SUCCESS",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:08.995337",
+    "end_time": "2025-01-04T11:51:09.016334",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 3: Percentage of malfunctions by device class in the latest year\nWITH latest_year_malfunctions AS (\n    SELECT\n        a.report_year,\n        f.deviceclass\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\ntotal_malfunctions AS (\n    SELECT COUNT(*) AS total FROM latest_year_malfunctions\n),\nclass_counts AS (\n    SELECT\n        deviceclass,\n        COUNT(*) AS class_count\n    FROM latest_year_malfunctions\n    GROUP BY deviceclass\n)\nSELECT\n    cc.deviceclass,\n    cc.class_count,\n    (cc.class_count::numeric / tm.total) * 100 AS percentage_of_total\nFROM class_counts cc, total_malfunctions tm\nORDER BY percentage_of_total DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:09.019199",
+    "end_time": "2025-01-04T11:51:09.047665",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 4: Top 5 manufacturers with the highest number of malfunction reports in the latest year\nWITH latest_year_malfunctions AS (\n  SELECT\n    report_year,\n    manufacturer_name\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n    AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nmanufacturer_counts AS (\n  SELECT\n    manufacturer_name,\n    COUNT(*) AS malfunction_count,\n    RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n  FROM latest_year_malfunctions\n  GROUP BY manufacturer_name\n)\nSELECT\n  report_year,\n  manufacturer_name,\n  malfunction_count\nFROM latest_year_malfunctions\nJOIN manufacturer_counts USING (manufacturer_name)\nWHERE rank_num <= 5\nGROUP BY report_year, manufacturer_name, malfunction_count\nORDER BY malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:09.049615",
+    "end_time": "2025-01-04T11:51:09.067165",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 5: Evolution of malfunction frequency for a specific device problem description over time\nWITH malfunction_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nWHERE problem_description = 'Failure to operate' -- Replace with a specific problem description\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:09.068524",
+    "end_time": "2025-01-04T11:51:09.081766",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:16.922173",
+    "end_time": "2025-01-04T11:51:16.940791",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:25.400619",
+    "end_time": "2025-01-04T11:51:25.419638",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:33.845084",
+    "end_time": "2025-01-04T11:51:33.865744",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_data AS (\n    SELECT\n        a.report_year\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 4,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:41.772500",
+    "end_time": "2025-01-04T11:51:41.789635",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 6: Year-over-year change in malfunction reports for the top 3 manufacturers in the latest year\nWITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:41.791691",
+    "end_time": "2025-01-04T11:51:41.813317",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 25:     LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm....\n             ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        CAST(a.report_year AS INTEGER) as report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:48.608643",
+    "end_time": "2025-01-04T11:51:48.637403",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 25:     LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm....\n             ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        CAST(a.report_year AS INTEGER) as report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(CAST(ymm.malfunction_count AS BIGINT), 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(CAST(ymm.malfunction_count AS BIGINT), 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:51:55.676141",
+    "end_time": "2025-01-04T11:51:55.705350",
+    "error_message": "function lag(bigint, integer, integer) does not exist\nLINE 25:     LAG(CAST(ymm.malfunction_count AS BIGINT), 1, 0) OVER (P...\n             ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        CAST(a.report_year AS INTEGER) as report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:02.756231",
+    "end_time": "2025-01-04T11:52:02.790768",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 7: Malfunction frequency by medical specialty in the latest year, ranked\nWITH latest_year_malfunctions_specialty AS (\n    SELECT\n        a.report_year,\n        f.medicalspecialty\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nspecialty_counts AS (\n    SELECT\n        medicalspecialty,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n    FROM latest_year_malfunctions_specialty\n    GROUP BY medicalspecialty\n)\nSELECT\n    report_year,\n    medicalspecialty,\n    malfunction_count\nFROM latest_year_malfunctions_specialty\nJOIN specialty_counts USING (medicalspecialty)\nGROUP BY report_year, medicalspecialty, malfunction_count, rank_num\nORDER BY rank_num\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:02.793090",
+    "end_time": "2025-01-04T11:52:02.815475",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 8: Percentage change in malfunction reports for a specific manufacturer over the last 3 years\nWITH specific_manufacturer_malfunctions AS (\n    SELECT\n        report_year,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND manufacturer_name = 'ALLERGAN' -- Replace with a specific manufacturer\n    GROUP BY report_year\n),\nlagged_malfunctions AS (\n    SELECT\n        report_year,\n        malfunction_count,\n        LAG(malfunction_count, 1) OVER (ORDER BY report_year) AS previous_year_count\n    FROM specific_manufacturer_malfunctions\n)\nSELECT\n    report_year,\n    malfunction_count,\n    previous_year_count,\n    CASE\n        WHEN previous_year_count = 0 THEN NULL\n        ELSE ((malfunction_count - previous_year_count)::numeric / previous_year_count) * 100\n    END AS percentage_change\nFROM lagged_malfunctions\nORDER BY report_year DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:02.817169",
+    "end_time": "2025-01-04T11:52:02.833834",
+    "error_message": null,
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 9: Trend of 'Failure to operate' malfunctions by manufacturer over time\nWITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:02.835402",
+    "end_time": "2025-01-04T11:52:02.848423",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:09.971684",
+    "end_time": "2025-01-04T11:52:09.990173",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc.unnest = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:27.421488",
+    "end_time": "2025-01-04T11:52:27.442715",
+    "error_message": "column dpc.unnest does not exist\nLINE 7:     JOIN \"maude\".\"patientproblemdata\" p ON dpc.unnest = p.\"ï...\n                                                   ^\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name,\n        dpc.device_problem_codes\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(device_problem_codes)\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc.device_problem_codes = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:52:33.714894",
+    "end_time": "2025-01-04T11:52:33.738412",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name,\n        dpc.device_problem_codes\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(device_problem_codes)\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc.device_problem_codes = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 4,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:53:53.805234",
+    "end_time": "2025-01-04T11:53:53.828992",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "-- Query 10: Comparing malfunction counts for two specific device problem descriptions over the latest 3 years\nWITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated IN ('Failure to operate', 'Incorrectly labeled') -- Replace with specific problem descriptions\n      AND a.report_year >= (SELECT MAX(report_year) - 2 FROM \"maude\".\"ASR_2019\")\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+    "status": "PERMANENT_FAILED",
+    "failure_retry_count": 0,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:54:09.621689",
+    "end_time": "2025-01-04T11:54:09.644238",
+    "error_message": "operator does not exist: text - integer\nLINE 11: ...    AND a.report_year >= (SELECT MAX(report_year) - 2 FROM \"...\n                                                              ^\nHINT:  No operator matches the given name and argument types. You might need to add explicit type casts.\n",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated IN ('Failure to operate', 'Incorrectly labeled') -- Replace with specific problem descriptions\n      AND a.report_year >= (SELECT CAST(MAX(CAST(report_year AS INTEGER)) - 2 AS TEXT) FROM \"maude\".\"ASR_2019\")\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 1,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:54:15.757495",
+    "end_time": "2025-01-04T11:54:15.786870",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated IN ('Failure to operate', 'Incorrectly labeled')\n      AND a.report_year >= (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\") -- Assuming report_year is TEXT and comparing directly\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 2,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:54:29.075639",
+    "end_time": "2025-01-04T11:54:29.098056",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc::TEXT = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated IN ('Failure to operate', 'Incorrectly labeled')\n      AND a.report_year >= (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 3,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:54:40.072510",
+    "end_time": "2025-01-04T11:54:40.093336",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  },
+  {
+    "query_text": "WITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc::TEXT = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+    "status": "SUCCESS",
+    "failure_retry_count": 4,
+    "no_data_retry_count": 0,
+    "start_time": "2025-01-04T11:54:49.795829",
+    "end_time": "2025-01-04T11:54:49.813838",
+    "error_message": "No data returned.",
+    "usage_label": "Advanced Analysis"
+  }
+]

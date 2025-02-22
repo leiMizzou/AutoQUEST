@@ -1,0 +1,485 @@
+{
+  "script_start_time": 1735964552.436786,
+  "script_end_time": 1735965356.359005,
+  "total_duration_seconds": 803.922,
+  "model_calls": [
+    {
+      "timestamp": 1735964570.410174,
+      "prompt_token_count": 16692,
+      "candidates_token_count": 2381,
+      "total_token_count": 19073,
+      "call_duration_seconds": 17.973
+    },
+    {
+      "timestamp": 1735964599.06402,
+      "prompt_token_count": 8597,
+      "candidates_token_count": 3925,
+      "total_token_count": 12522,
+      "call_duration_seconds": 28.651
+    },
+    {
+      "timestamp": 1735965232.755865,
+      "prompt_token_count": 21160,
+      "candidates_token_count": 4097,
+      "total_token_count": 25257,
+      "call_duration_seconds": 32.352
+    },
+    {
+      "timestamp": 1735965261.1228979,
+      "prompt_token_count": 21441,
+      "candidates_token_count": 3803,
+      "total_token_count": 25244,
+      "call_duration_seconds": 28.363
+    },
+    {
+      "timestamp": 1735965312.729177,
+      "prompt_token_count": 17422,
+      "candidates_token_count": 176,
+      "total_token_count": 17598,
+      "call_duration_seconds": 2.664
+    },
+    {
+      "timestamp": 1735965325.117407,
+      "prompt_token_count": 17427,
+      "candidates_token_count": 222,
+      "total_token_count": 17649,
+      "call_duration_seconds": 2.982
+    },
+    {
+      "timestamp": 1735965356.354563,
+      "prompt_token_count": 20624,
+      "candidates_token_count": 2829,
+      "total_token_count": 23453,
+      "call_duration_seconds": 21.401
+    }
+  ],
+  "total_sql_queries": 32,
+  "total_retry_count": 2,
+  "final_success_queries": [
+    {
+      "query": "-- Query 1: Distribution of Event Types in ASR_2019\nSELECT\n    asr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 2: Distribution of Event Types in mdrfoiThru2023\nSELECT\n    mdr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 8
+    },
+    {
+      "query": "-- Query 3: Top 10 Manufacturers by Report Count in ASR_2019\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.manufacturer_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 3
+    },
+    {
+      "query": "-- Query 4: Top 10 Manufacturers by Report Count in DEVICE2023\nSELECT\n    dev.manufacturer_d_name,\n    COUNT(DISTINCT dev.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.manufacturer_d_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 10
+    },
+    {
+      "query": "-- Query 5: Count of distinct Product Codes in ASR_2019 over time\nSELECT\n    asr.report_year,\n    COUNT(DISTINCT asr.product_code) AS distinct_product_code_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.report_year\nORDER BY asr.report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 6: Count of distinct Device Report Product Codes in DEVICE2023 over time\nSELECT\n    SUBSTRING(dev.date_received, 1, 4) AS report_year,\n    COUNT(DISTINCT dev.device_report_product_code) AS distinct_product_code_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 6
+    },
+    {
+      "query": "-- Query 7: Comparison of Brand Names between ASR_2019 and DEVICE2023\nSELECT\n    'ASR_2019' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY brand_name\nUNION ALL\nSELECT\n    'DEVICE2023' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY brand_name\nORDER BY brand_name, source\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query 8: Analysis of Device Problem Codes in ASR_2019\nSELECT\n    dp_code,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nCROSS JOIN UNNEST(STRING_TO_ARRAY(device_problem_codes, ';')) AS dp_code\nGROUP BY dp_code\nORDER BY count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 22
+    },
+    {
+      "query": "-- Query 9:  Yearly trend of Adverse Event Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) AS adverse_event_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS adverse_event_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query 10: Yearly trend of Product Problem Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) AS product_problem_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS product_problem_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query 11:  Most frequent Text Type Codes in foitext2023\nSELECT\n    ft.text_type_code,\n    COUNT(*) AS text_count\nFROM \"maude\".\"foitext2023\" ft\nGROUP BY ft.text_type_code\nORDER BY text_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 12: Count of reports by Report Source Code in mdrfoiThru2023\nSELECT\n    mdr.report_source_code,\n    COUNT(*) AS report_count\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.report_source_code\nORDER BY report_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 7
+    },
+    {
+      "query": "-- Query 13:  Distribution of Device Operators in DEVICE2023\nSELECT\n    dev.device_operator,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.device_operator\nORDER BY count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 14
+    },
+    {
+      "query": "-- Query 14:  Top 5 Brand Names with 'Failure' mentioned in foi_text\nSELECT\n    d.brand_name,\n    COUNT(DISTINCT t.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"foitext2023\" t ON d.mdr_report_key = t.mdr_report_key\nWHERE LOWER(t.foi_text) LIKE '%failure%'\nGROUP BY d.brand_name\nORDER BY report_count DESC\nLIMIT 5;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 5
+    },
+    {
+      "query": "-- Query 15:  Comparison of Date of Event between ASR and MDR within a specific year (e.g., 2018)\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE SUBSTRING(date_of_event, -4, 4) = '2018'\nUNION ALL\nSELECT\n    'MDR',\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE SUBSTRING(date_of_event, 1, 4) = '2018'\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 16: Count of distinct Manufacturer Registration Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT manufacturer_registration_number) AS distinct_mfr_reg_count\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 17: Count of reports with 'Implant' mentioned in Brand Name in both tables\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nUNION ALL\nSELECT\n    'DEVICE2023',\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 18:  Distribution of Report Years in ASR_2019\nSELECT\n    report_year,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "SELECT\n    implant_available_for_evaluation,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY implant_available_for_evaluation\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 3
+    },
+    {
+      "query": "-- Query 20: Number of reports where the device was available for evaluation (DEVICE)\nSELECT\n    device_availability,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY device_availability\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 11
+    },
+    {
+      "query": "-- Query 21:  Top 5 Generic Names in DEVICE2023\nSELECT\n    generic_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY generic_name\nORDER BY count DESC\nLIMIT 5;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 5
+    },
+    {
+      "query": "-- Query 22:  Count of reports with a specific Device Problem Code in ASR_2019 (e.g., '2682')\nSELECT\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE device_problem_codes LIKE '%2682%'\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 23:  Yearly count of reports with manufacturer link flag 'Y' in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE manufacturer_link_flag = 'Y'\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query 24:  Distribution of Reporter Occupation Codes in mdrfoiThru2023\nSELECT\n    reporter_occupation_code,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY reporter_occupation_code\nORDER BY COUNT(*) DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query 25: Count of reports with specific event types and device problem codes in ASR_2019\nSELECT\n    event_type,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE event_type IN ('IN', 'D') AND device_problem_codes LIKE '%2616%'\nGROUP BY event_type\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 26:  Top 5 Model Numbers in DEVICE2023\nSELECT\n    model_number,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY model_number\nORDER BY COUNT(*) DESC\nLIMIT 5;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 5
+    },
+    {
+      "query": "SELECT\n    implant_returned_to_manufacturer,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY implant_returned_to_manufacturer\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 28: Count of reports where the device was returned to the manufacturer (DEVICE)\nSELECT\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE device_availability = 'R'\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 29:  Distribution of Health Professional flag in mdrfoiThru2023\nSELECT\n    health_professional,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY health_professional\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 8
+    },
+    {
+      "query": "-- Query 30: Count of distinct Catalog Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 31: Count of distinct Catalog Numbers in DEVICE2023\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"DEVICE2023\"\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 32: Trend of reports reported to FDA in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) AS reported_to_fda_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS reported_to_fda_percentage\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    }
+  ],
+  "query_statistics": {
+    "Advanced Analysis Query 1": {
+      "original_query": "-- Query 1: Distribution of Event Types in ASR_2019\nSELECT\n    asr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 1: Distribution of Event Types in ASR_2019\nSELECT\n    asr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 2": {
+      "original_query": "-- Query 2: Distribution of Event Types in mdrfoiThru2023\nSELECT\n    mdr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 2: Distribution of Event Types in mdrfoiThru2023\nSELECT\n    mdr.event_type,\n    COUNT(*) AS event_count,\n    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) AS percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.event_type\nORDER BY event_count DESC\nLIMIT 32;",
+      "rows_returned": 8
+    },
+    "Advanced Analysis Query 3": {
+      "original_query": "-- Query 3: Top 10 Manufacturers by Report Count in ASR_2019\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.manufacturer_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 3: Top 10 Manufacturers by Report Count in ASR_2019\nSELECT\n    asr.manufacturer_name,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.manufacturer_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "rows_returned": 3
+    },
+    "Advanced Analysis Query 4": {
+      "original_query": "-- Query 4: Top 10 Manufacturers by Report Count in DEVICE2023\nSELECT\n    dev.manufacturer_d_name,\n    COUNT(DISTINCT dev.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.manufacturer_d_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 4: Top 10 Manufacturers by Report Count in DEVICE2023\nSELECT\n    dev.manufacturer_d_name,\n    COUNT(DISTINCT dev.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.manufacturer_d_name\nORDER BY report_count DESC\nLIMIT 10;",
+      "rows_returned": 10
+    },
+    "Advanced Analysis Query 5": {
+      "original_query": "-- Query 5: Count of distinct Product Codes in ASR_2019 over time\nSELECT\n    asr.report_year,\n    COUNT(DISTINCT asr.product_code) AS distinct_product_code_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.report_year\nORDER BY asr.report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 5: Count of distinct Product Codes in ASR_2019 over time\nSELECT\n    asr.report_year,\n    COUNT(DISTINCT asr.product_code) AS distinct_product_code_count\nFROM \"maude\".\"ASR_2019\" asr\nGROUP BY asr.report_year\nORDER BY asr.report_year\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 6": {
+      "original_query": "-- Query 6: Count of distinct Device Report Product Codes in DEVICE2023 over time\nSELECT\n    SUBSTRING(dev.date_received, 1, 4) AS report_year,\n    COUNT(DISTINCT dev.device_report_product_code) AS distinct_product_code_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 6: Count of distinct Device Report Product Codes in DEVICE2023 over time\nSELECT\n    SUBSTRING(dev.date_received, 1, 4) AS report_year,\n    COUNT(DISTINCT dev.device_report_product_code) AS distinct_product_code_count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 6
+    },
+    "Advanced Analysis Query 7": {
+      "original_query": "-- Query 7: Comparison of Brand Names between ASR_2019 and DEVICE2023\nSELECT\n    'ASR_2019' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY brand_name\nUNION ALL\nSELECT\n    'DEVICE2023' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY brand_name\nORDER BY brand_name, source\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 7: Comparison of Brand Names between ASR_2019 and DEVICE2023\nSELECT\n    'ASR_2019' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY brand_name\nUNION ALL\nSELECT\n    'DEVICE2023' AS source,\n    brand_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY brand_name\nORDER BY brand_name, source\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 8": {
+      "original_query": "-- Query 8: Analysis of Device Problem Codes in ASR_2019\nSELECT\n    dp_code,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nCROSS JOIN UNNEST(STRING_TO_ARRAY(device_problem_codes, ';')) AS dp_code\nGROUP BY dp_code\nORDER BY count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 8: Analysis of Device Problem Codes in ASR_2019\nSELECT\n    dp_code,\n    COUNT(*) AS count\nFROM \"maude\".\"ASR_2019\"\nCROSS JOIN UNNEST(STRING_TO_ARRAY(device_problem_codes, ';')) AS dp_code\nGROUP BY dp_code\nORDER BY count DESC\nLIMIT 32;",
+      "rows_returned": 22
+    },
+    "Advanced Analysis Query 9": {
+      "original_query": "-- Query 9:  Yearly trend of Adverse Event Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) AS adverse_event_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS adverse_event_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 9:  Yearly trend of Adverse Event Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) AS adverse_event_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.adverse_event_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS adverse_event_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 10": {
+      "original_query": "-- Query 10: Yearly trend of Product Problem Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) AS product_problem_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS product_problem_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 10: Yearly trend of Product Problem Flags in mdrfoiThru2023\nSELECT\n    SUBSTRING(mdr.date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) AS product_problem_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN mdr.product_problem_flag = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS product_problem_percentage\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 11": {
+      "original_query": "-- Query 11:  Most frequent Text Type Codes in foitext2023\nSELECT\n    ft.text_type_code,\n    COUNT(*) AS text_count\nFROM \"maude\".\"foitext2023\" ft\nGROUP BY ft.text_type_code\nORDER BY text_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 11:  Most frequent Text Type Codes in foitext2023\nSELECT\n    ft.text_type_code,\n    COUNT(*) AS text_count\nFROM \"maude\".\"foitext2023\" ft\nGROUP BY ft.text_type_code\nORDER BY text_count DESC\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 12": {
+      "original_query": "-- Query 12: Count of reports by Report Source Code in mdrfoiThru2023\nSELECT\n    mdr.report_source_code,\n    COUNT(*) AS report_count\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.report_source_code\nORDER BY report_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 12: Count of reports by Report Source Code in mdrfoiThru2023\nSELECT\n    mdr.report_source_code,\n    COUNT(*) AS report_count\nFROM \"maude\".\"mdrfoiThru2023\" mdr\nGROUP BY mdr.report_source_code\nORDER BY report_count DESC\nLIMIT 32;",
+      "rows_returned": 7
+    },
+    "Advanced Analysis Query 13": {
+      "original_query": "-- Query 13:  Distribution of Device Operators in DEVICE2023\nSELECT\n    dev.device_operator,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.device_operator\nORDER BY count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 13:  Distribution of Device Operators in DEVICE2023\nSELECT\n    dev.device_operator,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\" dev\nGROUP BY dev.device_operator\nORDER BY count DESC\nLIMIT 32;",
+      "rows_returned": 14
+    },
+    "Advanced Analysis Query 14": {
+      "original_query": "-- Query 14:  Top 5 Brand Names with 'Failure' mentioned in foi_text\nSELECT\n    d.brand_name,\n    COUNT(DISTINCT t.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"foitext2023\" t ON d.mdr_report_key = t.mdr_report_key\nWHERE LOWER(t.foi_text) LIKE '%failure%'\nGROUP BY d.brand_name\nORDER BY report_count DESC\nLIMIT 5;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 14:  Top 5 Brand Names with 'Failure' mentioned in foi_text\nSELECT\n    d.brand_name,\n    COUNT(DISTINCT t.mdr_report_key) AS report_count\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"foitext2023\" t ON d.mdr_report_key = t.mdr_report_key\nWHERE LOWER(t.foi_text) LIKE '%failure%'\nGROUP BY d.brand_name\nORDER BY report_count DESC\nLIMIT 5;",
+      "rows_returned": 5
+    },
+    "Advanced Analysis Query 15": {
+      "original_query": "-- Query 15:  Comparison of Date of Event between ASR and MDR within a specific year (e.g., 2018)\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE SUBSTRING(date_of_event, -4, 4) = '2018'\nUNION ALL\nSELECT\n    'MDR',\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE SUBSTRING(date_of_event, 1, 4) = '2018'\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 15:  Comparison of Date of Event between ASR and MDR within a specific year (e.g., 2018)\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE SUBSTRING(date_of_event, -4, 4) = '2018'\nUNION ALL\nSELECT\n    'MDR',\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE SUBSTRING(date_of_event, 1, 4) = '2018'\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 16": {
+      "original_query": "-- Query 16: Count of distinct Manufacturer Registration Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT manufacturer_registration_number) AS distinct_mfr_reg_count\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 16: Count of distinct Manufacturer Registration Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT manufacturer_registration_number) AS distinct_mfr_reg_count\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 17": {
+      "original_query": "-- Query 17: Count of reports with 'Implant' mentioned in Brand Name in both tables\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nUNION ALL\nSELECT\n    'DEVICE2023',\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 17: Count of reports with 'Implant' mentioned in Brand Name in both tables\nSELECT\n    'ASR' AS source,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nUNION ALL\nSELECT\n    'DEVICE2023',\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE LOWER(brand_name) LIKE '%implant%'\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 18": {
+      "original_query": "-- Query 18:  Distribution of Report Years in ASR_2019\nSELECT\n    report_year,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 18:  Distribution of Report Years in ASR_2019\nSELECT\n    report_year,\n    COUNT(*) AS report_count\nFROM \"maude\".\"ASR_2019\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 19": {
+      "original_query": "-- Query 19:  Number of reports where the device was available for evaluation (ASR)\nSELECT\n    impl_avail_for_eval,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY impl_avail_for_eval\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "SELECT\n    implant_available_for_evaluation,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY implant_available_for_evaluation\nLIMIT 32;",
+      "rows_returned": 3
+    },
+    "Advanced Analysis Query 20": {
+      "original_query": "-- Query 20: Number of reports where the device was available for evaluation (DEVICE)\nSELECT\n    device_availability,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY device_availability\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 20: Number of reports where the device was available for evaluation (DEVICE)\nSELECT\n    device_availability,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY device_availability\nLIMIT 32;",
+      "rows_returned": 11
+    },
+    "Advanced Analysis Query 21": {
+      "original_query": "-- Query 21:  Top 5 Generic Names in DEVICE2023\nSELECT\n    generic_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY generic_name\nORDER BY count DESC\nLIMIT 5;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 21:  Top 5 Generic Names in DEVICE2023\nSELECT\n    generic_name,\n    COUNT(*) AS count\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY generic_name\nORDER BY count DESC\nLIMIT 5;",
+      "rows_returned": 5
+    },
+    "Advanced Analysis Query 22": {
+      "original_query": "-- Query 22:  Count of reports with a specific Device Problem Code in ASR_2019 (e.g., '2682')\nSELECT\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE device_problem_codes LIKE '%2682%'\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 22:  Count of reports with a specific Device Problem Code in ASR_2019 (e.g., '2682')\nSELECT\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE device_problem_codes LIKE '%2682%'\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 23": {
+      "original_query": "-- Query 23:  Yearly count of reports with manufacturer link flag 'Y' in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE manufacturer_link_flag = 'Y'\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 23:  Yearly count of reports with manufacturer link flag 'Y' in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nWHERE manufacturer_link_flag = 'Y'\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 24": {
+      "original_query": "-- Query 24:  Distribution of Reporter Occupation Codes in mdrfoiThru2023\nSELECT\n    reporter_occupation_code,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY reporter_occupation_code\nORDER BY COUNT(*) DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 24:  Distribution of Reporter Occupation Codes in mdrfoiThru2023\nSELECT\n    reporter_occupation_code,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY reporter_occupation_code\nORDER BY COUNT(*) DESC\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 25": {
+      "original_query": "-- Query 25: Count of reports with specific event types and device problem codes in ASR_2019\nSELECT\n    event_type,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE event_type IN ('IN', 'D') AND device_problem_codes LIKE '%2616%'\nGROUP BY event_type\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 25: Count of reports with specific event types and device problem codes in ASR_2019\nSELECT\n    event_type,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nWHERE event_type IN ('IN', 'D') AND device_problem_codes LIKE '%2616%'\nGROUP BY event_type\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 26": {
+      "original_query": "-- Query 26:  Top 5 Model Numbers in DEVICE2023\nSELECT\n    model_number,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY model_number\nORDER BY COUNT(*) DESC\nLIMIT 5;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 26:  Top 5 Model Numbers in DEVICE2023\nSELECT\n    model_number,\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nGROUP BY model_number\nORDER BY COUNT(*) DESC\nLIMIT 5;",
+      "rows_returned": 5
+    },
+    "Advanced Analysis Query 27": {
+      "original_query": "-- Query 27:  Count of reports where the device was returned to the manufacturer (ASR)\nSELECT\n    impl_ret_to_mfr,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY impl_ret_to_mfr\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "SELECT\n    implant_returned_to_manufacturer,\n    COUNT(*)\nFROM \"maude\".\"ASR_2019\"\nGROUP BY implant_returned_to_manufacturer\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 28": {
+      "original_query": "-- Query 28: Count of reports where the device was returned to the manufacturer (DEVICE)\nSELECT\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE device_availability = 'R'\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 28: Count of reports where the device was returned to the manufacturer (DEVICE)\nSELECT\n    COUNT(*)\nFROM \"maude\".\"DEVICE2023\"\nWHERE device_availability = 'R'\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 29": {
+      "original_query": "-- Query 29:  Distribution of Health Professional flag in mdrfoiThru2023\nSELECT\n    health_professional,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY health_professional\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 29:  Distribution of Health Professional flag in mdrfoiThru2023\nSELECT\n    health_professional,\n    COUNT(*)\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY health_professional\nLIMIT 32;",
+      "rows_returned": 8
+    },
+    "Advanced Analysis Query 30": {
+      "original_query": "-- Query 30: Count of distinct Catalog Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 30: Count of distinct Catalog Numbers in ASR_2019\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"ASR_2019\"\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 31": {
+      "original_query": "-- Query 31: Count of distinct Catalog Numbers in DEVICE2023\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"DEVICE2023\"\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 31: Count of distinct Catalog Numbers in DEVICE2023\nSELECT\n    COUNT(DISTINCT catalog_number)\nFROM \"maude\".\"DEVICE2023\"\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 32": {
+      "original_query": "-- Query 32: Trend of reports reported to FDA in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) AS reported_to_fda_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS reported_to_fda_percentage\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 32: Trend of reports reported to FDA in mdrfoiThru2023\nSELECT\n    SUBSTRING(date_received, 1, 4) AS report_year,\n    SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) AS reported_to_fda_count,\n    COUNT(*) AS total_reports,\n    ROUND(SUM(CASE WHEN report_to_fda = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS reported_to_fda_percentage\nFROM \"maude\".\"mdrfoiThru2023\"\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "summary": {
+      "total_queries": 32,
+      "successful_queries": 32,
+      "failed_queries": 0,
+      "pass_rate": 100.0
+    }
+  },
+  "query_execution_time": 73.645
+}

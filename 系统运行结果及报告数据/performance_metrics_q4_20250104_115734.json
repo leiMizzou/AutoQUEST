@@ -1,0 +1,181 @@
+{
+  "script_start_time": 1735963054.981228,
+  "script_end_time": 1735963269.7045178,
+  "total_duration_seconds": 214.723,
+  "model_calls": [
+    {
+      "timestamp": 1735963075.284748,
+      "prompt_token_count": 16692,
+      "candidates_token_count": 2699,
+      "total_token_count": 19391,
+      "call_duration_seconds": 20.303
+    },
+    {
+      "timestamp": 1735963101.2194052,
+      "prompt_token_count": 8909,
+      "candidates_token_count": 3507,
+      "total_token_count": 12416,
+      "call_duration_seconds": 25.932
+    },
+    {
+      "timestamp": 1735963130.1908438,
+      "prompt_token_count": 22096,
+      "candidates_token_count": 3866,
+      "total_token_count": 25962,
+      "call_duration_seconds": 28.781
+    },
+    {
+      "timestamp": 1735963148.370549,
+      "prompt_token_count": 22694,
+      "candidates_token_count": 2369,
+      "total_token_count": 25063,
+      "call_duration_seconds": 18.176
+    },
+    {
+      "timestamp": 1735963161.299016,
+      "prompt_token_count": 18929,
+      "candidates_token_count": 665,
+      "total_token_count": 19594,
+      "call_duration_seconds": 5.992
+    },
+    {
+      "timestamp": 1735963180.058074,
+      "prompt_token_count": 19002,
+      "candidates_token_count": 810,
+      "total_token_count": 19812,
+      "call_duration_seconds": 7.082
+    },
+    {
+      "timestamp": 1735963193.097617,
+      "prompt_token_count": 18944,
+      "candidates_token_count": 602,
+      "total_token_count": 19546,
+      "call_duration_seconds": 5.913
+    },
+    {
+      "timestamp": 1735963205.453413,
+      "prompt_token_count": 19241,
+      "candidates_token_count": 625,
+      "total_token_count": 19866,
+      "call_duration_seconds": 5.731
+    },
+    {
+      "timestamp": 1735963218.573184,
+      "prompt_token_count": 19182,
+      "candidates_token_count": 649,
+      "total_token_count": 19831,
+      "call_duration_seconds": 6.189
+    },
+    {
+      "timestamp": 1735963269.700934,
+      "prompt_token_count": 18597,
+      "candidates_token_count": 6271,
+      "total_token_count": 24868,
+      "call_duration_seconds": 45.534
+    }
+  ],
+  "total_sql_queries": 7,
+  "total_retry_count": 5,
+  "final_success_queries": [
+    {
+      "query": "-- Query for Step 2.1: Top 10 most frequent device problem codes in ASR data for a specific product code in 2019\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".report_year = '2019'\n  AND \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  product_code,\n  device_problem_code,\n  COUNT(*) AS frequency\nFROM split_codes\nGROUP BY 1, 2\nORDER BY 3 DESC\nLIMIT 10;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 10
+    },
+    {
+      "query": "SELECT\n  d.device_report_product_code,\n  EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n  COUNT(*) AS frequency\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2 DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query for Step 2.2: Temporal trend of a specific device problem code in ASR data\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  report_year,\n  COUNT(*) AS frequency\nFROM split_codes\nWHERE device_problem_code = '2682' -- Example device problem code\nGROUP BY 1\nORDER BY 1\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "SELECT\n    d.device_report_product_code,\n    EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n    COUNT(*) AS current_year_count,\n    AVG(COUNT(*)) OVER (ORDER BY EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) ASC ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS rolling_avg_3yr\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND d.device_report_product_code = 'KNT'\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 6
+    },
+    {
+      "query": "SELECT\n  f.foi_text\nFROM \"maude\".\"foitext2023\" f\nJOIN \"maude\".\"DEVICE2023\" d ON f.mdr_report_key = d.mdr_report_key\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE d.device_report_product_code = 'KNT'\n  AND m.date_of_event <> 'NI'\n  AND EXTRACT(YEAR FROM to_date(m.date_of_event, 'MM/DD/YYYY')) = 2023\n  AND m.event_type = 'M'\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    },
+    {
+      "query": "-- Query for Step 2.1: Compare the proportion of specific device problem codes within different event types in ASR data\nWITH split_codes AS (\n  SELECT\n    product_code,\n    event_type,\n    TRIM(unnest(string_to_array(device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n),\ncode_counts AS (\n  SELECT\n    product_code,\n    event_type,\n    device_problem_code,\n    COUNT(*) AS code_frequency\n  FROM split_codes\n  GROUP BY 1, 2, 3\n),\ntotal_events AS (\n  SELECT\n    product_code,\n    event_type,\n    COUNT(*) AS total_events_per_type\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n  GROUP BY 1, 2\n)\nSELECT\n  cc.product_code,\n  cc.event_type,\n  cc.device_problem_code,\n  cc.code_frequency,\n  te.total_events_per_type,\n  (cc.code_frequency::decimal / te.total_events_per_type) * 100 AS percentage_of_event_type\nFROM code_counts cc\nJOIN total_events te ON cc.product_code = te.product_code AND cc.event_type = te.event_type\nWHERE cc.product_code = 'FTR' -- Example product code\nORDER BY 1, 2, 6 DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 29
+    },
+    {
+      "query": "WITH yearly_counts AS (\n    SELECT\n        d.device_report_product_code,\n        EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n        COUNT(*) AS num_malfunctions\n    FROM \"maude\".\"DEVICE2023\" d\n    JOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\n    WHERE m.event_type = 'M' AND m.date_of_event IS NOT NULL\n    GROUP BY 1, 2\n),\nranked_products AS (\n    SELECT\n        device_report_product_code,\n        SUM(num_malfunctions) AS total_malfunctions,\n        RANK() OVER (ORDER BY SUM(num_malfunctions) DESC) AS product_rank\n    FROM yearly_counts\n    GROUP BY 1\n),\nlagged_counts AS (\n    SELECT\n        yc.device_report_product_code,\n        yc.event_year,\n        yc.num_malfunctions,\n        LAG(yc.num_malfunctions, 1, 0::bigint) OVER (PARTITION BY yc.device_report_product_code ORDER BY yc.event_year) AS previous_year_malfunctions\n    FROM yearly_counts yc\n    WHERE yc.device_report_product_code IN (SELECT device_report_product_code FROM ranked_products WHERE product_rank <= 5)\n)\nSELECT\n    device_report_product_code,\n    event_year,\n    num_malfunctions,\n    previous_year_malfunctions,\n    (num_malfunctions - previous_year_malfunctions) AS year_over_year_change\nFROM lagged_counts\nORDER BY device_report_product_code, event_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 32
+    }
+  ],
+  "query_statistics": {
+    "Advanced Analysis Query 1": {
+      "original_query": "-- Query for Step 2.1: Top 10 most frequent device problem codes in ASR data for a specific product code in 2019\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".report_year = '2019'\n  AND \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  product_code,\n  device_problem_code,\n  COUNT(*) AS frequency\nFROM split_codes\nGROUP BY 1, 2\nORDER BY 3 DESC\nLIMIT 10;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query for Step 2.1: Top 10 most frequent device problem codes in ASR data for a specific product code in 2019\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".report_year = '2019'\n  AND \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  product_code,\n  device_problem_code,\n  COUNT(*) AS frequency\nFROM split_codes\nGROUP BY 1, 2\nORDER BY 3 DESC\nLIMIT 10;",
+      "rows_returned": 10
+    },
+    "Advanced Analysis Query 2": {
+      "original_query": "-- Query for Step 2.1: Frequency of 'Malfunction' event types in individual MDRs by product code and year\nSELECT\n  d.device_report_product_code,\n  EXTRACT(YEAR FROM m.date_of_event::date) AS event_year,\n  COUNT(*) AS frequency\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2 DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "SELECT\n  d.device_report_product_code,\n  EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n  COUNT(*) AS frequency\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2 DESC\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 3": {
+      "original_query": "-- Query for Step 2.2: Temporal trend of a specific device problem code in ASR data\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  report_year,\n  COUNT(*) AS frequency\nFROM split_codes\nWHERE device_problem_code = '2682' -- Example device problem code\nGROUP BY 1\nORDER BY 1\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query for Step 2.2: Temporal trend of a specific device problem code in ASR data\nWITH split_codes AS (\n  SELECT\n    \"maude\".\"ASR_2019\".product_code,\n    \"maude\".\"ASR_2019\".report_year,\n    TRIM(unnest(string_to_array(\"maude\".\"ASR_2019\".device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE \"maude\".\"ASR_2019\".product_code = 'FTR' -- Example product code\n)\nSELECT\n  report_year,\n  COUNT(*) AS frequency\nFROM split_codes\nWHERE device_problem_code = '2682' -- Example device problem code\nGROUP BY 1\nORDER BY 1\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 4": {
+      "original_query": "-- Query for Step 2.2: Rolling 3-year average of malfunction reports for a specific product code\nSELECT\n    d.device_report_product_code,\n    EXTRACT(YEAR FROM m.date_of_event::date) AS event_year,\n    COUNT(*) AS current_year_count,\n    AVG(COUNT(*)) OVER (ORDER BY EXTRACT(YEAR FROM m.date_of_event::date) ASC ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS rolling_avg_3yr\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND d.device_report_product_code = 'KNT' -- Example product code\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "SELECT\n    d.device_report_product_code,\n    EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n    COUNT(*) AS current_year_count,\n    AVG(COUNT(*)) OVER (ORDER BY EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) ASC ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS rolling_avg_3yr\nFROM \"maude\".\"DEVICE2023\" d\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE m.event_type = 'M'\n  AND d.device_report_product_code = 'KNT'\n  AND m.date_of_event IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1, 2\nLIMIT 32;",
+      "rows_returned": 6
+    },
+    "Advanced Analysis Query 5": {
+      "original_query": "-- Query for Step 3.1: Retrieve MDR narratives related to a specific product code and malfunction event in a given year\nSELECT\n  f.foi_text\nFROM \"maude\".\"foitext2023\" f\nJOIN \"maude\".\"DEVICE2023\" d ON f.mdr_report_key = d.mdr_report_key\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE d.device_report_product_code = 'KNT' -- Example product code\n  AND EXTRACT(YEAR FROM m.date_of_event::date) = 2023 -- Example year\n  AND m.event_type = 'M'\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 1,
+      "no_data_retries": 0,
+      "final_query": "SELECT\n  f.foi_text\nFROM \"maude\".\"foitext2023\" f\nJOIN \"maude\".\"DEVICE2023\" d ON f.mdr_report_key = d.mdr_report_key\nJOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\nWHERE d.device_report_product_code = 'KNT'\n  AND m.date_of_event <> 'NI'\n  AND EXTRACT(YEAR FROM to_date(m.date_of_event, 'MM/DD/YYYY')) = 2023\n  AND m.event_type = 'M'\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "Advanced Analysis Query 6": {
+      "original_query": "-- Query for Step 2.1: Compare the proportion of specific device problem codes within different event types in ASR data\nWITH split_codes AS (\n  SELECT\n    product_code,\n    event_type,\n    TRIM(unnest(string_to_array(device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n),\ncode_counts AS (\n  SELECT\n    product_code,\n    event_type,\n    device_problem_code,\n    COUNT(*) AS code_frequency\n  FROM split_codes\n  GROUP BY 1, 2, 3\n),\ntotal_events AS (\n  SELECT\n    product_code,\n    event_type,\n    COUNT(*) AS total_events_per_type\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n  GROUP BY 1, 2\n)\nSELECT\n  cc.product_code,\n  cc.event_type,\n  cc.device_problem_code,\n  cc.code_frequency,\n  te.total_events_per_type,\n  (cc.code_frequency::decimal / te.total_events_per_type) * 100 AS percentage_of_event_type\nFROM code_counts cc\nJOIN total_events te ON cc.product_code = te.product_code AND cc.event_type = te.event_type\nWHERE cc.product_code = 'FTR' -- Example product code\nORDER BY 1, 2, 6 DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query for Step 2.1: Compare the proportion of specific device problem codes within different event types in ASR data\nWITH split_codes AS (\n  SELECT\n    product_code,\n    event_type,\n    TRIM(unnest(string_to_array(device_problem_codes, ';'))) AS device_problem_code\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n),\ncode_counts AS (\n  SELECT\n    product_code,\n    event_type,\n    device_problem_code,\n    COUNT(*) AS code_frequency\n  FROM split_codes\n  GROUP BY 1, 2, 3\n),\ntotal_events AS (\n  SELECT\n    product_code,\n    event_type,\n    COUNT(*) AS total_events_per_type\n  FROM \"maude\".\"ASR_2019\"\n  WHERE report_year = '2019'\n  GROUP BY 1, 2\n)\nSELECT\n  cc.product_code,\n  cc.event_type,\n  cc.device_problem_code,\n  cc.code_frequency,\n  te.total_events_per_type,\n  (cc.code_frequency::decimal / te.total_events_per_type) * 100 AS percentage_of_event_type\nFROM code_counts cc\nJOIN total_events te ON cc.product_code = te.product_code AND cc.event_type = te.event_type\nWHERE cc.product_code = 'FTR' -- Example product code\nORDER BY 1, 2, 6 DESC\nLIMIT 32;",
+      "rows_returned": 29
+    },
+    "Advanced Analysis Query 7": {
+      "original_query": "-- Query for Step 2.2: Year-over-year change in the number of malfunction reports for the top 5 most reported product codes\nWITH yearly_counts AS (\n    SELECT\n        d.device_report_product_code,\n        EXTRACT(YEAR FROM m.date_of_event::date) AS event_year,\n        COUNT(*) AS num_malfunctions\n    FROM \"maude\".\"DEVICE2023\" d\n    JOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\n    WHERE m.event_type = 'M' AND m.date_of_event IS NOT NULL\n    GROUP BY 1, 2\n),\nranked_products AS (\n    SELECT\n        device_report_product_code,\n        SUM(num_malfunctions) AS total_malfunctions,\n        RANK() OVER (ORDER BY SUM(num_malfunctions) DESC) AS product_rank\n    FROM yearly_counts\n    GROUP BY 1\n),\nlagged_counts AS (\n    SELECT\n        yc.device_report_product_code,\n        yc.event_year,\n        yc.num_malfunctions,\n        LAG(yc.num_malfunctions, 1, 0) OVER (PARTITION BY yc.device_report_product_code ORDER BY yc.event_year) AS previous_year_malfunctions\n    FROM yearly_counts yc\n    WHERE yc.device_report_product_code IN (SELECT device_report_product_code FROM ranked_products WHERE product_rank <= 5)\n)\nSELECT\n    device_report_product_code,\n    event_year,\n    num_malfunctions,\n    previous_year_malfunctions,\n    (num_malfunctions - previous_year_malfunctions) AS year_over_year_change\nFROM lagged_counts\nORDER BY device_report_product_code, event_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 2,
+      "no_data_retries": 0,
+      "final_query": "WITH yearly_counts AS (\n    SELECT\n        d.device_report_product_code,\n        EXTRACT(YEAR FROM TO_DATE(m.date_of_event, 'MM/DD/YYYY')) AS event_year,\n        COUNT(*) AS num_malfunctions\n    FROM \"maude\".\"DEVICE2023\" d\n    JOIN \"maude\".\"mdrfoiThru2023\" m ON d.mdr_report_key = m.mdr_report_key\n    WHERE m.event_type = 'M' AND m.date_of_event IS NOT NULL\n    GROUP BY 1, 2\n),\nranked_products AS (\n    SELECT\n        device_report_product_code,\n        SUM(num_malfunctions) AS total_malfunctions,\n        RANK() OVER (ORDER BY SUM(num_malfunctions) DESC) AS product_rank\n    FROM yearly_counts\n    GROUP BY 1\n),\nlagged_counts AS (\n    SELECT\n        yc.device_report_product_code,\n        yc.event_year,\n        yc.num_malfunctions,\n        LAG(yc.num_malfunctions, 1, 0::bigint) OVER (PARTITION BY yc.device_report_product_code ORDER BY yc.event_year) AS previous_year_malfunctions\n    FROM yearly_counts yc\n    WHERE yc.device_report_product_code IN (SELECT device_report_product_code FROM ranked_products WHERE product_rank <= 5)\n)\nSELECT\n    device_report_product_code,\n    event_year,\n    num_malfunctions,\n    previous_year_malfunctions,\n    (num_malfunctions - previous_year_malfunctions) AS year_over_year_change\nFROM lagged_counts\nORDER BY device_report_product_code, event_year\nLIMIT 32;",
+      "rows_returned": 32
+    },
+    "summary": {
+      "total_queries": 7,
+      "successful_queries": 7,
+      "failed_queries": 0,
+      "pass_rate": 100.0
+    }
+  },
+  "query_execution_time": 75.71
+}

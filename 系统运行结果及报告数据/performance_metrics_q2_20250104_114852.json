@@ -1,0 +1,336 @@
+{
+  "script_start_time": 1735962532.692149,
+  "script_end_time": 1735962920.583196,
+  "total_duration_seconds": 387.891,
+  "model_calls": [
+    {
+      "timestamp": 1735962553.023085,
+      "prompt_token_count": 16692,
+      "candidates_token_count": 2651,
+      "total_token_count": 19343,
+      "call_duration_seconds": 20.331
+    },
+    {
+      "timestamp": 1735962577.74594,
+      "prompt_token_count": 8898,
+      "candidates_token_count": 3360,
+      "total_token_count": 12258,
+      "call_duration_seconds": 24.72
+    },
+    {
+      "timestamp": 1735962600.577021,
+      "prompt_token_count": 14506,
+      "candidates_token_count": 3041,
+      "total_token_count": 17547,
+      "call_duration_seconds": 22.671
+    },
+    {
+      "timestamp": 1735962623.0330691,
+      "prompt_token_count": 14513,
+      "candidates_token_count": 3033,
+      "total_token_count": 17546,
+      "call_duration_seconds": 22.452
+    },
+    {
+      "timestamp": 1735962628.874366,
+      "prompt_token_count": 11582,
+      "candidates_token_count": 374,
+      "total_token_count": 11956,
+      "call_duration_seconds": 3.72
+    },
+    {
+      "timestamp": 1735962635.1846678,
+      "prompt_token_count": 11578,
+      "candidates_token_count": 447,
+      "total_token_count": 12025,
+      "call_duration_seconds": 4.276
+    },
+    {
+      "timestamp": 1735962641.124989,
+      "prompt_token_count": 11578,
+      "candidates_token_count": 407,
+      "total_token_count": 11985,
+      "call_duration_seconds": 3.906
+    },
+    {
+      "timestamp": 1735962646.963181,
+      "prompt_token_count": 11583,
+      "candidates_token_count": 387,
+      "total_token_count": 11970,
+      "call_duration_seconds": 3.806
+    },
+    {
+      "timestamp": 1735962658.089068,
+      "prompt_token_count": 11629,
+      "candidates_token_count": 1155,
+      "total_token_count": 12784,
+      "call_duration_seconds": 9.062
+    },
+    {
+      "timestamp": 1735962668.992519,
+      "prompt_token_count": 11615,
+      "candidates_token_count": 1117,
+      "total_token_count": 12732,
+      "call_duration_seconds": 8.87
+    },
+    {
+      "timestamp": 1735962676.919227,
+      "prompt_token_count": 11534,
+      "candidates_token_count": 673,
+      "total_token_count": 12207,
+      "call_duration_seconds": 5.831
+    },
+    {
+      "timestamp": 1735962685.398012,
+      "prompt_token_count": 11498,
+      "candidates_token_count": 775,
+      "total_token_count": 12273,
+      "call_duration_seconds": 6.453
+    },
+    {
+      "timestamp": 1735962693.8423839,
+      "prompt_token_count": 11498,
+      "candidates_token_count": 761,
+      "total_token_count": 12259,
+      "call_duration_seconds": 6.416
+    },
+    {
+      "timestamp": 1735962701.77058,
+      "prompt_token_count": 11498,
+      "candidates_token_count": 706,
+      "total_token_count": 12204,
+      "call_duration_seconds": 5.896
+    },
+    {
+      "timestamp": 1735962708.6057868,
+      "prompt_token_count": 11781,
+      "candidates_token_count": 538,
+      "total_token_count": 12319,
+      "call_duration_seconds": 4.787
+    },
+    {
+      "timestamp": 1735962715.6733718,
+      "prompt_token_count": 11765,
+      "candidates_token_count": 568,
+      "total_token_count": 12333,
+      "call_duration_seconds": 5.029
+    },
+    {
+      "timestamp": 1735962722.754262,
+      "prompt_token_count": 11778,
+      "candidates_token_count": 576,
+      "total_token_count": 12354,
+      "call_duration_seconds": 5.041
+    },
+    {
+      "timestamp": 1735962729.968619,
+      "prompt_token_count": 11586,
+      "candidates_token_count": 592,
+      "total_token_count": 12178,
+      "call_duration_seconds": 5.114
+    },
+    {
+      "timestamp": 1735962747.418918,
+      "prompt_token_count": 11568,
+      "candidates_token_count": 2018,
+      "total_token_count": 13586,
+      "call_duration_seconds": 15.419
+    },
+    {
+      "timestamp": 1735962753.7124622,
+      "prompt_token_count": 11607,
+      "candidates_token_count": 475,
+      "total_token_count": 12082,
+      "call_duration_seconds": 4.265
+    },
+    {
+      "timestamp": 1735962833.802262,
+      "prompt_token_count": 11592,
+      "candidates_token_count": 2026,
+      "total_token_count": 13618,
+      "call_duration_seconds": 78.057
+    },
+    {
+      "timestamp": 1735962849.617878,
+      "prompt_token_count": 11592,
+      "candidates_token_count": 1802,
+      "total_token_count": 13394,
+      "call_duration_seconds": 13.781
+    },
+    {
+      "timestamp": 1735962855.7550778,
+      "prompt_token_count": 11668,
+      "candidates_token_count": 401,
+      "total_token_count": 12069,
+      "call_duration_seconds": 4.103
+    },
+    {
+      "timestamp": 1735962869.073591,
+      "prompt_token_count": 11596,
+      "candidates_token_count": 1429,
+      "total_token_count": 13025,
+      "call_duration_seconds": 11.278
+    },
+    {
+      "timestamp": 1735962880.069736,
+      "prompt_token_count": 11588,
+      "candidates_token_count": 1106,
+      "total_token_count": 12694,
+      "call_duration_seconds": 8.964
+    },
+    {
+      "timestamp": 1735962889.7931678,
+      "prompt_token_count": 11580,
+      "candidates_token_count": 931,
+      "total_token_count": 12511,
+      "call_duration_seconds": 7.691
+    },
+    {
+      "timestamp": 1735962904.629399,
+      "prompt_token_count": 11527,
+      "candidates_token_count": 1666,
+      "total_token_count": 13193,
+      "call_duration_seconds": 12.809
+    },
+    {
+      "timestamp": 1735962920.578449,
+      "prompt_token_count": 9285,
+      "candidates_token_count": 2090,
+      "total_token_count": 11375,
+      "call_duration_seconds": 15.944
+    }
+  ],
+  "total_sql_queries": 10,
+  "total_retry_count": 23,
+  "final_success_queries": [
+    {
+      "query": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY CAST(report_year AS INTEGER)\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "WITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        dpc.code AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(code)\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 5;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 5
+    },
+    {
+      "query": "-- Query 3: Percentage of malfunctions by device class in the latest year\nWITH latest_year_malfunctions AS (\n    SELECT\n        a.report_year,\n        f.deviceclass\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\ntotal_malfunctions AS (\n    SELECT COUNT(*) AS total FROM latest_year_malfunctions\n),\nclass_counts AS (\n    SELECT\n        deviceclass,\n        COUNT(*) AS class_count\n    FROM latest_year_malfunctions\n    GROUP BY deviceclass\n)\nSELECT\n    cc.deviceclass,\n    cc.class_count,\n    (cc.class_count::numeric / tm.total) * 100 AS percentage_of_total\nFROM class_counts cc, total_malfunctions tm\nORDER BY percentage_of_total DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 4: Top 5 manufacturers with the highest number of malfunction reports in the latest year\nWITH latest_year_malfunctions AS (\n  SELECT\n    report_year,\n    manufacturer_name\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n    AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nmanufacturer_counts AS (\n  SELECT\n    manufacturer_name,\n    COUNT(*) AS malfunction_count,\n    RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n  FROM latest_year_malfunctions\n  GROUP BY manufacturer_name\n)\nSELECT\n  report_year,\n  manufacturer_name,\n  malfunction_count\nFROM latest_year_malfunctions\nJOIN manufacturer_counts USING (manufacturer_name)\nWHERE rank_num <= 5\nGROUP BY report_year, manufacturer_name, malfunction_count\nORDER BY malfunction_count DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "WITH malfunction_data AS (\n    SELECT\n        a.report_year\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "WITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        CAST(a.report_year AS INTEGER) as report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 2
+    },
+    {
+      "query": "-- Query 7: Malfunction frequency by medical specialty in the latest year, ranked\nWITH latest_year_malfunctions_specialty AS (\n    SELECT\n        a.report_year,\n        f.medicalspecialty\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nspecialty_counts AS (\n    SELECT\n        medicalspecialty,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n    FROM latest_year_malfunctions_specialty\n    GROUP BY medicalspecialty\n)\nSELECT\n    report_year,\n    medicalspecialty,\n    malfunction_count\nFROM latest_year_malfunctions_specialty\nJOIN specialty_counts USING (medicalspecialty)\nGROUP BY report_year, medicalspecialty, malfunction_count, rank_num\nORDER BY rank_num\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    },
+    {
+      "query": "-- Query 8: Percentage change in malfunction reports for a specific manufacturer over the last 3 years\nWITH specific_manufacturer_malfunctions AS (\n    SELECT\n        report_year,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND manufacturer_name = 'ALLERGAN' -- Replace with a specific manufacturer\n    GROUP BY report_year\n),\nlagged_malfunctions AS (\n    SELECT\n        report_year,\n        malfunction_count,\n        LAG(malfunction_count, 1) OVER (ORDER BY report_year) AS previous_year_count\n    FROM specific_manufacturer_malfunctions\n)\nSELECT\n    report_year,\n    malfunction_count,\n    previous_year_count,\n    CASE\n        WHEN previous_year_count = 0 THEN NULL\n        ELSE ((malfunction_count - previous_year_count)::numeric / previous_year_count) * 100\n    END AS percentage_change\nFROM lagged_malfunctions\nORDER BY report_year DESC\nLIMIT 32;",
+      "usage_label": "Advanced Analysis",
+      "rows_returned": 1
+    }
+  ],
+  "query_statistics": {
+    "Advanced Analysis Query 1": {
+      "original_query": "-- Query 1: Trend of total malfunction reports over time\nWITH yearly_malfunctions AS (\n  SELECT\n    report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY report_year\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, 0) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 4,
+      "no_data_retries": 0,
+      "final_query": "WITH yearly_malfunctions AS (\n  SELECT\n    CAST(report_year AS INTEGER) AS report_year,\n    COUNT(*) AS total_malfunctions\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n  GROUP BY CAST(report_year AS INTEGER)\n)\nSELECT\n  report_year,\n  total_malfunctions,\n  LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year) AS previous_year_malfunctions,\n  (total_malfunctions - LAG(total_malfunctions, 1, CAST(0 AS BIGINT)) OVER (ORDER BY report_year)) AS year_over_year_change\nFROM yearly_malfunctions\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 2": {
+      "original_query": "-- Query 2: Top 5 most frequent malfunction problem descriptions in the latest year\nWITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    WHERE report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 2,
+      "no_data_retries": 0,
+      "final_query": "WITH latest_year_data AS (\n    SELECT\n        a.report_year,\n        dpc.code AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(code)\n    WHERE a.event_type IN ('M', 'M-D')\n),\nranked_problems AS (\n    SELECT\n        report_year,\n        problem_description,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (PARTITION BY report_year ORDER BY COUNT(*) DESC) as rank_num\n    FROM latest_year_data\n    GROUP BY report_year, problem_description\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM ranked_problems\nWHERE rank_num <= 5\nORDER BY report_year DESC, malfunction_count DESC\nLIMIT 5;",
+      "rows_returned": 5
+    },
+    "Advanced Analysis Query 3": {
+      "original_query": "-- Query 3: Percentage of malfunctions by device class in the latest year\nWITH latest_year_malfunctions AS (\n    SELECT\n        a.report_year,\n        f.deviceclass\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\ntotal_malfunctions AS (\n    SELECT COUNT(*) AS total FROM latest_year_malfunctions\n),\nclass_counts AS (\n    SELECT\n        deviceclass,\n        COUNT(*) AS class_count\n    FROM latest_year_malfunctions\n    GROUP BY deviceclass\n)\nSELECT\n    cc.deviceclass,\n    cc.class_count,\n    (cc.class_count::numeric / tm.total) * 100 AS percentage_of_total\nFROM class_counts cc, total_malfunctions tm\nORDER BY percentage_of_total DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 3: Percentage of malfunctions by device class in the latest year\nWITH latest_year_malfunctions AS (\n    SELECT\n        a.report_year,\n        f.deviceclass\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\ntotal_malfunctions AS (\n    SELECT COUNT(*) AS total FROM latest_year_malfunctions\n),\nclass_counts AS (\n    SELECT\n        deviceclass,\n        COUNT(*) AS class_count\n    FROM latest_year_malfunctions\n    GROUP BY deviceclass\n)\nSELECT\n    cc.deviceclass,\n    cc.class_count,\n    (cc.class_count::numeric / tm.total) * 100 AS percentage_of_total\nFROM class_counts cc, total_malfunctions tm\nORDER BY percentage_of_total DESC\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 4": {
+      "original_query": "-- Query 4: Top 5 manufacturers with the highest number of malfunction reports in the latest year\nWITH latest_year_malfunctions AS (\n  SELECT\n    report_year,\n    manufacturer_name\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n    AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nmanufacturer_counts AS (\n  SELECT\n    manufacturer_name,\n    COUNT(*) AS malfunction_count,\n    RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n  FROM latest_year_malfunctions\n  GROUP BY manufacturer_name\n)\nSELECT\n  report_year,\n  manufacturer_name,\n  malfunction_count\nFROM latest_year_malfunctions\nJOIN manufacturer_counts USING (manufacturer_name)\nWHERE rank_num <= 5\nGROUP BY report_year, manufacturer_name, malfunction_count\nORDER BY malfunction_count DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 4: Top 5 manufacturers with the highest number of malfunction reports in the latest year\nWITH latest_year_malfunctions AS (\n  SELECT\n    report_year,\n    manufacturer_name\n  FROM \"maude\".\"ASR_2019\"\n  WHERE event_type IN ('M', 'M-D')\n    AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nmanufacturer_counts AS (\n  SELECT\n    manufacturer_name,\n    COUNT(*) AS malfunction_count,\n    RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n  FROM latest_year_malfunctions\n  GROUP BY manufacturer_name\n)\nSELECT\n  report_year,\n  manufacturer_name,\n  malfunction_count\nFROM latest_year_malfunctions\nJOIN manufacturer_counts USING (manufacturer_name)\nWHERE rank_num <= 5\nGROUP BY report_year, manufacturer_name, malfunction_count\nORDER BY malfunction_count DESC\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 5": {
+      "original_query": "-- Query 5: Evolution of malfunction frequency for a specific device problem description over time\nWITH malfunction_data AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nWHERE problem_description = 'Failure to operate' -- Replace with a specific problem description\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 4,
+      "no_data_retries": 0,
+      "final_query": "WITH malfunction_data AS (\n    SELECT\n        a.report_year\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n)\nSELECT\n    report_year,\n    COUNT(*) AS malfunction_count\nFROM malfunction_data\nGROUP BY report_year\nORDER BY report_year\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 6": {
+      "original_query": "-- Query 6: Year-over-year change in malfunction reports for the top 3 manufacturers in the latest year\nWITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(ymm.malfunction_count, 1, 0) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 3,
+      "no_data_retries": 0,
+      "final_query": "WITH latest_year_top_manufacturers AS (\n    SELECT\n        manufacturer_name\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n    GROUP BY manufacturer_name\n    ORDER BY COUNT(*) DESC\n    LIMIT 3\n),\nyearly_manufacturer_malfunctions AS (\n    SELECT\n        CAST(a.report_year AS INTEGER) as report_year,\n        a.manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.manufacturer_name IN (SELECT manufacturer_name FROM latest_year_top_manufacturers)\n    GROUP BY a.report_year, a.manufacturer_name\n)\nSELECT\n    ymm.report_year,\n    ymm.manufacturer_name,\n    ymm.malfunction_count,\n    LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year) AS previous_year_count,\n    (ymm.malfunction_count - LAG(CAST(ymm.malfunction_count AS BIGINT), 1, CAST(0 AS BIGINT)) OVER (PARTITION BY ymm.manufacturer_name ORDER BY ymm.report_year)) AS year_over_year_change\nFROM yearly_manufacturer_malfunctions ymm\nORDER BY ymm.manufacturer_name, ymm.report_year\nLIMIT 32;",
+      "rows_returned": 2
+    },
+    "Advanced Analysis Query 7": {
+      "original_query": "-- Query 7: Malfunction frequency by medical specialty in the latest year, ranked\nWITH latest_year_malfunctions_specialty AS (\n    SELECT\n        a.report_year,\n        f.medicalspecialty\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nspecialty_counts AS (\n    SELECT\n        medicalspecialty,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n    FROM latest_year_malfunctions_specialty\n    GROUP BY medicalspecialty\n)\nSELECT\n    report_year,\n    medicalspecialty,\n    malfunction_count\nFROM latest_year_malfunctions_specialty\nJOIN specialty_counts USING (medicalspecialty)\nGROUP BY report_year, medicalspecialty, malfunction_count, rank_num\nORDER BY rank_num\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 7: Malfunction frequency by medical specialty in the latest year, ranked\nWITH latest_year_malfunctions_specialty AS (\n    SELECT\n        a.report_year,\n        f.medicalspecialty\n    FROM \"maude\".\"ASR_2019\" a\n    JOIN \"maude\".\"foiclass\" f ON a.product_code = f.productcode\n    WHERE a.event_type IN ('M', 'M-D')\n      AND a.report_year = (SELECT MAX(report_year) FROM \"maude\".\"ASR_2019\")\n),\nspecialty_counts AS (\n    SELECT\n        medicalspecialty,\n        COUNT(*) AS malfunction_count,\n        RANK() OVER (ORDER BY COUNT(*) DESC) AS rank_num\n    FROM latest_year_malfunctions_specialty\n    GROUP BY medicalspecialty\n)\nSELECT\n    report_year,\n    medicalspecialty,\n    malfunction_count\nFROM latest_year_malfunctions_specialty\nJOIN specialty_counts USING (medicalspecialty)\nGROUP BY report_year, medicalspecialty, malfunction_count, rank_num\nORDER BY rank_num\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 8": {
+      "original_query": "-- Query 8: Percentage change in malfunction reports for a specific manufacturer over the last 3 years\nWITH specific_manufacturer_malfunctions AS (\n    SELECT\n        report_year,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND manufacturer_name = 'ALLERGAN' -- Replace with a specific manufacturer\n    GROUP BY report_year\n),\nlagged_malfunctions AS (\n    SELECT\n        report_year,\n        malfunction_count,\n        LAG(malfunction_count, 1) OVER (ORDER BY report_year) AS previous_year_count\n    FROM specific_manufacturer_malfunctions\n)\nSELECT\n    report_year,\n    malfunction_count,\n    previous_year_count,\n    CASE\n        WHEN previous_year_count = 0 THEN NULL\n        ELSE ((malfunction_count - previous_year_count)::numeric / previous_year_count) * 100\n    END AS percentage_change\nFROM lagged_malfunctions\nORDER BY report_year DESC\nLIMIT 32;",
+      "status": "SUCCESS",
+      "error_retries": 0,
+      "no_data_retries": 0,
+      "final_query": "-- Query 8: Percentage change in malfunction reports for a specific manufacturer over the last 3 years\nWITH specific_manufacturer_malfunctions AS (\n    SELECT\n        report_year,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\"\n    WHERE event_type IN ('M', 'M-D')\n      AND manufacturer_name = 'ALLERGAN' -- Replace with a specific manufacturer\n    GROUP BY report_year\n),\nlagged_malfunctions AS (\n    SELECT\n        report_year,\n        malfunction_count,\n        LAG(malfunction_count, 1) OVER (ORDER BY report_year) AS previous_year_count\n    FROM specific_manufacturer_malfunctions\n)\nSELECT\n    report_year,\n    malfunction_count,\n    previous_year_count,\n    CASE\n        WHEN previous_year_count = 0 THEN NULL\n        ELSE ((malfunction_count - previous_year_count)::numeric / previous_year_count) * 100\n    END AS percentage_change\nFROM lagged_malfunctions\nORDER BY report_year DESC\nLIMIT 32;",
+      "rows_returned": 1
+    },
+    "Advanced Analysis Query 9": {
+      "original_query": "-- Query 9: Trend of 'Failure to operate' malfunctions by manufacturer over time\nWITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+      "status": "FAILED",
+      "error_retries": 5,
+      "no_data_retries": 0,
+      "final_query": "WITH failure_to_operate_malfunctions AS (\n    SELECT\n        a.report_year,\n        a.manufacturer_name,\n        dpc.device_problem_codes\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc(device_problem_codes)\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc.device_problem_codes = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated = 'Failure to operate'\n),\nyearly_manufacturer_counts AS (\n    SELECT\n        report_year,\n        manufacturer_name,\n        COUNT(*) AS malfunction_count\n    FROM failure_to_operate_malfunctions\n    GROUP BY report_year, manufacturer_name\n)\nSELECT\n    report_year,\n    manufacturer_name,\n    malfunction_count\nFROM yearly_manufacturer_counts\nORDER BY report_year, malfunction_count DESC\nLIMIT 32;",
+      "rows_returned": 0
+    },
+    "Advanced Analysis Query 10": {
+      "original_query": "-- Query 10: Comparing malfunction counts for two specific device problem descriptions over the latest 3 years\nWITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n      AND p.old_to_be_deactivated IN ('Failure to operate', 'Incorrectly labeled') -- Replace with specific problem descriptions\n      AND a.report_year >= (SELECT MAX(report_year) - 2 FROM \"maude\".\"ASR_2019\")\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+      "status": "FAILED",
+      "error_retries": 5,
+      "no_data_retries": 0,
+      "final_query": "WITH malfunction_comparison AS (\n    SELECT\n        a.report_year,\n        p.old_to_be_deactivated AS problem_description,\n        COUNT(*) AS malfunction_count\n    FROM \"maude\".\"ASR_2019\" a\n    CROSS JOIN LATERAL UNNEST(string_to_array(a.device_problem_codes, ';')) AS dpc\n    JOIN \"maude\".\"patientproblemdata\" p ON dpc = p.\"ï_1\"\n    WHERE a.event_type = 'M'\n    GROUP BY a.report_year, p.old_to_be_deactivated\n)\nSELECT\n    report_year,\n    problem_description,\n    malfunction_count\nFROM malfunction_comparison\nORDER BY report_year DESC, problem_description\nLIMIT 32;",
+      "rows_returned": 0
+    },
+    "summary": {
+      "total_queries": 10,
+      "successful_queries": 8,
+      "failed_queries": 2,
+      "pass_rate": 80.0
+    }
+  },
+  "query_execution_time": 281.508
+}
