@@ -1,0 +1,465 @@
+{
+  "research_question": "## Proposed Medical Device/Drug Safety Research Question and Strategy\n\nBased on the provided database schema, a meaningful medical device/drug safety research question could be:\n\n**Research Question:**\n\n**\"Are there specific drug ingredients or manufacturers that are disproportionately associated with drug recalls due to Current Good Manufacturing Practice (CGMP) deviations and impurity issues?\"**\n\n**Rationale:**\n\n*   **Relevance to Safety:** Drug recalls are a direct indicator of potential safety issues, as they are initiated when a product is found to be violative and potentially harmful to patients. CGMP deviations and impurity issues are significant reasons for recalls, directly impacting drug quality and patient safety.\n*   **Utilizes Available Data:** The database contains tables rich in information about drug recalls (`enforcements`, `enforcement_openfda`), drug products (`drug_openfda`, `products`, `active_ingredients`), and manufacturers.\n*   **Actionable Insights:** Identifying high-risk ingredients or manufacturers can inform targeted regulatory interventions, enhanced manufacturing oversight, and proactive risk mitigation strategies by pharmaceutical companies.\n\n**Research Strategy:**\n\nThis research strategy will focus on leveraging the `enforcements`, `enforcement_openfda`, `drug_openfda`, `products`, and `active_ingredients` tables to answer the proposed research question.\n\n**Steps:**\n\n1.  **Identify Relevant Recalls:**\n    *   **Table:** `enforcements`\n    *   **Filtering:** Query the `enforcements` table and filter records where:\n        *   `product_type` is 'Drugs' (to focus on drug safety)\n        *   `reason_for_recall` contains keywords related to CGMP deviations (e.g., 'CGMP Deviations', 'Manufacturing Practice Deviations', 'GMP Non-Compliance')\n        *   `reason_for_recall` contains keywords related to impurity issues (e.g., 'impurity', 'impurities', 'contamination', 'degradation product')\n    *   **Extract:** Retrieve `enforcement_id`, `recall_number`, `reason_for_recall`, `recalling_firm`, and `product_description` for these recalls.\n\n2.  **Link Recalls to Drug Product Information:**\n    *   **Tables:** `enforcements`, `enforcement_openfda`, `drug_openfda`\n    *   **Join:**\n        *   Join `enforcements` with `enforcement_openfda` using `enforcement_id`.\n        *   Join `enforcement_openfda` with `drug_openfda` using `openfda_id`.\n    *   **Extract:** From `drug_openfda`, retrieve `generic_names`, `brand_names`, `manufacturer_names`, `substance_names`, and `spl_ids`.\n\n3.  **Identify Active Ingredients for Recalled Products:**\n    *   **Tables:** `drug_openfda`, `active_ingredients`, `products`\n    *   **Join:**\n        *   Join `drug_openfda` with `products` using `spl_set_ids` (or potentially `spl_ids` if `spl_set_ids` is not consistently available for linking).  *Note:  It seems `drug_openfda` does not directly link to `products` or `active_ingredients` using `spl_set_ids`. We might need to explore other linking fields or strategies. A better link might be via `product_ndcs` or `application_numbers`, but these are array fields and require careful handling.  Alternatively, we could try to link via `spl_set_ids` from `drug_openfda` to `label_openfda` and then potentially back to `products` or `active_ingredients` if those tables are linked to `label_openfda` or `product_openfda`.*\n        *   *Upon further inspection, `active_ingredients` has `product_id` and `product_openfda` has `product_id`. `drug_openfda` and `product_openfda` share `spl_set_ids`. So, the link should be: `drug_openfda` -> `product_openfda` -> `active_ingredients`.*\n        *   Join `drug_openfda` with `product_openfda` using `spl_set_ids` (array intersection).\n        *   Join `product_openfda` with `active_ingredients` using `product_id`.\n    *   **Extract:** From `active_ingredients`, retrieve `name` (ingredient name).\n\n4.  **Analyze Associations:**\n    *   **Ingredient Analysis:** Aggregate the ingredient names (`active_ingredients.name`) associated with recalls identified in step 1. Calculate the frequency of each ingredient appearing in recalls due to CGMP/impurity issues. Identify ingredients that are disproportionately represented in these recalls compared to their overall prevalence in the drug database.\n    *   **Manufacturer Analysis:** Aggregate the manufacturer names (`drug_openfda.manufacturer_names` or `enforcements.recalling_firm`) associated with recalls identified in step 1. Calculate the frequency of each manufacturer appearing in CGMP/impurity-related recalls. Identify manufacturers that are disproportionately associated with these types of recalls.\n    *   **Recall Reason Categorization:**  Further categorize the `reason_for_recall` field to identify specific types of CGMP deviations or impurities (e.g., nitrosamine impurities, particulate matter, etc.). This can provide more granular insights into the nature of the safety issues.\n\n5.  **Statistical Analysis (Optional but Recommended):**\n    *   Perform statistical tests (e.g., chi-squared test, Fisher's exact test) to determine if the associations between specific ingredients/manufacturers and CGMP/impurity-related recalls are statistically significant.\n    *   Calculate odds ratios or relative risks to quantify the strength of these associations.\n\n6.  **Visualization and Reporting:**\n    *   Create visualizations (e.g., bar charts, network graphs) to present the findings, highlighting ingredients and manufacturers with the highest association with CGMP/impurity-related recalls.\n    *   Prepare a report summarizing the research question, methodology, findings, and potential implications for drug safety and regulatory practices.\n\n**Expected Outcomes:**\n\n*   Identification of specific drug ingredients that are more frequently associated with recalls due to CGMP deviations and impurity issues.\n*   Identification of drug manufacturers that have a higher proportion of drug recalls related to CGMP and impurity problems.\n*   Quantifiable measures of association (e.g., odds ratios) to indicate the strength of the identified relationships.\n*   Insights into the common types of impurities or manufacturing problems leading to drug recalls.\n\n**Limitations:**\n\n*   **Data Completeness and Accuracy:** The quality of the analysis depends on the completeness and accuracy of the data in the database.\n*   **Causality vs. Association:** This study can identify associations but may not establish causality. Further investigation might be needed to confirm causal relationships.\n*   **Recall Bias:** Recalls are a reactive measure, and the data reflects products that have been recalled. It might not capture all potential safety issues or products with similar problems that haven't been recalled yet.\n*   **Focus on CGMP/Impurity:** The research question is focused on specific recall reasons. Other important safety issues might not be captured in this specific analysis.\n\n**Further Research Directions:**\n\n*   **Temporal Trends:** Analyze trends in CGMP/impurity-related recalls over time to identify emerging safety issues or the effectiveness of regulatory interventions.\n*   **Patient Impact:** Link recall data with patient data (if available and ethically permissible) to assess the actual patient harm associated with these recalls.\n*   **Geographic Analysis:** Explore if CGMP/impurity-related recalls are concentrated in specific geographic regions or countries.\n\nBy following this research strategy, we can leverage the provided healthcare database to investigate a relevant drug safety question and potentially generate actionable insights for improving drug quality and patient safety.",
+  "execution_steps": "Here are the polished execution steps, incorporating optimizations for clarity and robustness against potential errors related to table/field names and data types, based on the provided database structures and data samples.\n\n**Optimized Execution Steps:**\n\n**Step 1: Identify Relevant Recalls**\n\n*   **Objective:** Retrieve enforcement records related to drug recalls caused by CGMP deviations or impurity issues.\n*   **Tables:** `enforcements`\n*   **Fields to Query:**\n    *   `enforcement_id` (`INTEGER`, Primary Key)\n    *   `recall_number` (`CHARACTER VARYING`)\n    *   `reason_for_recall` (`TEXT`)\n    *   `recalling_firm` (`TEXT`)\n    *   `product_description` (`TEXT`)\n*   **Filtering Conditions (WHERE clause):**\n    *   `product_type = 'Drugs'` (Matching `product_type` column of type `CHARACTER VARYING` with string literal 'Drugs')\n    *   `reason_for_recall ILIKE '%CGMP Deviations%' OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%' OR reason_for_recall ILIKE '%GMP Non-Compliance%' OR reason_for_recall ILIKE '%impurity%' OR reason_for_recall ILIKE '%impurities%' OR reason_for_recall ILIKE '%contamination%' OR reason_for_recall ILIKE '%degradation product%'` (Case-insensitive search using `ILIKE` on `reason_for_recall` column of type `TEXT`)\n*   **SQL Query:**\n\n```sql\nSELECT\n    enforcement_id,\n    recall_number,\n    reason_for_recall,\n    recalling_firm,\n    product_description\nFROM\n    enforcements\nWHERE\n    product_type = 'Drugs'\n    AND (\n        reason_for_recall ILIKE '%CGMP Deviations%'\n        OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n        OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n        OR reason_for_recall ILIKE '%impurity%'\n        OR reason_for_recall ILIKE '%impurities%'\n        OR reason_for_recall ILIKE '%contamination%'\n        OR reason_for_recall ILIKE '%degradation product%'\n    );\n```\n\n**Step 2: Link Recalls to Drug Product Information**\n\n*   **Objective:** Join the identified recalls with drug product information to get details like generic names, brand names, manufacturer names, substance names, and SPL IDs.\n*   **Tables:** `enforcements`, `enforcement_openfda`, `drug_openfda`\n*   **Fields to Query:**\n    *   From `enforcements`: `enforcement_id` (`INTEGER`, Join Key)\n    *   From `drug_openfda`: `generic_names` (`ARRAY`), `brand_names` (`ARRAY`), `manufacturer_names` (`ARRAY`), `substance_names` (`ARRAY`), `spl_ids` (`ARRAY`)\n*   **Join Conditions (JOIN clauses):**\n    *   `enforcements` JOIN `enforcement_openfda` ON `enforcements.enforcement_id = enforcement_openfda.enforcement_id` (Joining on `enforcement_id` of type `INTEGER`)\n    *   `enforcement_openfda` JOIN `drug_openfda` ON `enforcement_openfda.openfda_id = drug_openfda.openfda_id` (Joining on `openfda_id` of type `INTEGER`)\n*   **Filtering Conditions (WHERE clause - reusing Step 1 filters):** Apply the same filters as in Step 1 to ensure we are only considering CGMP/impurity-related drug recalls.\n*   **SQL Query (using CTE for Step 1 results):**\n\n```sql\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        enforcements\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n)\nSELECT\n    rr.enforcement_id,\n    do.generic_names,\n    do.brand_names,\n    do.manufacturer_names,\n    do.substance_names,\n    do.spl_ids\nFROM\n    RelevantRecalls rr\nJOIN\n    enforcement_openfda eo ON rr.enforcement_id = eo.enforcement_id\nJOIN\n    drug_openfda do ON eo.openfda_id = do.openfda_id;\n```\n\n**Step 3: Identify Active Ingredients for Recalled Products**\n\n*   **Objective:** Link the recalled drug products to their active ingredients.\n*   **Tables:** `drug_openfda`, `product_openfda`, `active_ingredients`\n*   **Fields to Query:**\n    *   From `active_ingredients`: `name` (`TEXT`, Ingredient name)\n    *   From the joined result of Step 2: `enforcement_id` (`INTEGER`, Join Key)\n*   **Join Conditions (JOIN clauses):**\n    *   `drug_openfda` JOIN `product_openfda` ON `drug_openfda.spl_set_ids && product_openfda.spl_set_ids` (Joining on `spl_set_ids` of type `ARRAY` using overlap operator `&&`)\n    *   `product_openfda` JOIN `active_ingredients` ON `product_openfda.product_id = active_ingredients.product_id` (Joining on `product_id` of type `INTEGER`)\n*   **CTE (to reuse results from Step 2):** Using CTE `RecalledDrugProducts` to encapsulate the join from Step 2 for clarity.\n*   **SQL Query (using CTEs for clarity):**\n\n```sql\nWITH RelevantRecalls AS ( -- CTE for Step 1 results\n    SELECT\n        enforcement_id\n    FROM\n        enforcements\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugProducts AS ( -- CTE for Step 2 results\n    SELECT\n        rr.enforcement_id,\n        do.spl_ids\n    FROM\n        RelevantRecalls rr\n    JOIN\n        enforcement_openfda eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        drug_openfda do ON eo.openfda_id = do.openfda_id\n)\nSELECT\n    ai.name AS ingredient_name,\n    rdp.enforcement_id\nFROM\n    active_ingredients ai\nJOIN\n    product_openfda po ON ai.product_id = po.product_id\nJOIN\n    drug_openfda do ON po.spl_set_ids && do.spl_set_ids\nJOIN\n    RecalledDrugProducts rdp ON do.spl_ids && rdp.spl_ids;\n```\n\n**Step 4: Analyze Associations - Ingredient Analysis (Example)**\n\n*   **Objective:** Count the occurrences of each ingredient name in the recalls identified in the previous steps to find disproportionately associated ingredients.\n*   **Tables:** Results from Step 3 (implicitly)\n*   **Fields to Query:**\n    *   `ingredient_name` (`TEXT`, from Step 3 query)\n*   **Aggregation and Grouping:**\n    *   `GROUP BY ingredient_name`\n    *   `COUNT(*)` AS `recall_count` (Count of recalls per ingredient)\n*   **Ordering:**\n    *   `ORDER BY recall_count DESC` (To show most frequent ingredients first)\n*   **SQL Query (building upon Step 3 query, using CTE for clarity):**\n\n```sql\nWITH RelevantRecalls AS ( -- CTE for Step 1 results\n    SELECT\n        enforcement_id\n    FROM\n        enforcements\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugProducts AS ( -- CTE for Step 2 results\n    SELECT\n        rr.enforcement_id,\n        do.spl_ids\n    FROM\n        RelevantRecalls rr\n    JOIN\n        enforcement_openfda eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        drug_openfda do ON eo.openfda_id = do.openfda_id\n), IngredientRecallData AS ( -- CTE for Step 3 results\n    SELECT\n        ai.name AS ingredient_name,\n        rdp.enforcement_id\n    FROM\n        active_ingredients ai\n    JOIN\n        product_openfda po ON ai.product_id = po.product_id\n    JOIN\n        drug_openfda do ON po.spl_set_ids && do.spl_set_ids\n    JOIN\n        RecalledDrugProducts rdp ON do.spl_ids && rdp.spl_ids\n)\nSELECT\n    ingredient_name,\n    COUNT(*) AS recall_count\nFROM\n    IngredientRecallData\nGROUP BY\n    ingredient_name\nORDER BY\n    recall_count DESC;\n```\n\n**Step 4: Analyze Associations - Manufacturer Analysis (Example)**\n\n*   **Objective:** Count the occurrences of each manufacturer in the recalls identified to find disproportionately associated manufacturers.\n*   **Tables:** `enforcements`, `enforcement_openfda`, `drug_openfda`\n*   **Fields to Query:**\n    *   `manufacturer_names` (`ARRAY`, from `drug_openfda`)\n*   **Aggregation and Grouping:**\n    *   `GROUP BY do.manufacturer_names`\n    *   `COUNT(*)` AS `recall_count` (Count of recalls per manufacturer)\n*   **Ordering:**\n    *   `ORDER BY recall_count DESC`\n*   **SQL Query (using CTE for Step 1 results):**\n\n```sql\nWITH RelevantRecalls AS ( -- CTE for Step 1 results\n    SELECT\n        enforcement_id\n    FROM\n        enforcements\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n)\nSELECT\n    do.manufacturer_names,\n    COUNT(*) AS recall_count\nFROM\n    RelevantRecalls rr\nJOIN\n    enforcement_openfda eo ON rr.enforcement_id = eo.enforcement_id\nJOIN\n    drug_openfda do ON eo.openfda_id = do.openfda_id\nGROUP BY\n    do.manufacturer_names\nORDER BY\n    recall_count DESC;\n```\n\n**Step 4: Analyze Associations - Recall Reason Categorization (Example)**\n\n*   **Objective:** Count the occurrences of each `reason_for_recall` to understand the specific types of CGMP/impurity issues.\n*   **Tables:** `enforcements`\n*   **Fields to Query:**\n    *   `reason_for_recall` (`TEXT`)\n*   **Aggregation and Grouping:**\n    *   `GROUP BY reason_for_recall`\n    *   `COUNT(*)` AS `recall_count` (Count of occurrences of each reason)\n*   **Ordering:**\n    *   `ORDER BY recall_count DESC`\n*   **SQL Query:**\n\n```sql\nSELECT\n    reason_for_recall,\n    COUNT(*) AS recall_count\nFROM\n    enforcements\nWHERE\n    product_type = 'Drugs'\n    AND (\n        reason_for_recall ILIKE '%CGMP Deviations%'\n        OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n        OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n        OR reason_for_recall ILIKE '%impurity%'\n        OR reason_for_recall ILIKE '%impurities%'\n        OR reason_for_recall ILIKE '%contamination%'\n        OR reason_for_recall ILIKE '%degradation product%'\n    )\nGROUP BY\n    reason_for_recall\nORDER BY\n    recall_count DESC;\n```\n\n**Steps 5 & 6: Statistical Analysis, Visualization and Reporting** - Remain the same, performed outside SQL using data generated from the above queries.\n\n**Key Improvements and Error Prevention Considerations:**\n\n*   **Clarity with CTEs:** Using CTEs (`WITH ... AS (...)`) improves the readability and organization of complex queries, especially when reusing intermediate results. This makes the queries easier to understand and maintain.\n*   **Explicit Data Type Mentions:**  Adding data types for key columns and join columns in the descriptions of \"Fields to Query\" and \"Join Conditions\" explicitly reminds users to consider data types during query construction, reducing potential type-related errors.\n*   **Format Consistency:**  Maintaining consistent SQL formatting (uppercase keywords, indentation) enhances readability and reduces syntax errors.\n*   **No Logic Changes:** The core logic of the queries remains the same as it was already well-structured. The optimizations are primarily focused on improving readability and maintainability.\n*   **Robust Filtering with ILIKE:** The use of `ILIKE` ensures case-insensitive matching for recall reasons, making the queries more robust to variations in text case within the `reason_for_recall` field.\n\nBy implementing these polished execution steps, you will have more robust and easier-to-understand SQL queries that are less prone to errors related to table/field names, value formats, and query logic.",
+  "sql_queries": [
+    "-- Advanced Analytical SQL Query for Step 1: Recall Trend Over Time\n\nWITH MonthlyRecalls AS (\n    SELECT\n        DATE_TRUNC('month', recall_initiation_date) AS recall_month,\n        COUNT(*) AS monthly_recall_count\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n    GROUP BY\n        recall_month\n)\nSELECT\n    recall_month,\n    monthly_recall_count,\n    LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month) AS previous_month_recall_count,\n    (monthly_recall_count - LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month)) AS month_over_month_change\nFROM\n    MonthlyRecalls\nORDER BY\n    recall_month DESC\nLIMIT 32;",
+    "-- Advanced Analytical SQL Query for Step 2: Recalls with Multiple Brand Names\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugBrandNames AS (\n    SELECT\n        rr.enforcement_id,\n        do.brand_names\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    WHERE do.brand_names IS NOT NULL\n)\nSELECT\n    enforcement_id,\n    brand_names,\n    array_length(brand_names, 1) AS number_of_brand_names\nFROM\n    RecalledDrugBrandNames\nWHERE\n    array_length(brand_names, 1) > 1\nORDER BY\n    number_of_brand_names DESC\nLIMIT 32;",
+    "-- Advanced Analytical SQL Query for Step 3: Ingredient Strength Distribution in Recalls\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugProducts AS (\n    SELECT\n        rr.enforcement_id,\n        do.spl_ids\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n), RecalledProductIngredients AS (\n    SELECT\n        rdp.enforcement_id,\n        ai.name AS ingredient_name,\n        ai.strength AS ingredient_strength\n    FROM\n        faers.\"active_ingredients\" ai\n    JOIN\n        faers.\"product_openfda\" po ON ai.product_id = po.product_id\n    JOIN\n        faers.\"drug_openfda\" do ON po.spl_set_ids && do.spl_set_ids\n    JOIN\n        RecalledDrugProducts rdp ON do.spl_ids && rdp.spl_ids\n)\nSELECT\n    ingredient_strength,\n    COUNT(*) AS ingredient_strength_count\nFROM\n    RecalledProductIngredients\nWHERE ingredient_strength IS NOT NULL\nGROUP BY\n    ingredient_strength\nORDER BY\n    ingredient_strength_count DESC\nLIMIT 32;",
+    "-- Advanced Analytical SQL Query for Step 4: Manufacturer Recall Rate Ranking\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ManufacturerRecallCounts AS (\n    SELECT\n        manufacturer_names,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    WHERE do.manufacturer_names IS NOT NULL\n    GROUP BY\n        manufacturer_names\n)\nSELECT\n    manufacturer_names,\n    recall_count,\n    RANK() OVER (ORDER BY recall_count DESC) AS recall_rank,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ManufacturerRecallCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;",
+    "-- Advanced Analytical SQL Query for Step 4: Recall Reason Category Breakdown with Percentages\n\nWITH RelevantRecalls AS (\n    SELECT\n        reason_for_recall\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ReasonCounts AS (\n    SELECT\n        reason_for_recall,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls\n    GROUP BY\n        reason_for_recall\n)\nSELECT\n    reason_for_recall,\n    recall_count,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ReasonCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;"
+  ],
+  "query_results": {
+    "Analysis Query 1": {
+      "data": [
+        {
+          "recall_month": "2025-02-01 00:00:00+08:00",
+          "monthly_recall_count": 1,
+          "previous_month_recall_count": 24,
+          "month_over_month_change": -23
+        },
+        {
+          "recall_month": "2025-01-01 00:00:00+08:00",
+          "monthly_recall_count": 24,
+          "previous_month_recall_count": 22,
+          "month_over_month_change": 2
+        },
+        {
+          "recall_month": "2024-12-01 00:00:00+08:00",
+          "monthly_recall_count": 22,
+          "previous_month_recall_count": 52,
+          "month_over_month_change": -30
+        },
+        {
+          "recall_month": "2024-11-01 00:00:00+08:00",
+          "monthly_recall_count": 52,
+          "previous_month_recall_count": 14,
+          "month_over_month_change": 38
+        },
+        {
+          "recall_month": "2024-10-01 00:00:00+08:00",
+          "monthly_recall_count": 14,
+          "previous_month_recall_count": 5,
+          "month_over_month_change": 9
+        },
+        {
+          "recall_month": "2024-09-01 00:00:00+08:00",
+          "monthly_recall_count": 5,
+          "previous_month_recall_count": 10,
+          "month_over_month_change": -5
+        },
+        {
+          "recall_month": "2024-08-01 00:00:00+08:00",
+          "monthly_recall_count": 10,
+          "previous_month_recall_count": 6,
+          "month_over_month_change": 4
+        },
+        {
+          "recall_month": "2024-07-01 00:00:00+08:00",
+          "monthly_recall_count": 6,
+          "previous_month_recall_count": 17,
+          "month_over_month_change": -11
+        },
+        {
+          "recall_month": "2024-06-01 00:00:00+08:00",
+          "monthly_recall_count": 17,
+          "previous_month_recall_count": 20,
+          "month_over_month_change": -3
+        },
+        {
+          "recall_month": "2024-05-01 00:00:00+08:00",
+          "monthly_recall_count": 20,
+          "previous_month_recall_count": 14,
+          "month_over_month_change": 6
+        },
+        {
+          "recall_month": "2024-04-01 00:00:00+08:00",
+          "monthly_recall_count": 14,
+          "previous_month_recall_count": 10,
+          "month_over_month_change": 4
+        },
+        {
+          "recall_month": "2024-03-01 00:00:00+08:00",
+          "monthly_recall_count": 10,
+          "previous_month_recall_count": 21,
+          "month_over_month_change": -11
+        },
+        {
+          "recall_month": "2024-02-01 00:00:00+08:00",
+          "monthly_recall_count": 21,
+          "previous_month_recall_count": 28,
+          "month_over_month_change": -7
+        },
+        {
+          "recall_month": "2024-01-01 00:00:00+08:00",
+          "monthly_recall_count": 28,
+          "previous_month_recall_count": 17,
+          "month_over_month_change": 11
+        },
+        {
+          "recall_month": "2023-12-01 00:00:00+08:00",
+          "monthly_recall_count": 17,
+          "previous_month_recall_count": 13,
+          "month_over_month_change": 4
+        },
+        {
+          "recall_month": "2023-11-01 00:00:00+08:00",
+          "monthly_recall_count": 13,
+          "previous_month_recall_count": 8,
+          "month_over_month_change": 5
+        },
+        {
+          "recall_month": "2023-10-01 00:00:00+08:00",
+          "monthly_recall_count": 8,
+          "previous_month_recall_count": 6,
+          "month_over_month_change": 2
+        },
+        {
+          "recall_month": "2023-09-01 00:00:00+08:00",
+          "monthly_recall_count": 6,
+          "previous_month_recall_count": 20,
+          "month_over_month_change": -14
+        },
+        {
+          "recall_month": "2023-08-01 00:00:00+08:00",
+          "monthly_recall_count": 20,
+          "previous_month_recall_count": 102,
+          "month_over_month_change": -82
+        },
+        {
+          "recall_month": "2023-07-01 00:00:00+08:00",
+          "monthly_recall_count": 102,
+          "previous_month_recall_count": 19,
+          "month_over_month_change": 83
+        },
+        {
+          "recall_month": "2023-06-01 00:00:00+08:00",
+          "monthly_recall_count": 19,
+          "previous_month_recall_count": 14,
+          "month_over_month_change": 5
+        },
+        {
+          "recall_month": "2023-05-01 00:00:00+08:00",
+          "monthly_recall_count": 14,
+          "previous_month_recall_count": 98,
+          "month_over_month_change": -84
+        },
+        {
+          "recall_month": "2023-04-01 00:00:00+08:00",
+          "monthly_recall_count": 98,
+          "previous_month_recall_count": 73,
+          "month_over_month_change": 25
+        },
+        {
+          "recall_month": "2023-03-01 00:00:00+08:00",
+          "monthly_recall_count": 73,
+          "previous_month_recall_count": 108,
+          "month_over_month_change": -35
+        },
+        {
+          "recall_month": "2023-02-01 00:00:00+08:00",
+          "monthly_recall_count": 108,
+          "previous_month_recall_count": 14,
+          "month_over_month_change": 94
+        },
+        {
+          "recall_month": "2023-01-01 00:00:00+08:00",
+          "monthly_recall_count": 14,
+          "previous_month_recall_count": 31,
+          "month_over_month_change": -17
+        },
+        {
+          "recall_month": "2022-12-01 00:00:00+08:00",
+          "monthly_recall_count": 31,
+          "previous_month_recall_count": 8,
+          "month_over_month_change": 23
+        },
+        {
+          "recall_month": "2022-11-01 00:00:00+08:00",
+          "monthly_recall_count": 8,
+          "previous_month_recall_count": 31,
+          "month_over_month_change": -23
+        },
+        {
+          "recall_month": "2022-10-01 00:00:00+08:00",
+          "monthly_recall_count": 31,
+          "previous_month_recall_count": 8,
+          "month_over_month_change": 23
+        },
+        {
+          "recall_month": "2022-09-01 00:00:00+08:00",
+          "monthly_recall_count": 8,
+          "previous_month_recall_count": 14,
+          "month_over_month_change": -6
+        },
+        {
+          "recall_month": "2022-08-01 00:00:00+08:00",
+          "monthly_recall_count": 14,
+          "previous_month_recall_count": 28,
+          "month_over_month_change": -14
+        },
+        {
+          "recall_month": "2022-07-01 00:00:00+08:00",
+          "monthly_recall_count": 28,
+          "previous_month_recall_count": 147,
+          "month_over_month_change": -119
+        }
+      ],
+      "row_count": 32
+    },
+    "Analysis Query 2": {
+      "error": "Query execution failed."
+    },
+    "Analysis Query 3": {
+      "error": "Query execution failed."
+    },
+    "Analysis Query 4": {
+      "error": "Query execution failed."
+    },
+    "Analysis Query 5": {
+      "data": [
+        {
+          "reason_for_recall": "Microbial contamination",
+          "recall_count": 465,
+          "percentage_of_total_recalls": "8.48230572783655600100"
+        },
+        {
+          "reason_for_recall": "Penicillin Cross Contamination: All lots of all products repackaged and distributed between 01/05/12 and 02/12/15 are being recalled because they were repackaged in a facility with penicillin products without adequate separation which could introduce the potential for cross contamination with penicillin.",
+          "recall_count": 463,
+          "percentage_of_total_recalls": "8.44582269244801167500"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Intermittent exposure to temperature excursion during storage.",
+          "recall_count": 198,
+          "percentage_of_total_recalls": "3.61182050346588836200"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations",
+          "recall_count": 174,
+          "percentage_of_total_recalls": "3.17402407880335643900"
+        },
+        {
+          "reason_for_recall": "cGMP deviations: Temperature abuse",
+          "recall_count": 130,
+          "percentage_of_total_recalls": "2.37139730025538124800"
+        },
+        {
+          "reason_for_recall": "cGMP deviations",
+          "recall_count": 107,
+          "percentage_of_total_recalls": "1.95184239328712148900"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: product held outside appropriate storage temperature conditions.",
+          "recall_count": 100,
+          "percentage_of_total_recalls": "1.82415176942721634400"
+        },
+        {
+          "reason_for_recall": "Lack of assurance of sterility. Validation data for decontamination cycles is lacking.",
+          "recall_count": 95,
+          "percentage_of_total_recalls": "1.73294418095585552700"
+        },
+        {
+          "reason_for_recall": "Failed Impurities/Degradation Specifications",
+          "recall_count": 95,
+          "percentage_of_total_recalls": "1.73294418095585552700"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Firm went out of business and could no longer continue stability studies.",
+          "recall_count": 86,
+          "percentage_of_total_recalls": "1.56877052170740605600"
+        },
+        {
+          "reason_for_recall": "Lack of Assurance of Sterility: There are also CGMP Deviations.",
+          "recall_count": 81,
+          "percentage_of_total_recalls": "1.47756293323604523900"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: recalling drug products following an FDA inspection.",
+          "recall_count": 70,
+          "percentage_of_total_recalls": "1.27690623859905144100"
+        },
+        {
+          "reason_for_recall": "cGMP Deviations",
+          "recall_count": 67,
+          "percentage_of_total_recalls": "1.22218168551623495100"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Lack of stability data and controls to support the manufacturers assigned retest or expiration date in firm's container/closure system.",
+          "recall_count": 66,
+          "percentage_of_total_recalls": "1.20394016782196278700"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.",
+          "recall_count": 65,
+          "percentage_of_total_recalls": "1.18569865012769062400"
+        },
+        {
+          "reason_for_recall": "Cross Contamination With Other Products: Oral care solutions were manufactured by a third party supplier on equipment shared with non-pharmaceutical products",
+          "recall_count": 64,
+          "percentage_of_total_recalls": "1.16745713243341846000"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Presence of NDMA impurity detected in product.",
+          "recall_count": 53,
+          "percentage_of_total_recalls": "0.96680043779642466300"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Products were manufactured with contaminated excipient that was recalled from the excipient supplier.",
+          "recall_count": 51,
+          "percentage_of_total_recalls": "0.93031740240788033600"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Firm did not adequately investigate customer complaints.",
+          "recall_count": 48,
+          "percentage_of_total_recalls": "0.87559284932506384500"
+        },
+        {
+          "reason_for_recall": "Recalled products were made using an active ingredient that was recalled by a supplier due to penicillin cross contamination.",
+          "recall_count": 47,
+          "percentage_of_total_recalls": "0.85735133163079168200"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Products are underdosed or have an incorrect dosage regime.",
+          "recall_count": 44,
+          "percentage_of_total_recalls": "0.80262677854797519200"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Products were manufactured outside of the controls required by current Good Manufacturing Practices.",
+          "recall_count": 43,
+          "percentage_of_total_recalls": "0.78438526085370302800"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: products manufactured under conditions that could impact its product quality.",
+          "recall_count": 43,
+          "percentage_of_total_recalls": "0.78438526085370302800"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: Products were exposed to temperatures outside of the products labeled storage conditions.",
+          "recall_count": 42,
+          "percentage_of_total_recalls": "0.76614374315943086500"
+        },
+        {
+          "reason_for_recall": "cGMP Deviations: Potential product contamination with Burkholderia cepacia (B.cepacia) and Ralstonia pickettii (R. pickettii).",
+          "recall_count": 41,
+          "percentage_of_total_recalls": "0.74790222546515870100"
+        },
+        {
+          "reason_for_recall": "cGMP deviations: all products within expiry are being recalled because the firm is discontinuing its stability study program.",
+          "recall_count": 37,
+          "percentage_of_total_recalls": "0.67493615468807004700"
+        },
+        {
+          "reason_for_recall": "CGMP deviations: Stability testing was not conducted on manufactured sunscreen and hand sanitizer OTC products.",
+          "recall_count": 36,
+          "percentage_of_total_recalls": "0.65669463699379788400"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: These products have been found to be misbranded as unapproved new drugs",
+          "recall_count": 35,
+          "percentage_of_total_recalls": "0.63845311929952572100"
+        },
+        {
+          "reason_for_recall": "Chemical contamination: product contains elevated levels of undeclared lead.",
+          "recall_count": 35,
+          "percentage_of_total_recalls": "0.63845311929952572100"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: These products have been found to be misbranded as  unapproved new drugs",
+          "recall_count": 35,
+          "percentage_of_total_recalls": "0.63845311929952572100"
+        },
+        {
+          "reason_for_recall": "Non-Sterility: Out of specification results for the sterility test for microbial contamination.",
+          "recall_count": 34,
+          "percentage_of_total_recalls": "0.62021160160525355700"
+        },
+        {
+          "reason_for_recall": "CGMP Deviations: prior to October 1, 2021, environmental and personnel monitoring Out of Action Limit (OOAL) excursions were not being properly investigated",
+          "recall_count": 33,
+          "percentage_of_total_recalls": "0.60197008391098139400"
+        }
+      ],
+      "row_count": 32
+    }
+  },
+  "analysis": "## Research Question:\n\n\"Are there specific drug ingredients or manufacturers that are disproportionately associated with drug recalls due to Current Good Manufacturing Practice (CGMP) deviations and impurity issues?\"\n\n## Interpretation and Insights on Returned Data:\n\nDue to errors in the execution of `Analysis Query 2`, `Analysis Query 3`, and `Analysis Query 4`, the insights will be primarily drawn from `Analysis Query 1` and `Analysis Query 5`. These successful queries provide valuable information regarding recall trends over time and the categorization of recall reasons.\n\n### Analysis Query 1: Recall Trend Over Time\n\nThis query aimed to analyze the monthly trends of drug recalls related to CGMP deviations and impurity issues. The results are presented in the table below:\n\n**Table 1: Monthly Recall Trends for CGMP and Impurity Related Drug Recalls**\n\n| Recall Month         | Monthly Recall Count | Previous Month Recall Count | Month-over-Month Change |\n| -------------------- | -------------------- | ------------------------- | ----------------------- |\n| 2025-02-01 00:00:00+08:00 | 1                    | 24                        | -23                     |\n| 2025-01-01 00:00:00+08:00 | 24                   | 22                        | 2                       |\n| 2024-12-01 00:00:00+08:00 | 22                   | 52                        | -30                     |\n| 2024-11-01 00:00:00+08:00 | 52                   | 14                        | 38                      |\n| 2024-10-01 00:00:00+08:00 | 14                   | 5                         | 9                       |\n| 2024-09-01 00:00:00+08:00 | 5                    | 10                        | -5                      |\n| 2024-08-01 00:00:00+08:00 | 10                   | 6                         | 4                       |\n| 2024-07-01 00:00:00+08:00 | 6                    | 17                        | -11                     |\n| 2024-06-01 00:00:00+08:00 | 17                   | 20                        | -3                      |\n| 2024-05-01 00:00:00+08:00 | 20                   | 14                        | 6                       |\n| 2024-04-01 00:00:00+08:00 | 14                   | 10                        | 4                       |\n| 2024-03-01 00:00:00+08:00 | 10                   | 21                        | -11                     |\n| 2024-02-01 00:00:00+08:00 | 21                   | 28                        | -7                      |\n| 2024-01-01 00:00:00+08:00 | 28                   | 17                        | 11                      |\n| 2023-12-01 00:00:00+08:00 | 17                   | 13                        | 4                       |\n| 2023-11-01 00:00:00+08:00 | 13                   | 8                         | 5                       |\n| 2023-10-01 00:00:00+08:00 | 8                    | 6                         | 2                       |\n| 2023-09-01 00:00:00+08:00 | 6                    | 20                        | -14                     |\n| 2023-08-01 00:00:00+08:00 | 20                   | 102                       | -82                     |\n| 2023-07-01 00:00:00+08:00 | 102                  | 19                        | 83                      |\n| 2023-06-01 00:00:00+08:00 | 19                   | 14                        | 5                       |\n| 2023-05-01 00:00:00+08:00 | 14                   | 98                        | -84                     |\n| 2023-04-01 00:00:00+08:00 | 98                   | 73                        | 25                      |\n| 2023-03-01 00:00:00+08:00 | 73                   | 108                       | -35                     |\n| 2023-02-01 00:00:00+08:00 | 108                  | 14                        | 94                      |\n| 2023-01-01 00:00:00+08:00 | 14                   | 31                        | -17                     |\n| 2022-12-01 00:00:00+08:00 | 31                   | 8                         | 23                      |\n| 2022-11-01 00:00:00+08:00 | 8                    | 31                        | -23                     |\n| 2022-10-01 00:00:00+08:00 | 31                   | 8                         | 23                      |\n| 2022-09-01 00:00:00+08:00 | 8                    | 14                        | -6                      |\n| 2022-08-01 00:00:00+08:00 | 14                   | 28                        | -14                     |\n| 2022-07-01 00:00:00+08:00 | 28                   | 147                       | -119                    |\n\n**Insights from Table 1:**\n\n*   **Fluctuating Monthly Recalls:** The number of monthly recalls related to CGMP deviations and impurity issues shows significant fluctuation over time. There are months with very high recall counts (e.g., February 2023, July 2023) and months with very low counts (e.g., September 2022, October 2023, February 2025).\n*   **No Clear Trend:**  There isn't a clear upward or downward trend in the number of recalls over the observed period. The month-over-month changes are inconsistent, suggesting that recalls are not steadily increasing or decreasing but rather occurring in peaks and troughs.\n*   **Recent Decrease:** In the most recent months (January and February 2025), there is a notable decrease in recall counts, with February 2025 showing only one recall. However, it is too early to conclude if this signifies a sustained downward trend.\n*   **Potential Seasonality or External Factors:** The fluctuations might be influenced by various factors such as increased regulatory scrutiny in certain periods, specific events triggering widespread recalls, or even seasonal variations in manufacturing practices. Further investigation would be needed to understand these patterns.\n\n### Analysis Query 5: Recall Reason Category Breakdown\n\nThis query provided a breakdown of the reasons for drug recalls related to CGMP deviations and impurity issues, along with the percentage of total recalls each reason represents. The top recall reasons are presented in Table 2.\n\n**Table 2: Top Recall Reasons for CGMP and Impurity Related Drug Recalls**\n\n| Reason for Recall                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Recall Count | Percentage of Total Recalls |\n| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------- | :-------------------------- |\n| Microbial contamination                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 465          | 8.48%                      |\n| Penicillin Cross Contamination: All lots of all products repackaged and distributed between 01/05/12 and 02/12/15 are being recalled because they were repackaged in a facility with penicillin products without adequate separation which could introduce the potential for cross contamination with penicillin.                                                                                                                                                                                                                                 | 463          | 8.45%                      |\n| CGMP Deviations: Intermittent exposure to temperature excursion during storage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 198          | 3.61%                      |\n| CGMP Deviations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 174          | 3.17%                      |\n| cGMP deviations: Temperature abuse                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 130          | 2.37%                      |\n| cGMP deviations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 107          | 1.95%                      |\n| CGMP Deviations: product held outside appropriate storage temperature conditions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 100          | 1.82%                      |\n| Lack of assurance of sterility. Validation data for decontamination cycles is lacking.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 95           | 1.73%                      |\n| Failed Impurities/Degradation Specifications                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 95           | 1.73%                      |\n| CGMP Deviations: Firm went out of business and could no longer continue stability studies.                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 86           | 1.57%                      |\n| Lack of Assurance of Sterility: There are also CGMP Deviations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 81           | 1.48%                      |\n| CGMP Deviations: recalling drug products following an FDA inspection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 70           | 1.28%                      |\n| cGMP Deviations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 67           | 1.22%                      |\n| CGMP Deviations: Lack of stability data and controls to support the manufacturers assigned retest or expiration date in firm's container/closure system.                                                                                                                                                                                                                                                                                                                                                                                         | 66           | 1.20%                      |\n| CGMP Deviations: Carcinogen impurity detected in API used to manufacture drug product.                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 65           | 1.19%                      |\n| Cross Contamination With Other Products: Oral care solutions were manufactured by a third party supplier on equipment shared with non-pharmaceutical products                                                                                                                                                                                                                                                                                                                                                                                      | 64           | 1.17%                      |\n| CGMP Deviations: Presence of NDMA impurity detected in product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 53           | 0.97%                      |\n| CGMP Deviations: Products were manufactured with contaminated excipient that was recalled from the excipient supplier.                                                                                                                                                                                                                                                                                                                                                                                                                              | 51           | 0.93%                      |\n| CGMP Deviations: Firm did not adequately investigate customer complaints.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 48           | 0.88%                      |\n| Recalled products were made using an active ingredient that was recalled by a supplier due to penicillin cross contamination.                                                                                                                                                                                                                                                                                                                                                                                                                      | 47           | 0.86%                      |\n| CGMP Deviations: Products are underdosed or have an incorrect dosage regime.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 44           | 0.80%                      |\n| CGMP Deviations: Products were manufactured outside of the controls required by current Good Manufacturing Practices.                                                                                                                                                                                                                                                                                                                                                                                                                            | 43           | 0.78%                      |\n| CGMP Deviations: products manufactured under conditions that could impact its product quality.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 43           | 0.78%                      |\n| CGMP Deviations: Products were exposed to temperatures outside of the products labeled storage conditions.                                                                                                                                                                                                                                                                                                                                                                                                                                          | 42           | 0.77%                      |\n| cGMP Deviations: Potential product contamination with Burkholderia cepacia (B.cepacia) and Ralstonia pickettii (R. pickettii).                                                                                                                                                                                                                                                                                                                                                                                                                    | 41           | 0.75%                      |\n| cGMP deviations: all products within expiry are being recalled because the firm is discontinuing its stability study program.                                                                                                                                                                                                                                                                                                                                                                                                                        | 37           | 0.67%                      |\n| CGMP deviations: Stability testing was not conducted on manufactured sunscreen and hand sanitizer OTC products.                                                                                                                                                                                                                                                                                                                                                                                                                                    | 36           | 0.66%                      |\n| CGMP Deviations: These products have been found to be misbranded as unapproved new drugs                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 35           | 0.64%                      |\n| Chemical contamination: product contains elevated levels of undeclared lead.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 35           | 0.64%                      |\n| CGMP Deviations: These products have been found to be misbranded as  unapproved new drugs                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 35           | 0.64%                      |\n| Non-Sterility: Out of specification results for the sterility test for microbial contamination.                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 34           | 0.62%                      |\n| CGMP Deviations: prior to October 1, 2021, environmental and personnel monitoring Out of Action Limit (OOAL) excursions were not being properly investigated                                                                                                                                                                                                                                                                                                                                                                                    | 33           | 0.60%                      |\n\n**Insights from Table 2:**\n\n*   **Microbial Contamination Dominates:** Microbial contamination and penicillin cross-contamination are the leading reasons for recalls, accounting for a significant portion (approximately 17%) of CGMP and impurity-related drug recalls. This highlights the critical importance of maintaining sterile manufacturing environments and preventing cross-contamination.\n*   **Temperature Excursions and Stability Issues:**  Several recall reasons relate to temperature excursions during storage and lack of stability data or controls. These point to potential weaknesses in temperature management throughout the drug product lifecycle and insufficient stability testing protocols.\n*   **General CGMP Deviations:**  \"CGMP Deviations\" and \"cGMP deviations\" appear multiple times as general reasons, suggesting a broad category of manufacturing practice failures.  More specific reasons under this umbrella, such as \"following an FDA inspection\" or \"lack of stability data,\" provide more granular insights.\n*   **Impurity Issues Beyond Microbial:** While microbial contamination is prominent, other impurity issues like \"Failed Impurities/Degradation Specifications,\" \"Carcinogen impurity detected,\" \"Presence of NDMA impurity,\" and \"Chemical contamination\" also contribute to recalls, indicating a range of chemical and degradation-related quality concerns.\n*   **Sterility Assurance:**  \"Lack of assurance of sterility\" and \"Non-Sterility\" are significant reasons, reinforcing the importance of robust sterilization processes, especially for sterile drug products.\n\n**Limitations of Insights:**\n\n*   **Missing Ingredient and Manufacturer Data:** Due to the failure of `Analysis Query 2`, `Analysis Query 3`, and `Analysis Query 4`, we could not identify specific drug ingredients or manufacturers disproportionately associated with these recalls. This limits our ability to directly answer the core research question regarding disproportionate associations.\n*   **Focus on Recall Reasons:** The analysis is heavily reliant on the \"reason_for_recall\" field, which may be inconsistently or vaguely documented in some cases. More detailed information about the specific CGMP deviations or impurities would be beneficial for a deeper analysis.\n\n## Validity and Feasibility of the Research Question:\n\n**Validity:**\n\n*   **High Validity:** The research question is highly valid and relevant to drug safety. Drug recalls are a critical indicator of potential safety issues, and understanding the factors contributing to recalls, especially CGMP deviations and impurity issues, is crucial for public health.\n*   **Addresses a Significant Problem:**  CGMP deviations and impurities directly impact drug quality and patient safety. Identifying specific ingredients or manufacturers associated with these recalls can lead to targeted interventions and improvements in drug manufacturing and regulation.\n*   **Actionable Outcomes:** The research has the potential to generate actionable insights that can inform regulatory bodies, pharmaceutical companies, and healthcare providers about high-risk areas and necessary preventative measures.\n\n**Feasibility:**\n\n*   **Data Availability:** The research question is feasible given the availability of data in the provided database schema. The `enforcements`, `enforcement_openfda`, `drug_openfda`, `products`, and `active_ingredients` tables are designed to capture the necessary information for this analysis.\n*   **Partial Success of Strategy:**  While some queries failed, `Analysis Query 1` and `Analysis Query 5` were successfully executed, demonstrating the feasibility of extracting and analyzing relevant recall data. The time trend and recall reason categorization analyses were achievable.\n*   **Challenges in Data Linkage (as noted in original strategy):** The original research strategy correctly identified potential challenges in linking tables, particularly between `drug_openfda`, `products`, and `active_ingredients`. The failed queries likely indicate issues with the join logic or data inconsistencies across these tables, which need to be addressed for complete feasibility. The note in the original strategy regarding `spl_set_ids`, `product_ndcs`, and `application_numbers` being array fields and needing careful handling is crucial and might be the root cause of the query failures.\n*   **Need for Refinement:**  To fully address the research question, the data linkage strategy needs to be refined. Specifically, debugging and optimizing the joins in `Analysis Query 2`, `Analysis Query 3`, and `Analysis Query 4` are essential. This might involve:\n    *   Careful examination of data types and values in linking fields.\n    *   Adjusting join conditions to handle array fields correctly (e.g., using array overlap `&&` or `unnest` if necessary).\n    *   Exploring alternative linking paths if `spl_set_ids` is not consistently reliable, such as using `product_ndcs` or `application_numbers` as suggested in the initial strategy.\n\n**Conclusion on Validity and Feasibility:**\n\nThe research question is **valid** and highly relevant. The research is **partially feasible** with the current data and strategy, as demonstrated by the successful trend analysis and recall reason categorization. However, to fully answer the research question and identify disproportionate associations with ingredients and manufacturers, the **feasibility needs to be enhanced** by resolving the data linkage challenges and refining the SQL queries, particularly for joining across `drug_openfda`, `product_openfda`, and `active_ingredients` tables. Once these technical issues are addressed, the research can be fully executed, and more comprehensive insights can be generated.",
+  "performance_metrics": {
+    "script_start_time": 1741245004.095788,
+    "script_end_time": null,
+    "total_duration_seconds": null,
+    "model_calls": [],
+    "total_sql_queries": 5,
+    "total_retry_count": 9,
+    "final_success_queries": [],
+    "query_statistics": {
+      "Analysis Query 1": {
+        "original_query": "-- Advanced Analytical SQL Query for Step 1: Recall Trend Over Time\n\nWITH MonthlyRecalls AS (\n    SELECT\n        DATE_TRUNC('month', recall_initiation_date) AS recall_month,\n        COUNT(*) AS monthly_recall_count\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n    GROUP BY\n        recall_month\n)\nSELECT\n    recall_month,\n    monthly_recall_count,\n    LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month) AS previous_month_recall_count,\n    (monthly_recall_count - LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month)) AS month_over_month_change\nFROM\n    MonthlyRecalls\nORDER BY\n    recall_month DESC\nLIMIT 32;",
+        "status": "SUCCESS",
+        "error_retries": 0,
+        "no_data_retries": 0,
+        "final_query": "-- Advanced Analytical SQL Query for Step 1: Recall Trend Over Time\n\nWITH MonthlyRecalls AS (\n    SELECT\n        DATE_TRUNC('month', recall_initiation_date) AS recall_month,\n        COUNT(*) AS monthly_recall_count\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n    GROUP BY\n        recall_month\n)\nSELECT\n    recall_month,\n    monthly_recall_count,\n    LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month) AS previous_month_recall_count,\n    (monthly_recall_count - LAG(monthly_recall_count, 1, 0) OVER (ORDER BY recall_month)) AS month_over_month_change\nFROM\n    MonthlyRecalls\nORDER BY\n    recall_month DESC\nLIMIT 32;",
+        "rows_returned": 32
+      },
+      "Analysis Query 2": {
+        "original_query": "-- Advanced Analytical SQL Query for Step 2: Recalls with Multiple Brand Names\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugBrandNames AS (\n    SELECT\n        rr.enforcement_id,\n        do.brand_names\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    WHERE do.brand_names IS NOT NULL\n)\nSELECT\n    enforcement_id,\n    brand_names,\n    array_length(brand_names, 1) AS number_of_brand_names\nFROM\n    RecalledDrugBrandNames\nWHERE\n    array_length(brand_names, 1) > 1\nORDER BY\n    number_of_brand_names DESC\nLIMIT 32;",
+        "status": "FAILED",
+        "error_retries": 3,
+        "no_data_retries": 0,
+        "final_query": "WITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugBrandNames AS (\n    SELECT\n        rr.enforcement_id,\n        do.brand_names\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    WHERE do.brand_names IS NOT NULL\n)\nSELECT\n    enforcement_id,\n    brand_names,\n    array_length(brand_names, 1) AS number_of_brand_names\nFROM\n    RecalledDrugBrandNames\nWHERE\n    array_length(brand_names, 1) > 1\nORDER BY\n    number_of_brand_names DESC\nLIMIT 32;",
+        "rows_returned": 0
+      },
+      "Analysis Query 3": {
+        "original_query": "-- Advanced Analytical SQL Query for Step 3: Ingredient Strength Distribution in Recalls\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugProducts AS (\n    SELECT\n        rr.enforcement_id,\n        do.spl_ids\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n), RecalledProductIngredients AS (\n    SELECT\n        rdp.enforcement_id,\n        ai.name AS ingredient_name,\n        ai.strength AS ingredient_strength\n    FROM\n        faers.\"active_ingredients\" ai\n    JOIN\n        faers.\"product_openfda\" po ON ai.product_id = po.product_id\n    JOIN\n        faers.\"drug_openfda\" do ON po.spl_set_ids && do.spl_set_ids\n    JOIN\n        RecalledDrugProducts rdp ON do.spl_ids && rdp.spl_ids\n)\nSELECT\n    ingredient_strength,\n    COUNT(*) AS ingredient_strength_count\nFROM\n    RecalledProductIngredients\nWHERE ingredient_strength IS NOT NULL\nGROUP BY\n    ingredient_strength\nORDER BY\n    ingredient_strength_count DESC\nLIMIT 32;",
+        "status": "FAILED",
+        "error_retries": 3,
+        "no_data_retries": 0,
+        "final_query": "WITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), RecalledDrugProducts AS (\n    SELECT\n        rr.enforcement_id,\n        do.spl_ids\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n), RecalledProductIngredients AS (\n    SELECT\n        rdp.enforcement_id,\n        ai.name AS ingredient_name,\n        ai.strength AS ingredient_strength\n    FROM\n        faers.\"active_ingredients\" ai\n    JOIN\n        faers.\"product_openfda\" po ON ai.product_id = po.product_id\n    JOIN\n        faers.\"drug_openfda\" do ON po.spl_set_ids && do.spl_set_ids\n    JOIN\n        RecalledDrugProducts rdp ON do.spl_ids && rdp.spl_ids\n)\nSELECT\n    ingredient_strength,\n    COUNT(*) AS ingredient_strength_count\nFROM\n    RecalledProductIngredients\nWHERE ingredient_strength IS NOT NULL\nGROUP BY\n    ingredient_strength\nORDER BY\n    ingredient_strength_count DESC\nLIMIT 32;",
+        "rows_returned": 0
+      },
+      "Analysis Query 4": {
+        "original_query": "-- Advanced Analytical SQL Query for Step 4: Manufacturer Recall Rate Ranking\n\nWITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ManufacturerRecallCounts AS (\n    SELECT\n        manufacturer_names,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    WHERE do.manufacturer_names IS NOT NULL\n    GROUP BY\n        manufacturer_names\n)\nSELECT\n    manufacturer_names,\n    recall_count,\n    RANK() OVER (ORDER BY recall_count DESC) AS recall_rank,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ManufacturerRecallCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;",
+        "status": "FAILED",
+        "error_retries": 3,
+        "no_data_retries": 0,
+        "final_query": "WITH RelevantRecalls AS (\n    SELECT\n        enforcement_id\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ManufacturerRecallCounts AS (\n    SELECT\n        manufacturer_name,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls rr\n    JOIN\n        faers.\"enforcement_openfda\" eo ON rr.enforcement_id = eo.enforcement_id\n    JOIN\n        faers.\"drug_openfda\" do ON eo.openfda_id = do.openfda_id\n    CROSS JOIN UNNEST(do.manufacturer_names) AS manufacturer_name\n    WHERE do.manufacturer_names IS NOT NULL\n    GROUP BY\n        manufacturer_name\n)\nSELECT\n    manufacturer_name,\n    recall_count,\n    RANK() OVER (ORDER BY recall_count DESC) AS recall_rank,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ManufacturerRecallCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;",
+        "rows_returned": 0
+      },
+      "Analysis Query 5": {
+        "original_query": "-- Advanced Analytical SQL Query for Step 4: Recall Reason Category Breakdown with Percentages\n\nWITH RelevantRecalls AS (\n    SELECT\n        reason_for_recall\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ReasonCounts AS (\n    SELECT\n        reason_for_recall,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls\n    GROUP BY\n        reason_for_recall\n)\nSELECT\n    reason_for_recall,\n    recall_count,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ReasonCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;",
+        "status": "SUCCESS",
+        "error_retries": 0,
+        "no_data_retries": 0,
+        "final_query": "-- Advanced Analytical SQL Query for Step 4: Recall Reason Category Breakdown with Percentages\n\nWITH RelevantRecalls AS (\n    SELECT\n        reason_for_recall\n    FROM\n        faers.\"enforcements\"\n    WHERE\n        product_type = 'Drugs'\n        AND (\n            reason_for_recall ILIKE '%CGMP Deviations%'\n            OR reason_for_recall ILIKE '%Manufacturing Practice Deviations%'\n            OR reason_for_recall ILIKE '%GMP Non-Compliance%'\n            OR reason_for_recall ILIKE '%impurity%'\n            OR reason_for_recall ILIKE '%impurities%'\n            OR reason_for_recall ILIKE '%contamination%'\n            OR reason_for_recall ILIKE '%degradation product%'\n        )\n), ReasonCounts AS (\n    SELECT\n        reason_for_recall,\n        COUNT(*) AS recall_count\n    FROM\n        RelevantRecalls\n    GROUP BY\n        reason_for_recall\n)\nSELECT\n    reason_for_recall,\n    recall_count,\n    (recall_count::numeric / SUM(recall_count) OVER ()) * 100 AS percentage_of_total_recalls\nFROM\n    ReasonCounts\nORDER BY\n    recall_count DESC\nLIMIT 32;",
+        "rows_returned": 32
+      },
+      "summary": {
+        "total_queries": 5,
+        "successful_queries": 2,
+        "failed_queries": 3,
+        "pass_rate": 40.0
+      }
+    }
+  },
+  "visualization_paths": {
+    "Analysis Query 1": [
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_1_histogram.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_2_histogram.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_3_histogram.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_4_scatter.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_5_scatter.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_6_scatter.png",
+      "outputs/viz_20250306_151004_Analysis_Query_1_viz_7_heatmap.png"
+    ],
+    "Analysis Query 5": [
+      "outputs/viz_20250306_151004_Analysis_Query_5_viz_1_histogram.png"
+    ]
+  },
+  "ai_visualization_paths": {
+    "Analysis Query 1": [
+      "outputs/ai_viz_20250306_151004_Analysis_Query_1_1_line.png"
+    ],
+    "Analysis Query 5": [
+      "outputs/ai_viz_20250306_151004_Analysis_Query_5_2_bar.png",
+      "outputs/ai_viz_20250306_151004_Analysis_Query_5_3_bar.png"
+    ]
+  }
+}
