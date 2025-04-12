@@ -26,6 +26,9 @@ AutoQUEST addresses these challenges with:
 - **Data Integration and Analysis**: Handles data cleaning, merging, and trend analysis across large datasets.
 - **Reporting and Visualization**: Produces actionable insights with dynamic visualizations and structured reports.
 
+
+![AutoQUEST System Overview](medinfo2025.png)
+*Figure 1: AutoQUEST full paper at Medinfo2025
 ---
 
 ## What is AutoQUEST?
